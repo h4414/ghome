@@ -6,6 +6,9 @@ package h4414.ghome.camel.routes;
 
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
@@ -17,9 +20,17 @@ import org.apache.camel.builder.RouteBuilder;
  */
 public class MainRoutes extends RouteBuilder{
 
+    @PersistenceUnit(unitName="ghome")
+    private EntityManagerFactory factory;
+    
     @Override
     public void configure() throws Exception {
+        EntityManager eManager = factory.createEntityManager();
         from("jetty:http://localhost:8087/test")
+                
+                
+                .to("jpa:ghome")
+                
         .log("test");
         
         /*
