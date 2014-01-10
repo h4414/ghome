@@ -1,6 +1,6 @@
 <%-- 
-    Document   : testJsp
-    Created on : 16 déc. 2013, 17:50:33
+    Document   : mainView
+    Created on : 6 janv. 2014, 21:33:38
     Author     : Mathis
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Main page ))</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Vue principale ?</h1>
     </body>
 </html>
