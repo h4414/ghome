@@ -110,4 +110,9 @@ public class Historique implements Serializable{
         return ( ( this.getIdCapteur()+ this.getDebutPresence().toString()+this.getFinPresence().toString()).hashCode());
     }
     
+    @Override
+    public String toString(){
+        return "["+this.getClass()+" "+this.getIdCapteur()+" "+ this.getDebutPresence()+"]";
+    }
+    
 }

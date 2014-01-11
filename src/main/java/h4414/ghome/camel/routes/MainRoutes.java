@@ -11,10 +11,13 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.http.HttpMessage;
 import org.apache.camel.component.jpa.JpaEndpoint;
 
 /**
@@ -41,8 +44,10 @@ public class MainRoutes extends RouteBuilder{
                 })
                 
                 .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
+                .setHeader("message",simple("${body}"))
                 .setBody(constant(null))
-        .to("http://localhost:8084/ghome/mainView.jsp?bridgeEndpoint=true"/*+"&disableStreamCache=true"*/);
+                
+        .to("http://localhost:8084/ghome/mainView.jsp?bridgeEndpoint=true&disableStreamCache=true");
         
         /*
          * definir une plage horaire sur laquelle l'on détecte une présence

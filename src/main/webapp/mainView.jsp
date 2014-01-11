@@ -3,8 +3,9 @@
     Created on : 6 janv. 2014, 21:33:38
     Author     : Mathis
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,5 +14,9 @@
     </head>
     <body>
         <h1>Vue principale ?</h1>
+        <%
+        //
+        %>
+        <p><c:out value="${header.message}"/></p>
     </body>
 </html>
