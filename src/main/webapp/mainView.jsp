@@ -18,5 +18,6 @@
         //
         %>
         <p><c:out value="${header.message}"/></p>
+        <p><c:out value="${header.histo.idCapteur}"/></p>
     </body>
 </html>

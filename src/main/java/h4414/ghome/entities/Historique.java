@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
  * @author Mathis
  */
 @ Entity
-public class Historique implements Serializable{
+public class Historique implements Serializable{ 
     @Id
     @GeneratedValue
     private int id;
