@@ -24,7 +24,7 @@ public class RecuperateurTrame {
 
  //TODO: a mettre dans fichier config
   final static int port = 5000;
-  final static String IP = "134.214.105.28";
+  final static String IP = "134.214.106.23";
   
   public static void main(String[] args) {
 
