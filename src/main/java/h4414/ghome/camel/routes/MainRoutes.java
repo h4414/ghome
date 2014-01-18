@@ -11,7 +11,12 @@ import java.util.Date;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-
+import org.apache.camel.component.http.HttpBinding;
+import org.apache.camel.component.http.HttpEndpoint;
+import org.apache.camel.component.http.HttpMessage;
+import org.apache.camel.component.jpa.JpaEndpoint;
+import org.apache.camel.impl.DefaultHeaderFilterStrategy;
+import trames.RecuperateurTrame;
 
 /**
  *
@@ -19,13 +24,26 @@ import org.apache.camel.builder.RouteBuilder;
  */
 public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
+      final static int port = 5000;
+  final static String IP = "134.214.106.23";
     //@PersistenceUnit(unitName="ghome")
     //private EntityManagerFactory factory;
     
     @Override
     public void configure() throws Exception {
         //EntityManager eManager = factory.createEntityManager();
-        
+        from("jetty:http://"+IP+":"+port)
+                .process(new Processor() {
+
+            @Override
+            public void process(Exchange exchng) throws Exception {
+                RecuperateurTrame recuperateur = new RecuperateurTrame();
+                
+                 System.out.println(recuperateur.execute((String) exchng.getIn().getBody()));
+            }
+        }
+              )
+                .log(simple("${body}").toString() );
         from("jetty:http://localhost:8087/test")
                 
                 

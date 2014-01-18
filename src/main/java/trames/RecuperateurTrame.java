@@ -25,23 +25,50 @@ public class RecuperateurTrame {
  //TODO: a mettre dans fichier config
   final static int port = 5000;
   final static String IP = "134.214.106.23";
-  
-  public static void main(String[] args) {
+  final static String ID_CONTACTEUR = "0001b595";
+  final static String ID_PRISE = "dfgbjfdkhbv";
+  final static String ID_BOUTON = "0021CC31";
+  public void recuperateurTrame()
+  {
+      
+  }
+  public  boolean execute(String trame) {
 
-    Socket socket;
-    BufferedReader trame;
-
-    try {
+      Trame trameRecue = new Trame(trame);
     
-      socket = new Socket(IP, port);
-      trame = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      String trameRecue = trame.readLine();
-      System.out.println(trameRecue);
-      socket.close();
-    } catch (IOException e) {
-        System.out.println("Serveur offline");
+         switch(trameRecue.getID())
+    {
+        case ID_PRISE: 
+            return true;
+            //TO DO Traitement
+            
+        case ID_CONTACTEUR:
+            return true;
+            //TO DO Traitement
+          
+        case ID_BOUTON :
+            return true;
+            //TO DO Traitement
+          
+        default:
+            return false;
+                     
+    }
+      return true;
+       
+      //System.out.println(trameRecue);
+  
+             
+  
     }
 
-  }
-}  
+
+    
+
+
+            
+}
+  
+  
+
 
