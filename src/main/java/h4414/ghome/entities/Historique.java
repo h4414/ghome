@@ -5,7 +5,7 @@
 package h4414.ghome.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,14 +22,14 @@ public class Historique implements Serializable{
     private int id;
     private String idCapteur;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date debutPresence;
+    private Calendar debutPresence;
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date finPresence;
+    private Calendar finPresence;
 
     public Historique(){}
         
     
-    public Historique ( String idCapteur, Date debutPresence, Date finPresence ){
+    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence ){
         this.idCapteur = idCapteur;
         this.debutPresence = debutPresence;
         this.finPresence = finPresence;
@@ -52,19 +52,19 @@ public class Historique implements Serializable{
         this.idCapteur = idCapteur;
     }
 
-    public Date getDebutPresence() {
+    public Calendar getDebutPresence() {
         return debutPresence;
     }
 
-    public void setDebutPresence(Date debutPresence) {
+    public void setDebutPresence(Calendar debutPresence) {
         this.debutPresence = debutPresence;
     }
 
-    public Date getFinPresence() {
+    public Calendar getFinPresence() {
         return finPresence;
     }
 
-    public void setFinPresence(Date finPresence) {
+    public void setFinPresence(Calendar finPresence) {
         this.finPresence = finPresence;
     }
     

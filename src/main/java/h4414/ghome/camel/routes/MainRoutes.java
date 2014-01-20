@@ -24,8 +24,8 @@ import trames.RecuperateurTrame;
  */
 public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
-      final static int port = 5000;
-  final static String IP = "134.214.106.23";
+    final static int port = 5000;
+    final static String IP = "134.214.106.23";
     //@PersistenceUnit(unitName="ghome")
     //private EntityManagerFactory factory;
     
@@ -35,7 +35,7 @@ public class MainRoutes extends RouteBuilder{
             Thread listener = new Thread(recuperateur);
             listener.start();
         //EntityManager eManager = factory.createEntityManager();
-    /*   from("http://"+IP+":"+port)
+        /*   from("http://"+IP+":"+port)
                 .process(new Processor() {
 
             @Override
