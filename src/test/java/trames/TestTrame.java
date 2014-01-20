@@ -6,6 +6,7 @@
 
 package trames;
 
+import java.math.BigInteger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,9 +44,15 @@ public class TestTrame {
     //
     // @Test
     // public void hello() {}
-    @Test
+
+    /**
+     *
+     */
+        @Test
     public void testCasUsuel(){
         Trame test = new Trame("A55A0B07B729000D00053E7B00BD");
+        test.getID();
+        test.getTrame();
         assertEquals("00053E7B",test.getID());
         assertEquals(0xB729000D,test.getData());
     }

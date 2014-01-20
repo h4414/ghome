@@ -34,7 +34,7 @@ public class Trame {
      * @return : les 32 bits de l'ID de la trame
      */
     public String getID(){
-        String id = String.format("%8h",trame.and(MASQUE_ID).shiftRight(4*4).toString(16));
+        String id = String.format("%08X",trame.and(MASQUE_ID).shiftRight(4*4));
         return id;
     }
     
@@ -86,6 +86,10 @@ public class Trame {
     public int getDATA3(){
         int data3 = trame.and(MASQUE_DATA3).shiftRight(4*18).intValue();
         return data3;
+    }
+    
+    public BigInteger getTrame(){
+        return this.trame;
     }
     
    
