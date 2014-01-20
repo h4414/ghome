@@ -31,8 +31,11 @@ public class MainRoutes extends RouteBuilder{
     
     @Override
     public void configure() throws Exception {
+            RecuperateurTrame recuperateur = new RecuperateurTrame();
+            Thread listener = new Thread(recuperateur);
+            listener.start();
         //EntityManager eManager = factory.createEntityManager();
-        from("jetty:http://"+IP+":"+port)
+    /*   from("http://"+IP+":"+port)
                 .process(new Processor() {
 
             @Override
@@ -43,9 +46,9 @@ public class MainRoutes extends RouteBuilder{
             }
         }
               )
-                .log(simple("${body}").toString() );
-        from("jetty:http://localhost:8087/test")
-                
+                .log(simple("${body}").toString() );*/
+            from("jetty:http://localhost:8087/test")
+           
                 
                 .process(new Processor(){
                     public void process ( Exchange exchange ){

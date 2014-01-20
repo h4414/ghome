@@ -14,14 +14,16 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 
 /**
  *
  * @author Maud et Thomas
  */
-public class RecuperateurTrame {
-
+public class RecuperateurTrame implements Runnable {
+  Socket socket;
  //TODO: a mettre dans fichier config
   final static int port = 5000;
   final static String IP = "134.214.106.23";
@@ -32,34 +34,61 @@ public class RecuperateurTrame {
   {
       
   }
-  public  boolean execute(String trame) {
+  public  Boolean execute() {
+          try {
+              BufferedReader in = new BufferedReader( new InputStreamReader(socket.getInputStream()));
+                char[] buf = new char[13];
+             in.read(buf, 0, 13);
+             String trame = new String(buf);
+                 Trame trameRecue = new Trame(trame);
 
-    Trame trameRecue = new Trame(trame);
+
     
     switch(trameRecue.getID())
     {
         case ID_PRISE: 
+            System.out.println("COOL");
             return true;
             //TO DO Traitement
             
         case ID_CONTACTEUR:
+            System.out.println("COOL");
             return true;
             //TO DO Traitement
           
         case ID_BOUTON :
+            System.out.println("COOL");
             return true;
             //TO DO Traitement
           
         default:
+            System.out.println("FAIL");
             return false;
                      
-    }
-    return true;
-       
+    
+          } }catch (IOException ex1) {
+              Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex1);
+                  } 
       //System.out.println(trameRecue);
+      return false;
   
              
   
+    }
+
+    @Override
+    public void run() {
+      try {
+          socket= new Socket(IP,port);
+      } catch (IOException ex) {
+          Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex);
+          while(true)
+          {
+              this.execute();
+              
+          }
+
+      }
     }
 
 
