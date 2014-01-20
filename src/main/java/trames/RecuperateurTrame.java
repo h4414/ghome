@@ -26,9 +26,10 @@ public class RecuperateurTrame implements Runnable {
  //TODO: a mettre dans fichier config
   final static int port = 5000;
   final static String IP = "134.214.106.23";
-  final static String ID_CONTACTEUR = "0001b595";
+  final static String ID_CONTACTEUR = "0001B595";
   final static String ID_PRISE = "dfgbjfdkhbv";
   final static String ID_BOUTON = "0021CC31";
+  final static String ID_PRESENCE ="00053E7B";
   public void recuperateurTrame()
   {
       
@@ -57,6 +58,10 @@ public class RecuperateurTrame implements Runnable {
             //TO DO Traitement
           
         case ID_BOUTON :
+            System.out.println("COOL");
+            return true;
+            
+        case ID_PRESENCE :
             System.out.println("COOL");
             return true;
             //TO DO Traitement
