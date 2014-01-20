@@ -24,39 +24,29 @@ import trames.RecuperateurTrame;
  */
 public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
-      final static int port = 5000;
-  final static String IP = "134.214.106.23";
-      //final static String IP = "0.0.0.0";
+
+    final static int port = 5000;
+    final static String IP = "134.214.106.23";
+
     //@PersistenceUnit(unitName="ghome")
     //private EntityManagerFactory factory;
     
     @Override
     public void configure() throws Exception {
+            RecuperateurTrame recuperateur = new RecuperateurTrame();
+            Thread listener = new Thread(recuperateur);
+            listener.start();
         //EntityManager eManager = factory.createEntityManager();
-        
-        
-        
-        
-        /*from("netty:tcp://"+IP+":"+port)
-                .to("log:test?showAll=true")
-                .process(new Processor() {
 
-            @Override
-            public void process(Exchange exchng) throws Exception {
-                RecuperateurTrame recuperateur = new RecuperateurTrame();
-                
-                 System.out.println(recuperateur.execute((String) exchng.getIn().getBody()));
-            }
-        }
-              )
-                .log(simple("${body}").toString() );*/
-        from("jetty:http://localhost:8087/test")
-                
+
+            from("jetty:http://localhost:8087/test")
+           
+
                 
                 .process(new Processor(){
                     public void process ( Exchange exchange ){
-                        Historique hist = new Historique("test", new Date(), new Date());
-                        exchange.getIn().setBody(hist);
+                        //Historique hist = new Historique("test", new Date(), new Date());
+                        //exchange.getIn().setBody(hist);
                     }
                 })
                 
