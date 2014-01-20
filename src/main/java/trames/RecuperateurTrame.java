@@ -34,9 +34,9 @@ public class RecuperateurTrame {
   }
   public  boolean execute(String trame) {
 
-      Trame trameRecue = new Trame(trame);
+    Trame trameRecue = new Trame(trame);
     
-         switch(trameRecue.getID())
+    switch(trameRecue.getID())
     {
         case ID_PRISE: 
             return true;
@@ -54,7 +54,7 @@ public class RecuperateurTrame {
             return false;
                      
     }
-      return true;
+    return true;
        
       //System.out.println(trameRecue);
   
