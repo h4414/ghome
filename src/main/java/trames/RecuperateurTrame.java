@@ -54,7 +54,7 @@ public class RecuperateurTrame {
             return false;
                      
     }
-    return true;
+    //return true;
        
       //System.out.println(trameRecue);
   

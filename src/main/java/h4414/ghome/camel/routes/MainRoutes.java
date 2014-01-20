@@ -26,13 +26,19 @@ public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
       final static int port = 5000;
   final static String IP = "134.214.106.23";
+      //final static String IP = "0.0.0.0";
     //@PersistenceUnit(unitName="ghome")
     //private EntityManagerFactory factory;
     
     @Override
     public void configure() throws Exception {
         //EntityManager eManager = factory.createEntityManager();
-        from("jetty:http://"+IP+":"+port)
+        
+        
+        
+        
+        /*from("netty:tcp://"+IP+":"+port)
+                .to("log:test?showAll=true")
                 .process(new Processor() {
 
             @Override
@@ -43,7 +49,7 @@ public class MainRoutes extends RouteBuilder{
             }
         }
               )
-                .log(simple("${body}").toString() );
+                .log(simple("${body}").toString() );*/
         from("jetty:http://localhost:8087/test")
                 
                 
