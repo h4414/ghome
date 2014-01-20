@@ -7,7 +7,8 @@
 package traitement;
 
 import h4414.ghome.entities.Historique;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import trames.Trame;
 
 /** Classe de traitement des trames du detecteur de présence
@@ -32,8 +33,8 @@ public class Presence {
      * @param finplage date de fin de la plage horaire qu'on surveille
      * @return l'historique créé, null si rien n'a été créé
      */
-    public static Historique TraitementPresence(Trame trame, Date debutplage, Date finplage){
-        Date now = new Date();
+    public static Historique TraitementPresence(Trame trame, Calendar debutplage, Calendar finplage){
+        Calendar now = new GregorianCalendar();
         if (debutplage.before(now) && finplage.after(now) && OccupancyDetected(trame)){        
             Historique newhist = new Historique(trame.getID(),now,now);
             return newhist;

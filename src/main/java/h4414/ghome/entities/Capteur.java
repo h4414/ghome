@@ -18,36 +18,39 @@ import javax.persistence.Temporal;
  */
 @ Entity
 public class Capteur implements Serializable{
-     @Id
+    @Id
     @GeneratedValue
-      private int id;
-      private String idCapteur;
-      private String NomCapteur;
-       public Capteur(){}
-       public Capteur( String idCapteur,String NomCapteur ){
+    private int id;
+    private String idCapteur;
+    private String NomCapteur;
+    public Capteur(){}
+    public Capteur( String idCapteur,String NomCapteur ){
         this.idCapteur = idCapteur;
-        this.NomCapteur = NomCapteur;}
-          public int getId(){
-          return id;
+        this.NomCapteur = NomCapteur;
     }
-          public void setId(int id) {
+    public int getId(){
+        return id;
+    }
+    
+    public void setId(int id) {
         this.id = id;
     }
-            public String getIdCapteur() {
+    
+    public String getIdCapteur() {
         return idCapteur;
     }
-              public String setIdCapteur() {
+    public String setIdCapteur() {
         return idCapteur;
     }
-               public String getNomCapteur() {
+    public String getNomCapteur() {
         return idCapteur;
     }
-               public String setNomCapteur() {
+    public String setNomCapteur() {
         return idCapteur;
     }
                
               
-              @Override
+    @Override
     public boolean equals ( Object o ){
         boolean resultat = false;
         if ( o == null ){
@@ -82,10 +85,11 @@ public class Capteur implements Serializable{
             }
         }
     
- public int hashCode(){
+    public int hashCode(){
         return ( ( this.getIdCapteur()+ this.getNomCapteur()).hashCode());
     }
-     @Override
+    
+    @Override
     public String toString(){
         return "["+this.getClass()+" "+this.getIdCapteur()+" "+ this.getNomCapteur()+"]";
     }
