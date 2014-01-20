@@ -48,21 +48,21 @@ public class RecuperateurTrame implements Runnable {
     switch(trameRecue.getID())
     {
         case ID_PRISE: 
-            System.out.println("COOL");
+            System.out.println("TRAME PRISE DETECTEE");
             return true;
             //TO DO Traitement
             
         case ID_CONTACTEUR:
-            System.out.println("COOL");
+            System.out.println("TRAME CONTACTEUR DETECTEE");
             return true;
             //TO DO Traitement
           
         case ID_BOUTON :
-            System.out.println("COOL");
+            System.out.println("TRAME BOUTON DETECTEE");
             return true;
             
         case ID_PRESENCE :
-            System.out.println("COOL");
+            System.out.println("TRAME PRESENCE DETECTEE");
             return true;
             //TO DO Traitement
           
