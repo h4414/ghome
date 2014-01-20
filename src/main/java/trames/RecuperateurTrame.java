@@ -17,7 +17,6 @@ import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
-
 /**
  *
  * @author Maud et Thomas
@@ -37,10 +36,11 @@ public class RecuperateurTrame implements Runnable {
   public  Boolean execute() {
           try {
               BufferedReader in = new BufferedReader( new InputStreamReader(socket.getInputStream()));
-                char[] buf = new char[13];
-             in.read(buf, 0, 13);
+                char[] buf = new char[28];
+             in.read(buf, 0, 28);
              String trame = new String(buf);
-                 Trame trameRecue = new Trame(trame);
+              Trame trameRecue;
+              trameRecue = new Trame(trame);
 
 
     
@@ -80,13 +80,14 @@ public class RecuperateurTrame implements Runnable {
     public void run() {
       try {
           socket= new Socket(IP,port);
-      } catch (IOException ex) {
-          Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex);
-          while(true)
+              while(true)
           {
               this.execute();
               
           }
+      } catch (IOException ex) {
+          Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex);
+      
 
       }
     }
