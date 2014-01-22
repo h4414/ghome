@@ -1,0 +1,19 @@
+/* 
+    Document   : ghome
+    Created on : 22 janv. 2014, 15:45:35
+    Author     : Mathis
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#options{
+    float : right;
+}
+#boutons-accueil .row{
+    padding : 0 15px;
+    /*margin: 0 -15px;*/
+}
+#ruleList{
+    
+}
+
