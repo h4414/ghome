@@ -42,7 +42,8 @@ public class RecuperateurTrame implements Runnable {
   //final static String ID_BOUTON = "0021CC31";
   final static String ID_BOUTON = "0021CBE3";
   //final static String ID_PRESENCE ="00053E7B";
-  final static String ID_PRESENCE ="00054A7F";
+  final static String ID_PRESENCE = "00054A7F";
+  final static String ID_TEMPERATURE = "0089337F";
   private CamelContext context;
 
   
@@ -68,7 +69,10 @@ public class RecuperateurTrame implements Runnable {
             System.out.println("TRAME PRISE DETECTEE");
             return true;
             //TO DO Traitement
-            
+        case ID_TEMPERATURE: 
+            System.out.println("TRAME TMPERATURE DETECTEE");
+            return true;
+            //TO DO Traitement     
         case ID_CONTACTEUR:
             System.out.println("TRAME CONTACTEUR DETECTEE");
             return true;
@@ -80,9 +84,7 @@ public class RecuperateurTrame implements Runnable {
             
         case ID_PRESENCE :
             System.out.println("TRAME PRESENCE DETECTEE");
-             ProducerTemplate pt = new DefaultProducerTemplate(this.context);
-             pt.sendBody("direct:capteur",trameRecue);
-            Calendar calendar1 = new GregorianCalendar();
+           /* Calendar calendar1 = new GregorianCalendar();
             Calendar calendar2 = new GregorianCalendar();
             Date d1 = new Date();
             d1.setTime(d1.getTime()-1000);
@@ -91,11 +93,14 @@ public class RecuperateurTrame implements Runnable {
             calendar1.setTime(d2);
             calendar2.setTime(d2);
             Presence presence = new Presence();
-           /* if ( presence.TraitementPresence(trameRecue, calendar1, calendar2 ) != null ){
+            if ( presence.TraitementPresence(trameRecue, calendar1, calendar2 ) != null ){
                 Historique histo = presence.TraitementPresence(trameRecue, calendar1, calendar2 );
                 ProducerTemplate pt = new DefaultProducerTemplate(this.context);
                 pt.sendBody("direct:capteur",histo);
             }*/
+             Presence traitementPresence = new Presence(trameRecue);
+            Thread presence = new Thread(traitementPresence);
+            presence.start();
             return true;
             //TO DO Traitement
           

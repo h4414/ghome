@@ -15,8 +15,12 @@ import trames.Trame;
  *
  * @author Jérémy
  */
-public class Presence {
+public class Presence implements Runnable {
     
+    /**
+     * Champ contenant la trame traitée ( pour execution dans un thread a part 
+     */
+    Trame trameTraitee;
     /**
      * 
      * @param trame Une trame recue par le détecteur de présence
@@ -26,7 +30,9 @@ public class Presence {
         return trame.getDataX_Y(0, 1) == 0;
     }
 
-    public Presence(){}
+    public Presence(Trame trameTraitee){
+    this.trameTraitee = trameTraitee ;
+    }
     /** Crée un objet historique si on détecte une présence dans la plage
      * horaire donnée.
      * @param trame Une trame recue par le détecteur de présence
@@ -42,5 +48,16 @@ public class Presence {
         }else{
             return null;
         }
+    }
+
+    @Override
+    public void run() {
+        Calendar begin= new GregorianCalendar();
+        begin .add(Calendar.HOUR, -4);
+        Calendar end = new GregorianCalendar();
+
+        end.add(Calendar.HOUR, 4);
+        Historique traitementPresence = TraitementPresence(trameTraitee,begin, end);
+        System.out.println(traitementPresence);
     }
 }
