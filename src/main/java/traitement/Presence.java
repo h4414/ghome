@@ -26,6 +26,7 @@ public class Presence {
         return trame.getDataX_Y(0, 1) == 0;
     }
 
+    public Presence(){}
     /** Crée un objet historique si on détecte une présence dans la plage
      * horaire donnée.
      * @param trame Une trame recue par le détecteur de présence
@@ -33,7 +34,7 @@ public class Presence {
      * @param finplage date de fin de la plage horaire qu'on surveille
      * @return l'historique créé, null si rien n'a été créé
      */
-    public static Historique TraitementPresence(Trame trame, Calendar debutplage, Calendar finplage){
+    public Historique TraitementPresence(Trame trame, Calendar debutplage, Calendar finplage){
         Calendar now = new GregorianCalendar();
         if (debutplage.before(now) && finplage.after(now) && OccupancyDetected(trame)){        
             Historique newhist = new Historique(trame.getID(),now,now);

@@ -7,6 +7,7 @@
 
 package trames;
 
+import h4414.ghome.entities.Historique;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -15,9 +16,16 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.camel.CamelContext;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultProducerTemplate;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
+import traitement.Presence;
 /**
  *
  * @author Maud et Thomas
@@ -27,13 +35,22 @@ public class RecuperateurTrame implements Runnable {
  //TODO: a mettre dans fichier config
   final static int port = 5000;
   final static String IP = "134.214.106.23";
-  final static String ID_CONTACTEUR = "0001B595";
+  //final static String ID_CONTACTEUR = "0001B595";
+  final static String ID_CONTACTEUR = "0001b25e";
+  //final static String ID_PRISE = "dfgbjfdkhbv";
   final static String ID_PRISE = "dfgbjfdkhbv";
-  final static String ID_BOUTON = "0021CC31";
-  final static String ID_PRESENCE ="00053E7B";
-  public void recuperateurTrame()
+  //final static String ID_BOUTON = "0021CC31";
+  final static String ID_BOUTON = "0021cbe3";
+  //final static String ID_PRESENCE ="00053E7B";
+  final static String ID_PRESENCE ="00054a7f";
+  private CamelContext context;
+
+
+  
+  
+  public RecuperateurTrame(CamelContext context)
   {
-      
+      this.context = context;
   }
   public  Boolean execute() {
           try {
@@ -64,6 +81,20 @@ public class RecuperateurTrame implements Runnable {
             
         case ID_PRESENCE :
             System.out.println("COOL");
+            Calendar calendar1 = new GregorianCalendar();
+            Calendar calendar2 = new GregorianCalendar();
+            Date d1 = new Date();
+            d1.setTime(d1.getTime()-1000);
+            Date d2 = new Date();
+            d2.setTime(d2.getTime()+1000);
+            calendar1.setTime(d2);
+            calendar2.setTime(d2);
+            Presence presence = new Presence();
+            if ( presence.TraitementPresence(trameRecue, calendar1, calendar2 ) != null ){
+                Historique histo = presence.TraitementPresence(trameRecue, calendar1, calendar2 );
+                ProducerTemplate pt = new DefaultProducerTemplate(this.context);
+                pt.sendBody("direct:capteur",histo);
+            }
             return true;
             //TO DO Traitement
           
