@@ -7,6 +7,7 @@ package h4414.ghome.camel.routes;
 
 
 import h4414.ghome.entities.Historique;
+import static java.lang.Thread.sleep;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import org.apache.camel.CamelContext;
@@ -38,6 +39,7 @@ public class MainRoutes extends RouteBuilder{
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
             Thread listener = new Thread(recuperateur);
             listener.start();
+          
         //EntityManager eManager = factory.createEntityManager();
 
             from("direct:capteur").to("log:capteur?showAll=true");

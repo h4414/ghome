@@ -123,11 +123,14 @@ public class RecuperateurTrame implements Runnable {
     public void run() {
       try {
           socket= new Socket(IP,port);
-              while(true)
+          while(true)
           {
               this.execute();
-              
           }
+          
+          
+              
+          
       } catch (IOException ex) {
           Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex);
       
