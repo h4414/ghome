@@ -36,15 +36,14 @@ public class RecuperateurTrame implements Runnable {
   final static int port = 5000;
   final static String IP = "134.214.106.23";
   //final static String ID_CONTACTEUR = "0001B595";
-  final static String ID_CONTACTEUR = "0001b25e";
+  final static String ID_CONTACTEUR = "0001B25E";
   //final static String ID_PRISE = "dfgbjfdkhbv";
   final static String ID_PRISE = "dfgbjfdkhbv";
   //final static String ID_BOUTON = "0021CC31";
-  final static String ID_BOUTON = "0021cbe3";
+  final static String ID_BOUTON = "0021CBE3";
   //final static String ID_PRESENCE ="00053E7B";
-  final static String ID_PRESENCE ="00054a7f";
+  final static String ID_PRESENCE ="00054A7F";
   private CamelContext context;
-
 
   
   
@@ -66,21 +65,21 @@ public class RecuperateurTrame implements Runnable {
     switch(trameRecue.getID())
     {
         case ID_PRISE: 
-            System.out.println("COOL");
+            System.out.println("TRAME PRISE DETECTEE");
             return true;
             //TO DO Traitement
             
         case ID_CONTACTEUR:
-            System.out.println("COOL");
+            System.out.println("TRAME CONTACTEUR DETECTEE");
             return true;
             //TO DO Traitement
           
         case ID_BOUTON :
-            System.out.println("COOL");
+            System.out.println("TRAME BOUTON DETECTEE");
             return true;
             
         case ID_PRESENCE :
-            System.out.println("COOL");
+            System.out.println("TRAME PRESENCE DETECTEE");
             Calendar calendar1 = new GregorianCalendar();
             Calendar calendar2 = new GregorianCalendar();
             Date d1 = new Date();
