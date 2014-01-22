@@ -80,6 +80,8 @@ public class RecuperateurTrame implements Runnable {
             
         case ID_PRESENCE :
             System.out.println("TRAME PRESENCE DETECTEE");
+             ProducerTemplate pt = new DefaultProducerTemplate(this.context);
+             pt.sendBody("direct:capteur",trameRecue);
             Calendar calendar1 = new GregorianCalendar();
             Calendar calendar2 = new GregorianCalendar();
             Date d1 = new Date();
@@ -89,11 +91,11 @@ public class RecuperateurTrame implements Runnable {
             calendar1.setTime(d2);
             calendar2.setTime(d2);
             Presence presence = new Presence();
-            if ( presence.TraitementPresence(trameRecue, calendar1, calendar2 ) != null ){
+           /* if ( presence.TraitementPresence(trameRecue, calendar1, calendar2 ) != null ){
                 Historique histo = presence.TraitementPresence(trameRecue, calendar1, calendar2 );
                 ProducerTemplate pt = new DefaultProducerTemplate(this.context);
                 pt.sendBody("direct:capteur",histo);
-            }
+            }*/
             return true;
             //TO DO Traitement
           
