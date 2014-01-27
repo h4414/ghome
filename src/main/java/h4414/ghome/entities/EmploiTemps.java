@@ -8,7 +8,6 @@ package h4414.ghome.entities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class EmploiTemps {
         return true;
     }
     
-    public PlageHoraire chercherPlage (GregorianCalendar dateTrame){
+    public PlageHoraire chercherPlage (Calendar dateTrame){
         for (PlageHoraire p:plages){
             if (p.estDansPlage(dateTrame)){
                 return p;

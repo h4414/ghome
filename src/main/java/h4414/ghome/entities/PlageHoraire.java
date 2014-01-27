@@ -6,23 +6,22 @@
 
 package h4414.ghome.entities;
 
-import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 
 /**
  *
  * @author Jérémy
  */
 public class PlageHoraire{
-    private GregorianCalendar debut;
-    private GregorianCalendar fin;
+    private Calendar debut;
+    private Calendar fin;
 
-    public PlageHoraire(GregorianCalendar debut, GregorianCalendar fin) {
+    public PlageHoraire(Calendar debut, Calendar fin) {
         this.debut = debut;
         this.fin = fin;
     }
         
-    public boolean estDansPlage (GregorianCalendar dateTrame){
+    public boolean estDansPlage (Calendar dateTrame){
         return (this.debut.before(dateTrame) && dateTrame.before(fin));
     }
 }
