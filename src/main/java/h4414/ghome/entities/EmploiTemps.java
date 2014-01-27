@@ -6,69 +6,35 @@
 
 package h4414.ghome.entities;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  *
  * @author Jérémy
  */
 public class EmploiTemps {
-    public enum JourDeLaSemaine {
-        Dimanche,
-        Lundi,
-        Mardi,
-        Mercredi,
-        Jeudi,
-        Vendredi,
-        Samedi;
-    }
-    private JourDeLaSemaine jourDebut;
-    private int heureDebut;   
-    private JourDeLaSemaine jourFin;
-    private int heureFin;
 
-    public EmploiTemps(JourDeLaSemaine jourDebut, int heureDebut, JourDeLaSemaine jourFin, int heureFin) {
-        this.jourDebut = jourDebut;
-        this.heureDebut = heureDebut;
-        this.jourFin = jourFin;
-        this.heureFin = heureFin;
+    private List<PlageHoraire> plages;
+
+    public EmploiTemps() {
+        this.plages = new ArrayList<>();
     }
     
-    public boolean EstDansPlage (GregorianCalendar dateTrame){
-        int ceJour = dateTrame.get(Calendar.DAY_OF_WEEK);
-        int cetteHeure = dateTrame.get(Calendar.HOUR_OF_DAY);
-        if (jourDebut.ordinal()<jourFin.ordinal()){
-            if (jourDebut.ordinal()<ceJour && ceJour<jourFin.ordinal()){
-                return true;
-            }
-            else if (jourDebut.ordinal()==ceJour){
-                return (heureDebut<=cetteHeure);
-            }
-            else if (jourFin.ordinal()==ceJour){
-                return (cetteHeure<heureFin);
-            }
-        }
-        else if (jourDebut.ordinal()==jourFin.ordinal()){
-            if (heureDebut<=heureFin){
-                return (heureDebut<=cetteHeure && cetteHeure<heureFin);
-            }
-            else{
-                return (heureDebut<=cetteHeure || cetteHeure<heureFin);
-            }
-        }
-        else if (jourDebut.ordinal()>jourFin.ordinal()){
-            if (jourDebut.ordinal()<ceJour || ceJour<jourFin.ordinal()){
-                return true;
-            }
-            else if (jourDebut.ordinal()==ceJour){
-                return (heureDebut<=cetteHeure);
-            }
-            else if (jourFin.ordinal()==ceJour){
-                return (cetteHeure<heureFin);
-            }            
-        }
-        return false;
+    public boolean ajouterPlage (PlageHoraire plage){
+        this.plages.add(plage);
+        return true;
     }
-
+    
+    public PlageHoraire chercherPlage (GregorianCalendar dateTrame){
+        for (PlageHoraire p:plages){
+            if (p.estDansPlage(dateTrame)){
+                return p;
+            }
+        }
+        return null;
+    }
+    
 }
