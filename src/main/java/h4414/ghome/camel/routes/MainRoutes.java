@@ -7,8 +7,11 @@ package h4414.ghome.camel.routes;
 
 
 import h4414.ghome.entities.Historique;
+import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
@@ -18,7 +21,9 @@ import org.apache.camel.component.http.HttpEndpoint;
 import org.apache.camel.component.http.HttpMessage;
 import org.apache.camel.component.jpa.JpaEndpoint;
 import org.apache.camel.impl.DefaultHeaderFilterStrategy;
+import traitement.Presence;
 import trames.RecuperateurTrame;
+import trames.Trame;
 
 /**
  *
@@ -26,6 +31,12 @@ import trames.RecuperateurTrame;
  */
 public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
+    private final String IP = "134.214.106.23";
+    private final String ID_CONTACTEUR = "0001B25E";
+    private final String ID_PRISE = "dfgbjfdkhbv";
+    private final String ID_BOUTON = "0021CBE3";
+    private final String ID_PRESENCE = "00054A7F";
+    private final String ID_TEMPERATURE = "0089337F";
 
     
 
@@ -38,15 +49,14 @@ public class MainRoutes extends RouteBuilder{
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
             Thread listener = new Thread(recuperateur);
             listener.start();
-        //EntityManager eManager = factory.createEntityManager();
+            //EntityManager eManager = factory.createEntityManager();
+            
 
             from("direct:capteur").to("log:capteur?showAll=true");
-
+          
             from("jetty:http://localhost:8087/test")
-           
-
-                
                 .process(new Processor(){
+                    @Override
                     public void process ( Exchange exchange ){
                         Historique hist = new Historique("test",new GregorianCalendar(),new GregorianCalendar());
                         exchange.getIn().setBody(hist);
@@ -65,6 +75,8 @@ public class MainRoutes extends RouteBuilder{
         .log("ajout d'un capteur");
         from( "jetty:http://localhost:8087/addrule")
         .log("ajout d'une règle");
+        
+        //from("").to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME);
     }
     
     

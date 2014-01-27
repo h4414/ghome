@@ -59,7 +59,7 @@ public class RecuperateurTrame implements Runnable {
              in.read(buf, 0, 28);
              String trame = new String(buf);
               Trame trameRecue;
-              trameRecue = new Trame(trame);
+              trameRecue = new Trame("");//trame);
 
 
     
@@ -98,7 +98,7 @@ public class RecuperateurTrame implements Runnable {
                 ProducerTemplate pt = new DefaultProducerTemplate(this.context);
                 pt.sendBody("direct:capteur",histo);
             }*/
-             Presence traitementPresence = new Presence(trameRecue);
+            Presence traitementPresence = new Presence(trameRecue);
             Thread presence = new Thread(traitementPresence);
             presence.start();
             return true;
