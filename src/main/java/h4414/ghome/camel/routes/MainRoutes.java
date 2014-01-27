@@ -6,6 +6,7 @@ package h4414.ghome.camel.routes;
 
 
 
+import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.entities.Historique;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -26,6 +27,7 @@ import trames.RecuperateurTrame;
  */
 public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
+    private PresenceRuleProcessor presenceRuleProcessor = new PresenceRuleProcessor();
 
     
 
@@ -64,6 +66,9 @@ public class MainRoutes extends RouteBuilder{
         from( "jetty:http://localhost:8087/addobject")
         .log("ajout d'un capteur");
         from( "jetty:http://localhost:8087/addrule")
+                .process(presenceRuleProcessor)
+                .to("log:regle ajoutee?showAll=true")
+                .to("jpa:ReglePresence?persistenceUnit="+PERSISTANCE_UNIT_NAME)
         .log("ajout d'une règle");
     }
     

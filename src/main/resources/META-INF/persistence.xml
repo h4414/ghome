@@ -3,6 +3,8 @@
   <persistence-unit name="4414_ghhome_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>h4414.ghome.entities.Historique</class>
+    <class>h4414.ghome.entities.Capteur</class>
+    <class>h4414.ghome.entities.ReglePresence</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/ghome"/>
