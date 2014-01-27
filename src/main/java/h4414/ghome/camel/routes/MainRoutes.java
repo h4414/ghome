@@ -8,7 +8,11 @@ package h4414.ghome.camel.routes;
 
 import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.entities.Historique;
+<<<<<<< HEAD
 import static java.lang.Thread.sleep;
+=======
+import java.io.IOException;
+>>>>>>> a5f0c510f46ce7fc6dbb60bf06f6c669da1965e4
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -54,6 +58,9 @@ public class MainRoutes extends RouteBuilder{
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
             Thread listener = new Thread(recuperateur);
 
+            listener.start();
+            //EntityManager eManager = factory.createEntityManager();
+            
 
             from("direct:capteur").to("log:capteur?showAll=true");
           
