@@ -8,11 +8,7 @@ package h4414.ghome.camel.routes;
 
 import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.entities.Historique;
-<<<<<<< HEAD
-import static java.lang.Thread.sleep;
-=======
-import java.io.IOException;
->>>>>>> a5f0c510f46ce7fc6dbb60bf06f6c669da1965e4
+
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -49,8 +45,7 @@ public class MainRoutes extends RouteBuilder{
 
     
 
-    //@PersistenceUnit(unitName="ghome")
-    //private EntityManagerFactory factory;
+
     
     @Override
     public void configure() throws Exception {
@@ -59,8 +54,6 @@ public class MainRoutes extends RouteBuilder{
             Thread listener = new Thread(recuperateur);
 
             listener.start();
-            //EntityManager eManager = factory.createEntityManager();
-            
 
             from("direct:capteur").to("log:capteur?showAll=true");
           
@@ -75,9 +68,9 @@ public class MainRoutes extends RouteBuilder{
                 
                 .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
                 
-           .to("log:yo?showAll=true");
+           //.to("log:yo?showAll=true");
         //.to("http://localhost:8084/ghome/mainView.jsp?bridgeEndpoint=true"/*+&disableStreamCache=true"+*/);
-        
+        .to("http://localhost:8087/ghome/html/index");
         /*
          * definir une plage horaire sur laquelle l'on détecte une présence
          */

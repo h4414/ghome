@@ -59,7 +59,7 @@ public class RecuperateurTrame implements Runnable {
              in.read(buf, 0, 28);
              String trame = new String(buf);
               Trame trameRecue;
-              trameRecue = new Trame("");//trame);
+              trameRecue = new Trame(trame);
 
 
     
