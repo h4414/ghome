@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.camel.CamelContext;
+import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultProducerTemplate;
 import trames.Trame;
 
 /** Classe de traitement des trames du detecteur de présence
@@ -23,6 +28,7 @@ public class Presence implements Runnable {
      * Champ contenant la trame traitée ( pour execution dans un thread a part 
      */
     Trame trameTraitee;
+    CamelContext ctx;
     /**
      * 
      * @param trame Une trame recue par le détecteur de présence
@@ -40,8 +46,9 @@ public class Presence implements Runnable {
         listeTrame = new ArrayList<Historique>();
     }
 
-    public Presence(Trame trameTraitee){
-    this.trameTraitee = trameTraitee ;
+    public Presence(Trame trameTraitee, CamelContext ctx){
+        this.trameTraitee = trameTraitee ;
+        this.ctx = ctx;
     }
     /** Crée un objet historique si on détecte une présence dans la plage
      * horaire donnée.
@@ -71,5 +78,15 @@ public class Presence implements Runnable {
         Historique traitementPresence = TraitementPresence(trameTraitee,begin, end);
         listeTrame.add(traitementPresence);
         System.out.println(traitementPresence);
+        ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
+        try {
+            pdt.start();
+            pdt.sendBody("direct:capteur",traitementPresence);
+            pdt.stop();
+        } catch (Exception ex) {
+            Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 }

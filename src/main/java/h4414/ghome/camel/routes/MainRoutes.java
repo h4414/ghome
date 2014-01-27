@@ -6,6 +6,7 @@ package h4414.ghome.camel.routes;
 
 
 
+import h4414.ghome.camel.processors.ContextInitializer;
 import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.entities.Historique;
 import java.io.IOException;
@@ -55,9 +56,11 @@ public class MainRoutes extends RouteBuilder{
             Thread listener = new Thread(recuperateur);
             listener.start();
             //EntityManager eManager = factory.createEntityManager();
-            
+            ContextInitializer ctxInit = new ContextInitializer(recuperateur);
 
-            from("direct:capteur").to("log:capteur?showAll=true");
+            from("direct:capteur")
+                    .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
+                    .to("log:capteur?showAll=true");
           
             from("jetty:http://localhost:8087/test")
                 .process(new Processor(){
@@ -83,6 +86,11 @@ public class MainRoutes extends RouteBuilder{
                 .to("log:regle ajoutee?showAll=true")
                 .to("jpa:ReglePresence?persistenceUnit="+PERSISTANCE_UNIT_NAME)
         .log("ajout d'une règle");
+        
+        
+        from("timer://runOnce?repeatCount=1&delay=5000")
+               .process(ctxInit)
+        .log("code de thomas op");
         
         //from("").to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME);
     }
