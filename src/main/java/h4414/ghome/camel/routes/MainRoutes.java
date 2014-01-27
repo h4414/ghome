@@ -92,6 +92,15 @@ public class MainRoutes extends RouteBuilder{
                .process(ctxInit)
         .log("code de thomas op");
         
+        /*from("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
+                .to("log:obj retrieved?showAll=true");*/
+        
+        from ( "jetty:http://localhost:8087/gethistorique")
+                
+                //.enrich("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
+                .to("log:obj retrieved?showAll=true")
+        .log("lol");
+        
         //from("").to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME);
     }
     
