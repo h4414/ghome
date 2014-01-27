@@ -7,8 +7,10 @@
 package traitement;
 
 import h4414.ghome.entities.Historique;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import trames.Trame;
 
 /** Classe de traitement des trames du detecteur de présence
@@ -16,7 +18,7 @@ import trames.Trame;
  * @author Jérémy
  */
 public class Presence implements Runnable {
-    
+    private static List<Historique> listeTrame = new ArrayList<Historique>();
     /**
      * Champ contenant la trame traitée ( pour execution dans un thread a part 
      */
@@ -28,6 +30,14 @@ public class Presence implements Runnable {
      */
     public static boolean OccupancyDetected(Trame trame){
         return trame.getDataX_Y(0, 1) == 0;
+    }
+    
+    public static List<Historique> getHistorique(){
+        return listeTrame;
+    }
+    
+    public static void viderHistorique(){
+        listeTrame = new ArrayList<Historique>();
     }
 
     public Presence(Trame trameTraitee){
@@ -44,6 +54,7 @@ public class Presence implements Runnable {
         Calendar now = new GregorianCalendar();
         if (debutplage.before(now) && finplage.after(now) && OccupancyDetected(trame)){        
             Historique newhist = new Historique(trame.getID(),now,now);
+            
             return newhist;
         }else{
             return null;
@@ -58,6 +69,7 @@ public class Presence implements Runnable {
 
         end.add(Calendar.HOUR, 4);
         Historique traitementPresence = TraitementPresence(trameTraitee,begin, end);
+        listeTrame.add(traitementPresence);
         System.out.println(traitementPresence);
     }
 }
