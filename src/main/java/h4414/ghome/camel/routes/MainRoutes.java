@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +10,7 @@ package h4414.ghome.camel.routes;
 import h4414.ghome.camel.processors.ContextInitializer;
 import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.entities.Historique;
-
+import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
@@ -46,14 +47,14 @@ public class MainRoutes extends RouteBuilder{
 
     
 
-
+    //@PersistenceUnit(unitName="ghome")
+    //private EntityManagerFactory factory;
     
     @Override
     public void configure() throws Exception {
         CamelContext context = this.getContext();
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
             Thread listener = new Thread(recuperateur);
-
             listener.start();
             //EntityManager eManager = factory.createEntityManager();
             ContextInitializer ctxInit = new ContextInitializer(recuperateur);
@@ -73,9 +74,9 @@ public class MainRoutes extends RouteBuilder{
                 
                 .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
                 
-           //.to("log:yo?showAll=true");
+           .to("log:yo?showAll=true");
         //.to("http://localhost:8084/ghome/mainView.jsp?bridgeEndpoint=true"/*+&disableStreamCache=true"+*/);
-        .to("http://localhost:8087/ghome/html/index");
+        
         /*
          * definir une plage horaire sur laquelle l'on détecte une présence
          */
@@ -98,3 +99,4 @@ public class MainRoutes extends RouteBuilder{
     
     
 }
+

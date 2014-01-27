@@ -1,4 +1,5 @@
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,8 +42,8 @@ public class RecuperateurTrame implements Runnable {
   final static String ID_PRISE = "dfgbjfdkhbv";
   //final static String ID_BOUTON = "0021CC31";
   final static String ID_BOUTON = "0021CBE3";
-  //final static String ID_PRESENCE ="00053E7B";
-  final static String ID_PRESENCE = "00054A7F";
+  final static String ID_PRESENCE ="00053E7B"; // n2
+  //final static String ID_PRESENCE = "00054A7F";
   final static String ID_TEMPERATURE = "0089337F";
   private CamelContext context;
 
@@ -84,7 +85,7 @@ public class RecuperateurTrame implements Runnable {
             
         case ID_PRESENCE :
             System.out.println("TRAME PRESENCE DETECTEE");
-           /* Calendar calendar1 = new GregorianCalendar();
+            /*Calendar calendar1 = new GregorianCalendar();
             Calendar calendar2 = new GregorianCalendar();
             Date d1 = new Date();
             d1.setTime(d1.getTime()-1000);
@@ -98,7 +99,7 @@ public class RecuperateurTrame implements Runnable {
                 ProducerTemplate pt = new DefaultProducerTemplate(this.context);
                 pt.sendBody("direct:capteur",histo);
             }*/
-            Presence traitementPresence = new Presence(trameRecue);
+            Presence traitementPresence = new Presence(trameRecue, this.context);
             Thread presence = new Thread(traitementPresence);
             presence.start();
             return true;
@@ -123,14 +124,11 @@ public class RecuperateurTrame implements Runnable {
     public void run() {
       try {
           socket= new Socket(IP,port);
-          while(true)
+              while(true)
           {
               this.execute();
-          }
-          
-          
               
-          
+          }
       } catch (IOException ex) {
           Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex);
       
@@ -140,8 +138,11 @@ public class RecuperateurTrame implements Runnable {
 
 
     
-
+public void setContext ( CamelContext context){
+    this.context = context;
+}
 
             
 }
+
 
