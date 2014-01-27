@@ -1,4 +1,5 @@
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,14 +36,14 @@ public class RecuperateurTrame implements Runnable {
  //TODO: a mettre dans fichier config
   final static int port = 5000;
   final static String IP = "134.214.106.23";
-  //final static String ID_CONTACTEUR = "0001B595";
-  final static String ID_CONTACTEUR = "0001B25E";
-  //final static String ID_PRISE = "dfgbjfdkhbv";
+  final static String ID_CONTACTEUR = "0001B595";
+ // final static String ID_CONTACTEUR = "0001B25E";
   final static String ID_PRISE = "dfgbjfdkhbv";
-  //final static String ID_BOUTON = "0021CC31";
-  final static String ID_BOUTON = "0021CBE3";
-  final static String ID_PRESENCE ="00053E7B"; // n2
-  //final static String ID_PRESENCE = "00054A7F";
+  //final static String ID_PRISE = "dfgbjfdkhbv";
+  final static String ID_BOUTON = "0021CC31";
+ // final static String ID_BOUTON = "0021CBE3";
+  //final static String ID_PRESENCE ="00053E7B"; // n2
+  final static String ID_PRESENCE = "00054A7F";
   final static String ID_TEMPERATURE = "0089337F";
   private CamelContext context;
 
@@ -70,7 +71,7 @@ public class RecuperateurTrame implements Runnable {
             return true;
             //TO DO Traitement
         case ID_TEMPERATURE: 
-            System.out.println("TRAME TMPERATURE DETECTEE");
+            System.out.println("TRAME TEMPERATURE DETECTEE");
             return true;
             //TO DO Traitement     
         case ID_CONTACTEUR:
@@ -143,4 +144,5 @@ public void setContext ( CamelContext context){
 
             
 }
+
 
