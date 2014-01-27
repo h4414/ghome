@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Ghome homepage</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta charset='iso-8859-1'>
+            <!-- Bootstrap -->
+            <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+            <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+            <link href="css/ghome.css" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        <div class='header'> 
+            <div id='options'>
+                 <span class='glyphicon glyphicon-cog'></span>
+            </div>
+            <h1>GHome <small>the future is now</small></h1>
+        </div>
+       <center>
+            <div class="container">
+                <div class="row">
+                    <div class="span6 offset3">
+                            <form class="navbar-form pull-left">
+                                ID du capteur : 
+                                <input type="text" class="span2"> <br> <br>
+                                Nom du capteur : 
+                                <input type="text" class="span2"> <br> <br>
+                                Salle concernée : 
+                                <div class="btn-group dropdown">
+                                        <button class="btn">Choisir salle</button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <!-- dropdown menu links -->
+                                        <li><a tabindex="-1" href="#">Salle à manger</a></li>
+                                        <li><a tabindex="-1" href="#">Chambre</a></li>
+                                        <li><a tabindex="-1" href="#">Cuisine</a></li>
+                                    </ul>
+                                </div> <br> <br>
+                                <button type="submit" class="btn">Envoyer</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+            <!-- footer -->
+            <div class='footer'>
+            </div>
+
+             <!-- scripts -->
+             <script src="http://code.jquery.com/jquery.js"></script>
+             <script src="js/bootstrap.min.js"></script>
+         </center>
+    </body>
+</html>
