@@ -5,6 +5,7 @@
     <class>h4414.ghome.entities.Historique</class>
     <class>h4414.ghome.entities.Capteur</class>
     <class>h4414.ghome.entities.ReglePresence</class>
+    <class>h4414.ghome.entities.Regle</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/ghome"/>

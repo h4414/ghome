@@ -6,9 +6,8 @@ package h4414.ghome.entities;
 
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 
 /**
@@ -16,11 +15,8 @@ import javax.persistence.Temporal;
  * @author Mathis
  */
 @ Entity
+@DiscriminatorValue("PRESENCE")
 public class ReglePresence extends Regle{
-    
-    @Id
-    @GeneratedValue
-    private int id;
     
     private String idCapteur;
     
@@ -29,7 +25,7 @@ public class ReglePresence extends Regle{
 
     @Override
     public String toString() {
-        return "ReglePresence{" + "id=" + id + ", idCapteur=" + idCapteur + ", begin=" + dateBegin + ", end=" + dateEnd + '}';
+        return "ReglePresence{" /*+ "id=" + id */+ ", idCapteur=" + idCapteur + ", begin=" + dateBegin + ", end=" + dateEnd + '}';
     }
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateEnd;
@@ -43,15 +39,15 @@ public class ReglePresence extends Regle{
         this.dateBegin = begin;
         this.dateEnd = end;
     }
-
+/*
     public int getId() {
         return id;
-    }
+    }*/
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 89 * hash + this.id;
+        //hash = 89 * hash + this.id;
         hash = 89 * hash + Objects.hashCode(this.idCapteur);
         hash = 89 * hash + Objects.hashCode(this.dateBegin);
         hash = 89 * hash + Objects.hashCode(this.dateEnd);
@@ -67,9 +63,9 @@ public class ReglePresence extends Regle{
             return false;
         }
         final ReglePresence other = (ReglePresence) obj;
-        if (this.id != other.id) {
+        /*if (this.id != other.id) {
             return false;
-        }
+        }*/
         if (!Objects.equals(this.idCapteur, other.idCapteur)) {
             return false;
         }

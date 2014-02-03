@@ -7,15 +7,22 @@
 package h4414.ghome.entities;
 
 import java.io.Serializable;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 /**
  *
  * @author Jérémy
  */
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="ruletype",discriminatorType=DiscriminatorType.STRING)
+@DiscriminatorValue("Regle")
 public class Regle implements Serializable{
     @Id
     @GeneratedValue
@@ -24,16 +31,7 @@ public class Regle implements Serializable{
     private String nom;
       
     private String piece;
-   
-    private int idfille;
-            
-    public enum TypeRegle{
-        PRESENCE
-    }
-    private TypeRegle type;
-
-    
-
+     
     public String getNom() {
         return nom;
     }
@@ -41,9 +39,6 @@ public class Regle implements Serializable{
     public String getPiece() {
         return piece;
     }
-
-    public TypeRegle getType() {
-        return type;
-    }      
+     
     
 }
