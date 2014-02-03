@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+//import h4414.ghome.entities.InfoRegles;
 import h4414.ghome.entities.ReglePresence;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,7 +51,9 @@ public class PresenceRuleProcessor implements Processor{
             Date b = sd.parse(begin.asText());
             Date e = sd.parse(end.asText());
             ReglePresence regle = new ReglePresence("numcapteur",b,e);
+            //InfoRegles infos = new InfoRegles(regle,"",InfoRegles.TypeRegle.PRESENCE);
             in.setBody(regle);
+            //in.setBody(infos);
             System.out.println (regle);
         } catch (IOException ex) {
             Logger.getLogger(PresenceRuleProcessor.class.getName()).log(Level.SEVERE, null, ex);
