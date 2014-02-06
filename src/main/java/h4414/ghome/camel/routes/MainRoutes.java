@@ -9,6 +9,10 @@ package h4414.ghome.camel.routes;
 
 import h4414.ghome.camel.processors.ContextInitializer;
 import h4414.ghome.camel.processors.PresenceRuleProcessor;
+import h4414.ghome.camel.processors.AddRoute;
+
+import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
+
 import h4414.ghome.entities.Historique;
 import java.io.IOException;
 import java.util.Date;
@@ -43,7 +47,9 @@ public class MainRoutes extends RouteBuilder{
     private final String ID_BOUTON = "0021CBE3";
     private final String ID_PRESENCE = "00054A7F";
     private final String ID_TEMPERATURE = "0089337F";
-
+    
+    // offlineMode = ne pas charger de trames de la base de capteurs, simuler des trames à la place ( pour bosser à la maison )
+    private boolean offlineMode = true;
 
     
 
@@ -52,13 +58,15 @@ public class MainRoutes extends RouteBuilder{
     
     @Override
     public void configure() throws Exception {
-        CamelContext context = this.getContext();
+        
+            CamelContext context = this.getContext();
+           
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
             Thread listener = new Thread(recuperateur);
             listener.start();
             //EntityManager eManager = factory.createEntityManager();
             ContextInitializer ctxInit = new ContextInitializer(recuperateur);
-
+        
             from("direct:capteur")
                     .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
                     .to("log:capteur?showAll=true");
@@ -90,11 +98,17 @@ public class MainRoutes extends RouteBuilder{
         
         
         from("timer://runOnce?repeatCount=1&delay=5000")
-               .process(ctxInit)
-        .log("code de thomas op");
+               .choice()
+                .when().constant(!offlineMode)
+                    .process(ctxInit)
+                    .log("code de thomas op")
+                .otherwise()
+                    .process(new AddRoute(new OfflineModeRoutes()))
+                    .log("\n***************************\nOffline mode engaged :@\n changez le boolean dans mainroutes pour changer de mode\nYAAAAARRRHHH\n***************************");
         
-        /*from("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
-                .to("log:obj retrieved?showAll=true");*/
+        
+        from("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
+                .to("log:obj retrieved?showAll=true");
         
         from ( "jetty:http://localhost:8087/gethistorique")
                 

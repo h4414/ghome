@@ -130,7 +130,7 @@ public class RecuperateurTrame implements Runnable {
               
           }
       } catch (IOException ex) {
-          Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex);
+          Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, "Impossible de se connecter à la base de capteurs ...");
       
 
       }
