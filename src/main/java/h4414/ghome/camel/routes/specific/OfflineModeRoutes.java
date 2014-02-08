@@ -33,8 +33,7 @@ public class OfflineModeRoutes extends RouteBuilder{
          */
         from("timer://foo?fixedRate=true&period="+timer+"s")
                 .setBody().constant(new Historique("FakeCapteur",new GregorianCalendar(), new GregorianCalendar()))
-                .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
-                .log("Fake Historique added to DB"); 
+                .to("direct:historiqueToDb"); 
         
         // TODO : ajouter d'autre routes comme celle des historiques pour générer 
         //          d'autres objets au fur et a mesure qu'on prendra en compte d'autres types de donnees

@@ -10,6 +10,7 @@ package h4414.ghome.camel.routes;
 import h4414.ghome.camel.processors.ContextInitializer;
 import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.camel.processors.AddRoute;
+import h4414.ghome.camel.processors.DataBaseReader;
 
 import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
 
@@ -40,6 +41,7 @@ public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
 
     private PresenceRuleProcessor presenceRuleProcessor = new PresenceRuleProcessor();
+    private DataBaseReader dbReader = new DataBaseReader();
 
     private final String IP = "134.214.106.23";
     private final String ID_CONTACTEUR = "0001B25E";
@@ -68,8 +70,7 @@ public class MainRoutes extends RouteBuilder{
             ContextInitializer ctxInit = new ContextInitializer(recuperateur);
         
             from("direct:capteur")
-                    .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
-                    .to("log:capteur?showAll=true");
+            .to("direct:historiqueToDb");
           
             from("jetty:http://localhost:8087/test")
                 .process(new Processor(){
@@ -80,9 +81,9 @@ public class MainRoutes extends RouteBuilder{
                     }
                 })
                 
-                .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
+            .to("direct:historiqueToDb");
                 
-           .to("log:yo?showAll=true");
+           
         //.to("http://localhost:8084/ghome/mainView.jsp?bridgeEndpoint=true"/*+&disableStreamCache=true"+*/);
         
         /*
@@ -105,14 +106,39 @@ public class MainRoutes extends RouteBuilder{
                 .otherwise()
                     .process(new AddRoute(new OfflineModeRoutes()))
                     .log("\n***************************\nOffline mode engaged :@\n changez le boolean dans mainroutes pour changer de mode\nYAAAAARRRHHH\n***************************");
-        
-        
-        from("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
-                .to("log:obj retrieved?showAll=true");
-        
-        from ( "jetty:http://localhost:8087/gethistorique")
+        /*
+         * route qui envoie un objet historique dans la db
+         * @ input : un objet historique dans le body
+         * @ output : demarre la route qui pull les historiques et la suspend juste apres
+         *              --> cause du spam dans les logs
+         */
+        from("direct:historiqueToDb")
+                .to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME)
+                .log("Historique added to DB");
+                //.to("controlbus:route?routeId=historiqueDbPull&action=resume")
+                //.delay(1000)
+                //.to("controlbus:route?routeId=historiqueDbPull&action=suspend");
                 
+        /*
+         * Route activee des que l'on ajoute un historique dans la Db
+         * 
+         */
+        /* from("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=1&consumer.initialDelay=0&consumer.query=select o from Historique o")
+                .id("historiqueDbPull")
+                .to("log:obj retrieved?showAll=true");
+          */      
+        
+        from ( "jetty:http://localhost:8087/getdata")
+                /*
+                 *  ça lit les données :)
+                 * TODO : passer le type de donnees a recuperer en param http get
+                 * 
+                 */
+                .setProperty("entityName",constant("Historique"))
+                .process(dbReader)
                 //.enrich("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
+                
+                
                 .to("log:obj retrieved?showAll=true")
         .log("lol");
         
