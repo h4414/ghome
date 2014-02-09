@@ -25,7 +25,7 @@ public class DataBaseReader implements Processor{
      *  
      * passer le nom de l'entité à mettre dans la requete jpql dans une proprité de l'change
      * 
-     * le resultat est dans le body du message
+     * le resultat est dans un parametre de l'échange
      * 
      * une seule jpql pour l'instant, je suppose que c'est assez mais si non passez la genre en propriete de l'echange
      */

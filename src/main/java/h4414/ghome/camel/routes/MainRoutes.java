@@ -11,6 +11,7 @@ import h4414.ghome.camel.processors.ContextInitializer;
 import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.camel.processors.AddRoute;
 import h4414.ghome.camel.processors.DataBaseReader;
+import h4414.ghome.camel.processors.DataToJson;
 
 import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
 
@@ -42,6 +43,7 @@ public class MainRoutes extends RouteBuilder{
 
     private PresenceRuleProcessor presenceRuleProcessor = new PresenceRuleProcessor();
     private DataBaseReader dbReader = new DataBaseReader();
+    private DataToJson dataToJson = new DataToJson();
 
     private final String IP = "134.214.106.23";
     private final String ID_CONTACTEUR = "0001B25E";
@@ -136,6 +138,7 @@ public class MainRoutes extends RouteBuilder{
                  */
                 .setProperty("entityName",constant("Historique"))
                 .process(dbReader)
+                .process(dataToJson)
                 //.enrich("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
                 
                 
