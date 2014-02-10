@@ -29,16 +29,9 @@ public class Regle implements Serializable{
     private int id;
     
     private String nom;
-      
-    private String piece;
      
     public String getNom() {
         return nom;
-    }
-
-    public String getPiece() {
-        return piece;
-    }
-     
+    }     
     
 }

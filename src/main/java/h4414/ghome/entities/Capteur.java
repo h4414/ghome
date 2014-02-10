@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -23,10 +25,14 @@ public class Capteur implements Serializable{
     private int id;
     private String idCapteur;
     private String NomCapteur;
+    @ManyToOne @JoinColumn(name="IDPIECE", nullable=false)
+    private Piece piece;
+    
     public Capteur(){}
-    public Capteur( String idCapteur,String NomCapteur ){
+    public Capteur( String idCapteur,String NomCapteur, Piece piece ){
         this.idCapteur = idCapteur;
         this.NomCapteur = NomCapteur;
+        this.piece=piece;
     }
     public int getId(){
         return id;
@@ -48,6 +54,15 @@ public class Capteur implements Serializable{
     public String setNomCapteur() {
         return idCapteur;
     }
+
+    public Piece getPiece() {
+        return piece;
+    }
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+    
                
               
     @Override

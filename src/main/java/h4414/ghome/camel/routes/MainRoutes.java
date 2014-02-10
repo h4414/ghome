@@ -15,7 +15,7 @@ import h4414.ghome.camel.processors.DataToJson;
 import h4414.ghome.camel.processors.GetEntityType;
 
 import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
-
+import h4414.ghome.camel.processors.CapteurProcessor;
 import h4414.ghome.entities.Historique;
 import java.io.IOException;
 import java.util.Date;
@@ -43,6 +43,7 @@ public class MainRoutes extends RouteBuilder{
     private final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
 
     private PresenceRuleProcessor presenceRuleProcessor = new PresenceRuleProcessor();
+    private CapteurProcessor capteurprocessor = new CapteurProcessor(); 
     private DataBaseReader dbReader = new DataBaseReader();
     private DataToJson dataToJson = new DataToJson();
     private GetEntityType getQueryParams = new GetEntityType();
@@ -94,6 +95,7 @@ public class MainRoutes extends RouteBuilder{
          * definir une plage horaire sur laquelle l'on détecte une présence
          */
         from( "jetty:http://localhost:8087/addobject")
+                 .process(capteurprocessor)
         .log("ajout d'un capteur");
         from( "jetty:http://localhost:8087/addrule")
                 .process(presenceRuleProcessor)
