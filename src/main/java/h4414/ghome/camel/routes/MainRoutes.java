@@ -12,6 +12,7 @@ import h4414.ghome.camel.processors.PresenceRuleProcessor;
 import h4414.ghome.camel.processors.AddRoute;
 import h4414.ghome.camel.processors.DataBaseReader;
 import h4414.ghome.camel.processors.DataToJson;
+import h4414.ghome.camel.processors.GetEntityType;
 
 import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
 
@@ -44,6 +45,7 @@ public class MainRoutes extends RouteBuilder{
     private PresenceRuleProcessor presenceRuleProcessor = new PresenceRuleProcessor();
     private DataBaseReader dbReader = new DataBaseReader();
     private DataToJson dataToJson = new DataToJson();
+    private GetEntityType getQueryParams = new GetEntityType();
 
     private final String IP = "134.214.106.23";
     private final String ID_CONTACTEUR = "0001B25E";
@@ -136,9 +138,16 @@ public class MainRoutes extends RouteBuilder{
                  * TODO : passer le type de donnees a recuperer en param http get
                  * 
                  */
-                .setProperty("entityName",constant("Historique"))
-                .process(dbReader)
-                .process(dataToJson)
+                .process(getQueryParams)
+                .choice()
+                    .when().simple("${header.go}")
+                    //.setProperty("entityName",constant("Historique"))
+                        .process(dbReader)
+                        .process(dataToJson)
+                    .otherwise()
+                        .log ( "invalid request :)")
+                        //.setBody().constant("invalid request")
+                        .setHeader(Exchange.HTTP_RESPONSE_CODE).constant(400)
                 //.enrich("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
                 
                 

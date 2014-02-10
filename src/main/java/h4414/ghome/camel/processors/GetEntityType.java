@@ -1,0 +1,59 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package h4414.ghome.camel.processors;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
+import org.apache.http.NameValuePair;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Iterator;
+import org.apache.commons.httpclient.URIException;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.StringEntity;
+
+/**
+ *
+ * @author Mathis
+ */
+public class GetEntityType implements Processor {
+    public void process( Exchange exchange ){
+        String url = exchange.getIn().getHeader(Exchange.HTTP_URL, String.class);
+        try {
+            List<NameValuePair> params = URLEncodedUtils.parse(new URI(url), "UTF-8");
+            Iterator<NameValuePair> it = params.iterator();
+            
+            while ( it.hasNext()){
+                NameValuePair nvp = it.next();
+                switch ( nvp.getName()){
+                    case "name" :{
+                        exchange.setProperty("entityName", nvp.getValue());
+                        
+                        break;
+                    }
+                    case "nb" :{
+                        exchange.setProperty("nbEntity", nvp.getValue());
+                        break;
+                    }
+                }
+                if ( exchange.getProperty("entityName",String.class) != null ){
+                    exchange.getIn().setHeader("go",true);
+                }
+                else{
+                    exchange.getIn().setHeader("go", false);
+                }
+            }
+        } 
+        catch (URISyntaxException ex) {
+            Logger.getLogger(GetEntityType.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+}
