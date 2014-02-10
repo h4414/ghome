@@ -29,9 +29,10 @@ public class Capteur implements Serializable{
     private Piece piece;
     
     public Capteur(){}
-    public Capteur( String idCapteur,String NomCapteur ){
+    public Capteur( String idCapteur,String NomCapteur, Piece piece ){
         this.idCapteur = idCapteur;
         this.NomCapteur = NomCapteur;
+        this.piece=piece;
     }
     public int getId(){
         return id;
