@@ -24,13 +24,15 @@ and open the template in the editor.
        <center>
             <div class="container">
                 <div class="row">
+                    <div style="display:none;" id="MessageErreur" class="alert alert-danger"></div>
+
                     <div class="span6 offset3">
                             <form class="navbar-form pull-left">
                                 ID du capteur : 
-                                <input type="text" class="span2"> <br> <br>
+                                <input id="idCapteur" type="text" class="span2"> <br> <br>
                                 Nom du capteur : 
-                                <input type="text" class="span2"> <br> <br>
-                                Salle concernée : 
+                                <input id="nomCapteur" type="text" class="span2"> <br> <br>
+                                Salle concernÃ©e : 
                                 <div class="btn-group dropdown">
                                         <button class="btn">Choisir salle</button>
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -38,12 +40,12 @@ and open the template in the editor.
                                     </button>
                                     <ul class="dropdown-menu">
                                         <!-- dropdown menu links -->
-                                        <li><a tabindex="-1" href="#">Salle à manger</a></li>
+                                        <li><a tabindex="-1" href="#">Salle ï¿½ manger</a></li>
                                         <li><a tabindex="-1" href="#">Chambre</a></li>
                                         <li><a tabindex="-1" href="#">Cuisine</a></li>
                                     </ul>
                                 </div> <br> <br>
-                                <button type="submit" class="btn">Envoyer</button>
+                                <button type="submit" id="btnValider" class="btn">Envoyer</button>
                             </form>
                     </div>
                 </div>
@@ -55,6 +57,7 @@ and open the template in the editor.
              <!-- scripts -->
              <script src="http://code.jquery.com/jquery.js"></script>
              <script src="js/bootstrap.min.js"></script>
+             <script src="js/ajoutCapteur.js"></script>
          </center>
     </body>
 </html>
