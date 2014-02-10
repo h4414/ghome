@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -23,6 +25,9 @@ public class Capteur implements Serializable{
     private int id;
     private String idCapteur;
     private String NomCapteur;
+    @ManyToOne @JoinColumn(name="piece_id", nullable=false)
+    private Piece piece;
+    
     public Capteur(){}
     public Capteur( String idCapteur,String NomCapteur ){
         this.idCapteur = idCapteur;
@@ -48,6 +53,15 @@ public class Capteur implements Serializable{
     public String setNomCapteur() {
         return idCapteur;
     }
+
+    public Piece getPiece() {
+        return piece;
+    }
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+    
                
               
     @Override

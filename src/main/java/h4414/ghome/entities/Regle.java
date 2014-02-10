@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 /**
  *
  * @author Jérémy
@@ -29,14 +30,14 @@ public class Regle implements Serializable{
     private int id;
     
     private String nom;
-      
-    private String piece;
+    @ManyToOne  
+    private Piece piece;
      
     public String getNom() {
         return nom;
     }
 
-    public String getPiece() {
+    public Piece getPiece() {
         return piece;
     }
      
