@@ -25,7 +25,7 @@ public class Capteur implements Serializable{
     private int id;
     private String idCapteur;
     private String NomCapteur;
-    @ManyToOne @JoinColumn(name="piece_id", nullable=false)
+    @ManyToOne @JoinColumn(name="IDPIECE", nullable=false)
     private Piece piece;
     
     public Capteur(){}
