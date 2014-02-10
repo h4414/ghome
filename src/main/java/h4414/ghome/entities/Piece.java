@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,6 +25,7 @@ public class Piece implements Serializable{
     
     @Id @GeneratedValue
     private int id;
+    @Column(unique=true)
     private String nom;
     @OneToMany(cascade=CascadeType.ALL, mappedBy="piece")
     private List<Capteur> capteurs;
