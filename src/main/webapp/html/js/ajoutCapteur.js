@@ -8,8 +8,9 @@ $("#btnValider").click(function()
    newCapteur = new Object();
    newCapteur.type="capteur";
    newCapteur.id = $("#idCapteur").val();
-   newCapteur.nomCapteur = $("#nomCapteur").val(); 
-   newCapteur.piece = "A REMPLIR";
+   newCapteur.nomCapteur = $("#nomCapteur").val();
+   var indexSelected = $("#selectPieces")[0].selectedIndex;
+   newCapteur.piece = $("#selectPieces")[0].options[indexSelected].text;
    var jText = JSON.stringify(newCapteur);
     
 
@@ -29,6 +30,21 @@ $("#idCapteur").blur(function()
     {
        $("#idCapteur").val(""); 
        $("#MessageErreur")[0].textContent="Erreur : l'ID du capteur est un nombre hexadécimal";
-       $("#MessageErreur")[0].style.display="block";  //style.display="block";
+       $("#MessageErreur")[0].style.display="block";  
     }
 });
+
+function init()
+{
+    $("#header").load("header.html"); 
+    // TO DO : requete sur getData pour chopper la liste des pieces dans la base
+       var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType="JSON";
+    xmlHttp.open( "GET", "http://localhost:8087/getData?name=Piece", false );
+    var listPiece = xmlHttp.responseText;
+    
+}
+
+$(document).ready( init);

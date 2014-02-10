@@ -15,12 +15,7 @@ and open the template in the editor.
             <link href="css/ghome.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <div class='header'> 
-            <div id='options'>
-                 <span class='glyphicon glyphicon-cog'></span>
-            </div>
-            <h1>GHome <small>the future is now</small></h1>
-        </div>
+        <div class='header'></div>
        <center>
             <div class="container">
                 <div class="row">
@@ -33,18 +28,15 @@ and open the template in the editor.
                                 Nom du capteur : 
                                 <input id="nomCapteur" type="text" class="span2"> <br> <br>
                                 Salle concernée : 
-                                <div class="btn-group dropdown">
-                                        <button class="btn">Choisir salle</button>
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <!-- dropdown menu links -->
-                                        <li><a tabindex="-1" href="#">Salle � manger</a></li>
-                                        <li><a tabindex="-1" href="#">Chambre</a></li>
-                                        <li><a tabindex="-1" href="#">Cuisine</a></li>
-                                    </ul>
-                                </div> <br> <br>
+                          
+                                <select id="selectPieces" class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                                 <br> <br>
                                 <button type="submit" id="btnValider" class="btn">Envoyer</button>
                             </form>
                     </div>
