@@ -96,6 +96,7 @@ public class MainRoutes extends RouteBuilder{
          */
         from( "jetty:http://localhost:8087/addobject")
                  .process(capteurprocessor)
+                 .to("jpa:Capteur?persistenceUnit="+PERSISTANCE_UNIT_NAME)
         .log("ajout d'un capteur");
         from( "jetty:http://localhost:8087/addrule")
                 .process(presenceRuleProcessor)

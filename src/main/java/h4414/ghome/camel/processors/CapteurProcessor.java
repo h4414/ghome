@@ -56,7 +56,7 @@ public class CapteurProcessor implements Processor{
             JsonNode id = node.path("id");
             JsonNode nomCapteur = node.path("nomCapteur");
              JsonNode piece = node.path("piece");
-             Piece piece1=new Piece();
+             Piece piece1=new Piece(piece.asText(),null);
              Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),piece1);
             in.setBody(capteur);
             System.out.println (capteur);
