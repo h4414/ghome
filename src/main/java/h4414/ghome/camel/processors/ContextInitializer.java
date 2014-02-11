@@ -23,6 +23,8 @@ public class ContextInitializer implements Processor {
     public void process ( Exchange ex){
         CamelContext ctx = ex.getContext();
         this.rec.setContext(ctx);
+        Thread listener = new Thread(this.rec);
+        listener.start();
     }
     
 }

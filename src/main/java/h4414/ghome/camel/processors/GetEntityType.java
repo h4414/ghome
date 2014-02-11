@@ -13,6 +13,7 @@ import org.apache.camel.Processor;
 import org.apache.http.NameValuePair;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.Iterator;
 import org.apache.commons.httpclient.URIException;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -25,10 +26,10 @@ import org.apache.http.entity.StringEntity;
 public class GetEntityType implements Processor {
     public void process( Exchange exchange ){
         String url = exchange.getIn().getHeader(Exchange.HTTP_URL, String.class);
-        try {
-            List<NameValuePair> params = URLEncodedUtils.parse(new URI(url), "UTF-8");
+        
+            List<NameValuePair> params = URLEncodedUtils.parse(exchange.getIn().getHeader(Exchange.HTTP_QUERY, String.class), Charset.defaultCharset());
             Iterator<NameValuePair> it = params.iterator();
-            
+            System.out.println("nvp : "+params);
             while ( it.hasNext()){
                 NameValuePair nvp = it.next();
                 switch ( nvp.getName()){
@@ -50,10 +51,8 @@ public class GetEntityType implements Processor {
                 }
             }
         } 
-        catch (URISyntaxException ex) {
-            Logger.getLogger(GetEntityType.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
-    }
+        
+    
     
 }

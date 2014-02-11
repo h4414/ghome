@@ -69,8 +69,8 @@ public class MainRoutes extends RouteBuilder{
             CamelContext context = this.getContext();
            
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
-            Thread listener = new Thread(recuperateur);
-            listener.start();
+            //Thread listener = new Thread(recuperateur);
+            //listener.start();
             //EntityManager eManager = factory.createEntityManager();
             ContextInitializer ctxInit = new ContextInitializer(recuperateur);
         
