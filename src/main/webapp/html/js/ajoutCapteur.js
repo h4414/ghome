@@ -50,7 +50,7 @@ $("#idCapteur").blur(function()
 
 function init()
 {
-    $("#header").load("header.html"); 
+    $("#header").load("/ghome/html/header.html"); 
     // TO DO : requete sur getData pour chopper la liste des pieces dans la base
        var xmlHttp = null;
 

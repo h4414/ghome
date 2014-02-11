@@ -8,7 +8,7 @@ function init(){
     $('#heure1').timepicker();
     $('#heure2').timepicker();
      
-      $("#header").load("header.html"); 
+      $("#header").load("/ghome/html/header.html"); 
    
     
 }

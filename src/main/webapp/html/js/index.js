@@ -5,6 +5,6 @@
  */
 function init()
 {
-    $("#header").load('html/header.html'); 
+    $("#header").load('/ghome/html/header.html'); 
 }
 $(document).ready( init);

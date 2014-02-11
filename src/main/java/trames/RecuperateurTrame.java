@@ -30,7 +30,7 @@ public class RecuperateurTrame implements Runnable {
     Socket socket;
     //TODO: a mettre dans fichier config
     final static int port = 5000;
-    final static String IP = "134.214.106.23";
+    final static String IP = "127.0.0.1";
     
     List<String> IDS_CONTACTEUR;
     List<String> IDS_PRISE;
@@ -148,19 +148,10 @@ public class RecuperateurTrame implements Runnable {
         
         
     }
-    public void initialize()
+    
+    public void update(Capteur c)
     {
-        Registry reg = context.getRegistry();
-        Object emf = reg.lookupByName("entityManagerFactory");
-        
-        if ( emf != null ){
-            if ( emf instanceof EntityManagerFactory ){
-                EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
-                EntityManager em = emFactory.createEntityManager();
-                ArrayList<Capteur> datas = (ArrayList<Capteur>) em.createQuery("SELECT o FROM Capteur o").getResultList();
-                for (Capteur c : datas)
-                {
-                    switch ( c.getType().toString())
+                            switch ( c.getType().toString())
                     {
                         case "CONTACTEUR":
                             IDS_CONTACTEUR.add(c.getIdCapteur());
@@ -175,7 +166,20 @@ public class RecuperateurTrame implements Runnable {
                             IDS_TEMPERATURE.add(c.getIdCapteur());
                             break;
                     }
-                    
+    }
+    public void initialize()
+    {
+        Registry reg = context.getRegistry();
+        Object emf = reg.lookupByName("entityManagerFactory");
+        
+        if ( emf != null ){
+            if ( emf instanceof EntityManagerFactory ){
+                EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
+                EntityManager em = emFactory.createEntityManager();
+                List<Capteur> datas =  em.createQuery("SELECT o FROM Capteur o").getResultList();
+                for (Capteur c : datas)
+                {
+                    update(c);                  
                 }
                 
             }
