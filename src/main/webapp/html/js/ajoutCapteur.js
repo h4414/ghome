@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$("#btnValider").click(function()
+$(document).on("submit","form",(function(event)
 {
    newCapteur = new Object();
-   newCapteur.type="capteur";
+   newCapteur.type="capteur"; // A retravailler ^^ 
    newCapteur.id = $("#idCapteur").val();
    newCapteur.nomCapteur = $("#nomCapteur").val();
    var indexSelected = $("#selectPieces")[0].selectedIndex;
    newCapteur.piece = $("#selectPieces")[0].options[indexSelected].text;
+   if( newCapteur.type !== "" &&  newCapteur.id !== "" && newCapteur.nomCapteur !== "" && newCapteur.piece !== "")
+   {
    var jText = JSON.stringify(newCapteur);
     
 
@@ -19,18 +21,29 @@ $("#btnValider").click(function()
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "POST", "http://localhost:8087/addobject", false );
     xmlHttp.send( jText );
-});
+   }
+   else 
+   {
+       $("#MessageErreur")[0].textContent="Erreur : L'un des champs est vide";
+       $("#MessageErreur")[0].style.display="block"; 
+       event.preventDefault();
+   }
+}));
 
 $("#idCapteur").blur(function()
 {
+    
     var valueID = $("#idCapteur").val();
     valueID = valueID.toUpperCase();
+    if (valueID != "")
+    {
     var regexp = new RegExp("^[0-9A-F]+$");
     if(!regexp.test(valueID))
     {
        $("#idCapteur").val(""); 
-       $("#MessageErreur")[0].textContent="Erreur : l'ID du capteur est un nombre hexadécimal";
+       $("#MessageErreur")[0].textContent="Erreur : l'ID du capteur est un nombre hexadÃ©cimal";
        $("#MessageErreur")[0].style.display="block";  
+    }
     }
 });
 

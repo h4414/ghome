@@ -33,9 +33,10 @@ public class Piece implements Serializable{
     public Piece(){
         this.capteurs = new ArrayList<Capteur>();
     }
-    public Piece(Capteur capteur){
+    public Piece(String nom,Capteur capteur){
         this.capteurs = new ArrayList<Capteur>();
         this.capteurs.add(capteur);
+        this.nom = nom;
     }
     public void addCapteur(Capteur capteur){
         this.capteurs.add(capteur);
