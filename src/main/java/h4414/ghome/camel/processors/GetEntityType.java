@@ -44,7 +44,7 @@ public class GetEntityType implements Processor {
             
             //List<NameValuePair> params = URLEncodedUtils.parse(exchange.getIn().getHeader(Exchange.HTTP_QUERY, String.class), Charset.defaultCharset());
             Iterator<NameValuePair> it = params.iterator();
-            System.out.println("nvp : "+params);
+            
             while ( it.hasNext()){
                 NameValuePair nvp = it.next();
                 switch ( nvp.getName()){
