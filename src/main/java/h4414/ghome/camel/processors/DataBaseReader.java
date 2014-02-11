@@ -39,6 +39,9 @@ public class DataBaseReader implements Processor{
                 EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
                 EntityManager em = emFactory.createEntityManager();
                 List datas = em.createQuery("SELECT o FROM "+entityName+" o").getResultList();
+                if ( ex.getProperty("nbEntity",Integer.class) != null ){
+                    datas = datas.subList(0,ex.getProperty("nbEntity",Integer.class) );
+                }
                 //System.out.println("Grrrreat success : "+datas);
                 ex.setProperty("dataRetrieved", datas);
             }
