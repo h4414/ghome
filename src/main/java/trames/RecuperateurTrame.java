@@ -20,11 +20,15 @@ import java.net.SocketException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultProducerTemplate;
+import org.apache.camel.spi.Registry;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import traitement.Presence;
 /**
@@ -85,20 +89,6 @@ public class RecuperateurTrame implements Runnable {
             
         case ID_PRESENCE :
             System.out.println("TRAME PRESENCE DETECTEE");
-            /*Calendar calendar1 = new GregorianCalendar();
-            Calendar calendar2 = new GregorianCalendar();
-            Date d1 = new Date();
-            d1.setTime(d1.getTime()-1000);
-            Date d2 = new Date();
-            d2.setTime(d2.getTime()+1000);
-            calendar1.setTime(d2);
-            calendar2.setTime(d2);
-            Presence presence = new Presence();
-            if ( presence.TraitementPresence(trameRecue, calendar1, calendar2 ) != null ){
-                Historique histo = presence.TraitementPresence(trameRecue, calendar1, calendar2 );
-                ProducerTemplate pt = new DefaultProducerTemplate(this.context);
-                pt.sendBody("direct:capteur",histo);
-            }*/
             Presence traitementPresence = new Presence(trameRecue, this.context);
             Thread presence = new Thread(traitementPresence);
             presence.start();
@@ -119,10 +109,32 @@ public class RecuperateurTrame implements Runnable {
              
   
     }
+    public void initialize()
+    {
+        Registry reg = context.getRegistry();
+        Object emf = reg.lookupByName("entityManagerFactory");
+        
+        if ( emf != null ){
+            if ( emf instanceof EntityManagerFactory ){
+                EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
+                EntityManager em = emFactory.createEntityManager();
+                List datas = em.createQuery("SELECT o FROM CAPTEUR o").getResultList();
+                System.out.println(datas);
+            }
+            else{
+                System.out.println("failed to retrieve emfactory : is instance of "+emf.getClass()+"");
+            }
+        }
+        else{
+            System.out.println("failed to retrieve emfactory : is null ...");
+        }
+    }
+    
 
     @Override
     public void run() {
       try {
+          this.initialize();
           socket= new Socket(IP,port);
               while(true)
           {
