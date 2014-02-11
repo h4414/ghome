@@ -35,6 +35,10 @@ public class Capteur implements Serializable{
     };
     @Enumerated(EnumType.STRING)
     TypeCapteur type;
+
+    public TypeCapteur getType() {
+        return type;
+    }
     private String idCapteur;
     private String NomCapteur;
     @ManyToOne @JoinColumn(name="IDPIECE", nullable=false)
