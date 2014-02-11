@@ -23,16 +23,26 @@ public class Capteur implements Serializable{
     @Id
     @GeneratedValue
     private int id;
+    public enum TypeCapteur{
+      PRESENCE,
+      TEMPERATURE,
+      CONTACTEUR,
+      BOUTON,
+      PRISE,
+    
+    };
+    TypeCapteur type;
     private String idCapteur;
     private String NomCapteur;
     @ManyToOne @JoinColumn(name="IDPIECE", nullable=false)
     private Piece piece;
     
     public Capteur(){}
-    public Capteur( String idCapteur,String NomCapteur, Piece piece ){
+    public Capteur( String idCapteur,String NomCapteur, Piece piece,TypeCapteur type  ){
         this.idCapteur = idCapteur;
         this.NomCapteur = NomCapteur;
         this.piece=piece;
+        this.type = type;
     }
     public int getId(){
         return id;

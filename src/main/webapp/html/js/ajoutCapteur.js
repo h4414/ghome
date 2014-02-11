@@ -6,10 +6,11 @@
 $(document).on("submit","form",(function(event)
 {
    newCapteur = new Object();
-   newCapteur.type="capteur"; // A retravailler ^^ 
+   var indexSelected = $("#selectPieces")[0].selectedIndex;
+   newCapteur.type=$("#typeCapteur")[0].options[indexSelected].text; // A retravailler ^^ 
    newCapteur.id = $("#idCapteur").val();
    newCapteur.nomCapteur = $("#nomCapteur").val();
-   var indexSelected = $("#selectPieces")[0].selectedIndex;
+   indexSelected = $("#selectPieces")[0].selectedIndex;
    newCapteur.piece = $("#selectPieces")[0].options[indexSelected].text;
    if( newCapteur.type !== "" &&  newCapteur.id !== "" && newCapteur.nomCapteur !== "" && newCapteur.piece !== "")
    {

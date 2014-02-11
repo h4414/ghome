@@ -17,6 +17,7 @@ import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -41,6 +42,11 @@ public class RecuperateurTrame implements Runnable {
   final static int port = 5000;
   final static String IP = "134.214.106.23";
   final static String ID_CONTACTEUR = "0001B595";
+    List<String> IDS_CONTACTEUR;
+    List<String> IDS_PRISE;
+    List<String> IDS_BOUTON;
+    List<String> IDS_PRESENCE;
+    List<String> IDS_TEMPERATURE;
  // final static String ID_CONTACTEUR = "0001B25E";
   final static String ID_PRISE = "dfgbjfdkhbv";
   //final static String ID_PRISE = "dfgbjfdkhbv";
@@ -56,6 +62,11 @@ public class RecuperateurTrame implements Runnable {
   public RecuperateurTrame(CamelContext context)
   {
       this.context = context;
+      this.IDS_CONTACTEUR = new ArrayList<>();
+      this.IDS_PRISE= new ArrayList<>();
+      this.IDS_BOUTON= new ArrayList<>();
+      this.IDS_PRESENCE= new ArrayList<>();
+      this.IDS_TEMPERATURE= new ArrayList<>();
   }
   public  Boolean execute() {
           try {
@@ -118,8 +129,8 @@ public class RecuperateurTrame implements Runnable {
             if ( emf instanceof EntityManagerFactory ){
                 EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
                 EntityManager em = emFactory.createEntityManager();
-                List datas = em.createQuery("SELECT o FROM CAPTEUR o").getResultList();
-                System.out.println(datas);
+                List datas = em.createQuery("SELECT o FROM Capteur o").getResultList();
+                
             }
             else{
                 System.out.println("failed to retrieve emfactory : is instance of "+emf.getClass()+"");

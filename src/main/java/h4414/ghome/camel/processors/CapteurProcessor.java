@@ -52,12 +52,14 @@ public class CapteurProcessor implements Processor{
             JsonNode node = mapper.readTree(jp);
             System.out.println(node);
             JsonNode type = node.path("type");
+            Capteur.TypeCapteur typeCapteur;
+            typeCapteur=Capteur.TypeCapteur.valueOf(type.asText());
             //System.out.println(type.asText());
             JsonNode id = node.path("id");
             JsonNode nomCapteur = node.path("nomCapteur");
-             JsonNode piece = node.path("piece");
+            JsonNode piece = node.path("piece"); 
              Piece piece1=new Piece(piece.asText(),null);
-             Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),piece1);
+             Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),piece1,typeCapteur);
             in.setBody(capteur);
             System.out.println (capteur);
         } catch (IOException ex) {
