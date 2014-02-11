@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -130,7 +131,11 @@ public class RecuperateurTrame implements Runnable {
                 EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
                 EntityManager em = emFactory.createEntityManager();
                 List datas = em.createQuery("SELECT o FROM Capteur o").getResultList();
-                
+                Iterator i = datas.iterator();
+                while (i.hasNext())
+                {
+  //                i.
+                }
             }
             else{
                 System.out.println("failed to retrieve emfactory : is instance of "+emf.getClass()+"");

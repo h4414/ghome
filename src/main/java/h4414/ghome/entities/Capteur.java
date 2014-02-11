@@ -8,6 +8,8 @@ package h4414.ghome.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -31,6 +33,7 @@ public class Capteur implements Serializable{
       PRISE,
     
     };
+    @Enumerated(EnumType.STRING)
     TypeCapteur type;
     private String idCapteur;
     private String NomCapteur;
