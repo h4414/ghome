@@ -138,8 +138,12 @@ public class MainRoutes extends RouteBuilder{
         from ( "jetty:http://localhost:8087/getdata")
                 /*
                  *  ça lit les données :)
-                 * TODO : passer le type de donnees a recuperer en param http get
+                 *  les parametres sont passes par requete http get
                  * 
+                 * @param name (obligatoire): le nom du type d'entite a recuperer
+                 * @param nb (optionnel) : le nombre d'entites a recuperer ( recupere les entites les plus recentes )
+                 * 
+                 * @return : une liste d'objets json de l'entite correspondante dans le corps du message
                  */
                 .process(getQueryParams)
                 .choice()
@@ -155,6 +159,7 @@ public class MainRoutes extends RouteBuilder{
                 
                 
                 .to("log:obj retrieved?showAll=true")
+                
         .log("lol");
         
         //from("").to("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME);
