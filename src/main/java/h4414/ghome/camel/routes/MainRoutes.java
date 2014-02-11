@@ -142,6 +142,7 @@ public class MainRoutes extends RouteBuilder{
                  * 
                  */
                 .process(getQueryParams)
+                .log("query params retrieved")
                 .choice()
                     .when().simple("${header.go}")
                     //.setProperty("entityName",constant("Historique"))
