@@ -16,6 +16,7 @@ import h4414.ghome.camel.processors.GetEntityType;
 
 import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
 import h4414.ghome.camel.processors.CapteurProcessor;
+import h4414.ghome.camel.processors.PieceProcessor;
 import h4414.ghome.entities.Historique;
 import java.io.IOException;
 import java.util.Date;
@@ -44,6 +45,7 @@ public class MainRoutes extends RouteBuilder{
 
     private PresenceRuleProcessor presenceRuleProcessor = new PresenceRuleProcessor();
     private CapteurProcessor capteurprocessor = new CapteurProcessor(); 
+    private PieceProcessor pieceProcessor = new PieceProcessor();
     private DataBaseReader dbReader = new DataBaseReader();
     private DataToJson dataToJson = new DataToJson();
     private GetEntityType getQueryParams = new GetEntityType();
@@ -98,6 +100,12 @@ public class MainRoutes extends RouteBuilder{
                  .process(capteurprocessor)
                  .to("jpa:Capteur?persistenceUnit="+PERSISTANCE_UNIT_NAME)
         .log("ajout d'un capteur");
+        
+        from( "jetty:http://localhost:8087/addpiece")
+                 .process(pieceProcessor)
+                 .to("jpa:Piece?persistenceUnit="+PERSISTANCE_UNIT_NAME)
+        .log("ajout d'un Piece");
+        
         from( "jetty:http://localhost:8087/addrule")
                 .process(presenceRuleProcessor)
                 .to("log:regle ajoutee?showAll=true")
