@@ -30,7 +30,7 @@ public class RecuperateurTrame implements Runnable {
     Socket socket;
     //TODO: a mettre dans fichier config
     final static int port = 5000;
-    final static String IP = "127.0.0.1";
+    final static String IP = "134.214.106.23";
     
     List<String> IDS_CONTACTEUR;
     List<String> IDS_PRISE;
