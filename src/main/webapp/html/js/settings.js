@@ -22,6 +22,7 @@ $("#btnAjouter").click((function()
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "POST", "http://localhost:8087/addpiece", false );
+    
     xmlHttp.send( jText );
     $("#MessageSucces")[0].textContent="La pièce a bien été ajoutée";
     $("#MessageSucces")[0].style.display="block"; 
@@ -30,8 +31,7 @@ $("#btnAjouter").click((function()
    else 
    {
        $("#MessageErreur")[0].textContent="Erreur : L'un des champs est vide";
-       $("#MessageErreur")[0].style.display="block"; 
-       
+       $("#MessageErreur")[0].style.display="block";    
    }
    
 }));}
