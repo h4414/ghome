@@ -44,6 +44,7 @@ public class PieceProcessor implements Processor{
             JsonNode nom = node.path("nom");
             
              Piece newPiece = new Piece(nom.asText(),null);
+             in.setHeader("Access-Control-Allow-Origin", "*");
             in.setBody(newPiece);
             
         } catch (IOException ex) {

@@ -58,7 +58,7 @@ public class MainRoutes extends RouteBuilder{
     public void configure() throws Exception {
         
             CamelContext context = this.getContext();
-           
+          
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
             //Thread listener = new Thread(recuperateur);
             //listener.start();
@@ -87,6 +87,7 @@ public class MainRoutes extends RouteBuilder{
          */
                 from( "jetty:http://localhost:8087/addpiece")
                  .process(pieceProcessor)
+                 
                  .to("jpa:Piece?persistenceUnit="+PERSISTANCE_UNIT_NAME)
         .log("ajout d'un Piece");
                 

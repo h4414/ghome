@@ -49,6 +49,7 @@ public class CapteurProcessor implements Processor{
             JsonNode piece = node.path("piece"); 
              Piece piece1=new Piece(piece.asText(),null);
              Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),piece1,typeCapteur);
+             in.setHeader("Access-Control-Allow-Origin", "*");
             in.setBody(capteur);
             System.out.println (capteur);
         } catch (IOException ex) {
