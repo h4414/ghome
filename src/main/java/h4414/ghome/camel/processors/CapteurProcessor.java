@@ -35,7 +35,9 @@ public class CapteurProcessor implements Processor{
             //System.out.println(input);
             //jp = jFactory.createParser(in.getBody(InputStream.class));
             jp = jFactory.createParser(input);
-            ObjectMapper mapper = new ObjectMapper();     
+            ObjectMapper mapper = new ObjectMapper();
+            
+            
             JsonNode node = mapper.readTree(jp);
             System.out.println(node);
             JsonNode type = node.path("type");
@@ -44,7 +46,7 @@ public class CapteurProcessor implements Processor{
             //System.out.println(type.asText());
             JsonNode id = node.path("id");
             JsonNode nomCapteur = node.path("nomCapteur");
-            JsonNode piece = node.path("piece"); 
+            JsonNode piece = node.path("piece");
              Piece piece1=new Piece(piece.asText(),null);
              Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),piece1,typeCapteur);
              in.setHeader("Access-Control-Allow-Origin", "*");
