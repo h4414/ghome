@@ -31,32 +31,25 @@ public class CapteurProcessor implements Processor{
         JsonParser jp;
         System.out.println("processing");
         try {
-            if (Security.CheckReferrer(in)){
-                String input = in.getBody(String.class);
-                //System.out.println(input);
-                //jp = jFactory.createParser(in.getBody(InputStream.class));
-                jp = jFactory.createParser(input);
-                ObjectMapper mapper = new ObjectMapper();
-
-
-                JsonNode node = mapper.readTree(jp);
-                System.out.println(node);
-                JsonNode type = node.path("type");
-                Capteur.TypeCapteur typeCapteur;
-                typeCapteur=Capteur.TypeCapteur.valueOf(type.asText());
-                //System.out.println(type.asText());
-                JsonNode id = node.path("id");
-                JsonNode nomCapteur = node.path("nomCapteur");
-                JsonNode piece = node.path("piece"); 
-                 Piece piece1=new Piece(piece.asText(),null);
-                 Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),piece1,typeCapteur);
-                in.setBody(capteur);
-                System.out.println (capteur);
-            }
-            else{
-                System.out.println ("MAUVAIS REFERRER");
-            }
-            
+            String input = in.getBody(String.class);
+            //System.out.println(input);
+            //jp = jFactory.createParser(in.getBody(InputStream.class));
+            jp = jFactory.createParser(input);
+            ObjectMapper mapper = new ObjectMapper();     
+            JsonNode node = mapper.readTree(jp);
+            System.out.println(node);
+            JsonNode type = node.path("type");
+            Capteur.TypeCapteur typeCapteur;
+            typeCapteur=Capteur.TypeCapteur.valueOf(type.asText());
+            //System.out.println(type.asText());
+            JsonNode id = node.path("id");
+            JsonNode nomCapteur = node.path("nomCapteur");
+            JsonNode piece = node.path("piece"); 
+             Piece piece1=new Piece(piece.asText(),null);
+             Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),piece1,typeCapteur);
+             in.setHeader("Access-Control-Allow-Origin", "*");
+            in.setBody(capteur);
+            System.out.println (capteur);
         } catch (IOException ex) {
             Logger.getLogger(PresenceRuleProcessor.class.getName()).log(Level.SEVERE, null, ex);  
         }

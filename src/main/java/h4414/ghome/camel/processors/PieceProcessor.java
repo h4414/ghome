@@ -6,7 +6,6 @@
 
 package h4414.ghome.camel.processors;
 import  h4414.ghome.entities.Piece;
-import  h4414.ghome.entities.Capteur;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,13 +13,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.camel.AsyncCallback;
+import org.apache.camel.AsyncProcessor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.Processor;
 
 /**
  *
- * @author Mathis
+ * @author Thomas
  */
 public class PieceProcessor implements Processor{
     
@@ -43,17 +44,14 @@ public class PieceProcessor implements Processor{
             JsonNode nom = node.path("nom");
             
              Piece newPiece = new Piece(nom.asText(),null);
+             in.setHeader("Access-Control-Allow-Origin", "*");
             in.setBody(newPiece);
             
         } catch (IOException ex) {
             Logger.getLogger(PresenceRuleProcessor.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
-        
-        
-        
-        
-        
+
         
     }
     

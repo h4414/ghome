@@ -18,23 +18,12 @@ import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
 import h4414.ghome.camel.processors.CapteurProcessor;
 import h4414.ghome.camel.processors.PieceProcessor;
 import h4414.ghome.entities.Historique;
-import java.io.IOException;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.http.HttpBinding;
-import org.apache.camel.component.http.HttpEndpoint;
-import org.apache.camel.component.http.HttpMessage;
-import org.apache.camel.component.jpa.JpaEndpoint;
-import org.apache.camel.impl.DefaultHeaderFilterStrategy;
-import traitement.Presence;
 import trames.RecuperateurTrame;
-import trames.Trame;
 
 /**
  *
@@ -58,7 +47,7 @@ public class MainRoutes extends RouteBuilder{
     private final String ID_TEMPERATURE = "0089337F";
     
     // offlineMode = ne pas charger de trames de la base de capteurs, simuler des trames à la place ( pour bosser à la maison )
-    private boolean offlineMode = false;
+    private boolean offlineMode = true;
 
     
 
@@ -69,7 +58,7 @@ public class MainRoutes extends RouteBuilder{
     public void configure() throws Exception {
         
             CamelContext context = this.getContext();
-           
+          
             RecuperateurTrame recuperateur = new RecuperateurTrame(context);
             //Thread listener = new Thread(recuperateur);
             //listener.start();
@@ -96,15 +85,18 @@ public class MainRoutes extends RouteBuilder{
         /*
          * definir une plage horaire sur laquelle l'on détecte une présence
          */
+                from( "jetty:http://localhost:8087/addpiece")
+                 .process(pieceProcessor)
+                 
+                 .to("jpa:Piece?persistenceUnit="+PERSISTANCE_UNIT_NAME)
+        .log("ajout d'un Piece");
+                
         from( "jetty:http://localhost:8087/addobject")
                  .process(capteurprocessor)
                  .to("jpa:Capteur?persistenceUnit="+PERSISTANCE_UNIT_NAME)
         .log("ajout d'un capteur");
         
-        from( "jetty:http://localhost:8087/addpiece")
-                 .process(pieceProcessor)
-                 .to("jpa:Piece?persistenceUnit="+PERSISTANCE_UNIT_NAME)
-        .log("ajout d'un Piece");
+    
         
         from( "jetty:http://localhost:8087/addrule")
                 .process(presenceRuleProcessor)
