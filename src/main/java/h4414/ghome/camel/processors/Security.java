@@ -16,7 +16,14 @@ public class Security {
     
     private static String URL = "http://localhost:8084/ghome/html/";
             
-    public static boolean CheckReferrer(Message in) throws SecurityException{
+    /**
+     * Methode qui vérifie le referrer de la requête HTTP (=la page depuis laquelle
+     * la requête a été effectuée) et vérifie que c'est bien notre site. Attention,
+     * ca peut être falsifié donc c'est pas super probant.
+     * @param in
+     * @return vrai si ca vient bien de notre site
+     */
+    public static boolean CheckReferrer(Message in){
         String referrer = in.getHeader("referer", String.class);
         return referrer.startsWith(URL);
         
