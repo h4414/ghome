@@ -56,8 +56,15 @@ function init()
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.responseType="JSON";
-    xmlHttp.open( "GET", "http://localhost:8087/getData?name=Piece", false );
-    var listPiece = xmlHttp.responseText;
+    xmlHttp.open( "GET", "http://localhost:8087/getdata?name=Piece", false );
+    xmlHttp.send();
+    var data = xmlHttp.responseText;
+    var listePiece=JSON.parse(data);
+    var i;
+    for(i=0;i< listePiece.length;i++ )
+    {
+    $("#selectPieces")[0].options[i].textContent=(listePiece[i]["nom"] );
+    }
     
 }
 
