@@ -46,6 +46,7 @@ public class Capteur implements Serializable{
     
     public Capteur(){}
     public Capteur( String idCapteur,String NomCapteur, Piece piece,TypeCapteur type  ){
+        
         this.idCapteur = idCapteur;
         this.NomCapteur = NomCapteur;
         this.piece=piece;

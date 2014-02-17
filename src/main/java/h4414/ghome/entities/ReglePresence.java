@@ -20,14 +20,14 @@ public class ReglePresence extends Regle{
     
     private String idCapteur;
     
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIME)
     private Date dateBegin;
 
     @Override
     public String toString() {
         return "ReglePresence{" /*+ "id=" + id */+ ", idCapteur=" + idCapteur + ", begin=" + dateBegin + ", end=" + dateEnd + '}';
     }
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIME)
     private Date dateEnd;
     
     public  ReglePresence(){
