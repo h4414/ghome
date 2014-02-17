@@ -8,6 +8,8 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import h4414.ghome.entities.Historique;
+import h4414.ghome.vues.JsonUtils;
+
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
@@ -31,7 +33,8 @@ public class DataToJson implements Processor{
         JsonFactory factory = new JsonFactory();
         //ReglePresence reglePresence = new ReglePresence("numeroCapteur", new Date(),new Date() );
         List datas = ex.getProperty("dataRetrieved", List.class);
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = JsonUtils.getObjectMapper();
+        
         ObjectWriter oWriter = mapper.writer();
         StringWriter sWriter = new StringWriter();
         try { 
