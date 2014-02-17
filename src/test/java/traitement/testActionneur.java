@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 public class testActionneur {
     
     public testActionneur() {
+        
     }
     
     @BeforeClass

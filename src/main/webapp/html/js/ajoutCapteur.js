@@ -52,6 +52,7 @@ function init()
 {
     $("#header").load("/ghome/html/header.html"); 
     // TO DO : requete sur getData pour chopper la liste des pieces dans la base
+
        
    $('#selectPieces')
     .find('option')
@@ -83,6 +84,7 @@ function init()
     
     
     
+
     
 }
 
