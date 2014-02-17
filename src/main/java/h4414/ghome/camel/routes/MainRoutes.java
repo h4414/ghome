@@ -47,7 +47,7 @@ public class MainRoutes extends RouteBuilder{
     private final String ID_TEMPERATURE = "0089337F";
     
     // offlineMode = ne pas charger de trames de la base de capteurs, simuler des trames à la place ( pour bosser à la maison )
-    private boolean offlineMode = true;
+    private boolean offlineMode = false;
 
     
 
