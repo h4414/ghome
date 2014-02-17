@@ -61,9 +61,10 @@ function init()
     var data = xmlHttp.responseText;
     var listePiece=JSON.parse(data);
   
-    for(var i=0;i< listePiece.length;i++ )
+    for(var i=0;i< listePiece.data.length ;i++ )
     {
-    $("#selectPieces")[0].options[i].textContent=(listePiece[i]["nom"] );
+    var option = new Option(listePiece.data[i]["nom"]);
+    $("#selectPieces")[0].add(option) ;
     }
     
 }
