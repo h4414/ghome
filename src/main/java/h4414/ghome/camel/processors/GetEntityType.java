@@ -65,6 +65,7 @@ public class GetEntityType implements Processor {
                     exchange.getIn().setHeader("go", false);
                 }
             }
+            exchange.getIn().setHeader("Access-Control-Allow-Origin", "*");
         } 
         
         
