@@ -20,7 +20,7 @@ public class Actionneur {
     private static final String payload2 = "00";
     private static final String payload1 = "00";
     private static final String payload0 = "00";
-    public Trame sendTrame(String id){
+    public static Trame sendTrame(String id){
         Integer checksum = Integer.parseInt(hseqLength,16) + Integer.parseInt(org,16) + Integer.parseInt(payload3,16)
                 + Integer.parseInt(payload2,16) + Integer.parseInt(payload1,16) + Integer.parseInt(payload0,16)
                 + Integer.parseInt(id.substring(0,2)) + Integer.parseInt(id.substring(2,4)) + Integer.parseInt(id.substring(4,6))

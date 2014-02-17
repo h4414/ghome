@@ -21,7 +21,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.Registry;
+import traitement.Actionneur;
 import traitement.Presence;
+import traitement.Temperature;
 /**
  *
  * @author Maud et Thomas
@@ -75,6 +77,11 @@ public class RecuperateurTrame implements Runnable {
             else if (this.IDS_TEMPERATURE.contains(trameRecue.getID()))
             {
                 System.out.println("TRAME TEMPERATURE DETECTEE");
+                double temperature = Temperature.getTemperature(trameRecue);
+                if (temperature<25){
+                    Trame envoi = Actionneur.sendTrame("FF9F1E06");
+                    
+                }
                 return true;
                 //TO DO Traitement
             }
