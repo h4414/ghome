@@ -60,8 +60,8 @@ function init()
     xmlHttp.send();
     var data = xmlHttp.responseText;
     var listePiece=JSON.parse(data);
-    var i;
-    for(i=0;i< listePiece.length;i++ )
+  
+    for(var i=0;i< listePiece.length;i++ )
     {
     $("#selectPieces")[0].options[i].textContent=(listePiece[i]["nom"] );
     }
