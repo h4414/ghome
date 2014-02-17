@@ -12,6 +12,7 @@ import h4414.ghome.entities.Capteur;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +81,8 @@ public class RecuperateurTrame implements Runnable {
                 double temperature = Temperature.getTemperature(trameRecue);
                 if (temperature<25){
                     Trame envoi = Actionneur.sendTrame("FF9F1E06");
-                    
+                    PrintWriter out = new PrintWriter(socket.getOutputStream());
+                    out.println(envoi.getTrame());
                 }
                 return true;
                 //TO DO Traitement
@@ -95,6 +97,9 @@ public class RecuperateurTrame implements Runnable {
             {
                 System.out.println("TRAME PRESENCE DETECTEE");
                 Presence traitementPresence = new Presence(trameRecue, this.context);
+                Trame envoi = Actionneur.sendTrame("FF9F1E06");
+                PrintWriter out = new PrintWriter(socket.getOutputStream());
+                out.println(envoi.getTrame());
                 Thread presence = new Thread(traitementPresence);
                 presence.start();
                 return true;
