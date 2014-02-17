@@ -72,9 +72,8 @@ public class Presence implements Runnable {
     public void run() {
         Calendar begin= new GregorianCalendar();
         
-        Calendar end = new GregorianCalendar();
+        Calendar end = null;
 
-        end.add(Calendar.HOUR, 4);
         Historique traitementPresence = TraitementPresence(trameTraitee,begin, end);
         listeTrame.add(traitementPresence);
         System.out.println(traitementPresence);
