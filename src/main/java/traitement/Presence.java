@@ -67,7 +67,9 @@ public class Presence implements Runnable {
             return null;
         }
     }
-
+    /**
+     * Sera modifié sous peu
+     */
     @Override
     public void run() {
         Calendar begin= new GregorianCalendar();
@@ -76,15 +78,17 @@ public class Presence implements Runnable {
 
         end.add(Calendar.HOUR, 4);
         Historique traitementPresence = TraitementPresence(trameTraitee,begin, end);
-        listeTrame.add(traitementPresence);
-        System.out.println(traitementPresence);
-        ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
-        try {
-            pdt.start();
-            pdt.sendBody("direct:capteur",traitementPresence);
-            pdt.stop();
-        } catch (Exception ex) {
-            Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
+        if (!(traitementPresence==null)){
+            listeTrame.add(traitementPresence);
+            System.out.println(traitementPresence);
+            ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
+            try {
+                pdt.start();
+                pdt.sendBody("direct:capteur",traitementPresence);
+                pdt.stop();
+            } catch (Exception ex) {
+                Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         
