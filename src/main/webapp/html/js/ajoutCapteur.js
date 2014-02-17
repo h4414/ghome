@@ -56,7 +56,8 @@ function init()
 
     xmlHttp = new XMLHttpRequest();
     xmlHttp.responseType="JSON";
-    xmlHttp.open( "GET", "http://localhost:8087/getData?name=Piece", false );
+    xmlHttp.open( "GET", "http://localhost:8087/getdata?name=Piece", false );
+    xmlHttp.send();
     var listPiece = xmlHttp.responseText;
     
 }
