@@ -33,9 +33,9 @@ public class Historique implements Serializable{
         this.idCapteur = idCapteur;
         this.debutPresence = debutPresence;
         this.finPresence = finPresence;
-        System.out.println("NOUVEL HISTO");
+        /*System.out.println("NOUVEL HISTO");
         System.out.println(debutPresence.toString());
-        System.out.println(finPresence.toString());
+        System.out.println(finPresence.toString());*/
     }
     
     
