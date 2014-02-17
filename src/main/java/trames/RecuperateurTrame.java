@@ -97,9 +97,6 @@ public class RecuperateurTrame implements Runnable {
             {
                 System.out.println("TRAME PRESENCE DETECTEE");
                 Presence traitementPresence = new Presence(trameRecue, this.context);
-                Trame envoi = Actionneur.sendTrame("FF9F1E06");
-                PrintWriter out = new PrintWriter(socket.getOutputStream());
-                out.println(envoi.getTrame());
                 Thread presence = new Thread(traitementPresence);
                 presence.start();
                 return true;

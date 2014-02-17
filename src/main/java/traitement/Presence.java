@@ -71,7 +71,7 @@ public class Presence implements Runnable {
     @Override
     public void run() {
         Calendar begin= new GregorianCalendar();
-        begin .add(Calendar.HOUR, -4);
+        
         Calendar end = new GregorianCalendar();
 
         end.add(Calendar.HOUR, 4);
