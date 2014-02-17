@@ -27,7 +27,7 @@ import org.apache.camel.spi.Registry;
  * @author Mathis
  */
 public class CapteurProcessor implements Processor{
-    
+
     @Override
     public void process( Exchange exc ){
         Message in = exc.getIn();
@@ -40,7 +40,7 @@ public class CapteurProcessor implements Processor{
             //jp = jFactory.createParser(in.getBody(InputStream.class));
             jp = jFactory.createParser(input);
             ObjectMapper mapper = new ObjectMapper();
-            
+
             
             JsonNode node = mapper.readTree(jp);
             System.out.println(node);
@@ -50,46 +50,46 @@ public class CapteurProcessor implements Processor{
             //System.out.println(type.asText());
             JsonNode id = node.path("id");
             JsonNode nomCapteur = node.path("nomCapteur");
-            JsonNode piece = node.path("piece"); 
-     
-              Registry reg = exc.getContext().getRegistry();
+            JsonNode piece = node.path("piece");
+
+            Registry reg = exc.getContext().getRegistry();
         String entityName = exc.getProperty("entityName",String.class);
-        Object emf = reg.lookupByName("entityManagerFactory");
-                    
+            Object emf = reg.lookupByName("entityManagerFactory");
+
                     if ( emf != null ){
             if ( emf instanceof EntityManagerFactory ){
                 EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
-                EntityManager em = emFactory.createEntityManager();
-                 
+                    EntityManager em = emFactory.createEntityManager();
+
             Piece datas =  (Piece) em.createQuery("SELECT o FROM Piece o WHERE o.nom=:p_nom" )
                     .setParameter("p_nom",piece.asText())
-                    .getSingleResult();
-            
+                            .getSingleResult();
+
              Capteur capteur = new Capteur(id.asText(),nomCapteur.asText(),datas,typeCapteur);
-             in.setHeader("Access-Control-Allow-Origin", "*");
-            in.setBody(capteur);
+                    in.setHeader("Access-Control-Allow-Origin", "*");
+                    in.setBody(capteur);
             System.out.println (capteur);
             }
             else
             {
-                
-            }
+
+                }
                     }
                     else
                     {
-                        
-                    }
+
+            }
         } catch (IOException ex) {
             Logger.getLogger(PresenceRuleProcessor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-        
-        
-        
-        
-        
-        
     }
+
+        
+        
+        
+        
+        
+}
     
 
 
