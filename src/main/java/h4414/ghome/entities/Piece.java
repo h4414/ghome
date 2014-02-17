@@ -6,7 +6,7 @@
 
 package h4414.ghome.entities;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 /**
  *
  * @author Jérémy
@@ -25,12 +24,11 @@ import javax.persistence.OneToMany;
 @Entity
 public class Piece implements Serializable{
     
-    
     @Id @GeneratedValue
     private int id;
     @Column(unique=true)
     private String nom;
-   
+    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, mappedBy="piece")
     private List<Capteur> capteurs;
     
