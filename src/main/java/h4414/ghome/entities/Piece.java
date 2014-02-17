@@ -6,6 +6,7 @@
 
 package h4414.ghome.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class Piece implements Serializable{
     private int id;
     @Column(unique=true)
     private String nom;
+    @JsonIgnore
     @OneToMany(cascade=CascadeType.ALL, mappedBy="piece")
     private List<Capteur> capteurs;
     
