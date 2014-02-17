@@ -40,7 +40,7 @@ public class PresenceRuleProcessor implements Processor{
         System.out.println("processing");
         try {
             String input = in.getBody(String.class);
-            System.out.println(input);
+            //System.out.println(input);
             //jp = jFactory.createParser(in.getBody(InputStream.class));
             jp = jFactory.createParser(input);
             ObjectMapper mapper = new ObjectMapper();
