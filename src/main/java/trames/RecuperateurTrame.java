@@ -163,6 +163,9 @@ public class RecuperateurTrame implements Runnable {
                         case "CONTACTEUR":
                             IDS_CONTACTEUR.add(c.getIdCapteur());
                             break;
+                        case "PRESENCE":
+                            IDS_PRESENCE.add(c.getIdCapteur());
+                            break;
                         case "PRISE":
                             IDS_PRISE.add(c.getIdCapteur());
                             break;
