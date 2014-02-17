@@ -8,7 +8,7 @@ $(document).on("submit","form",(function(event)
    newCapteur = new Object();
    var indexSelected = $("#selectPieces")[0].selectedIndex;
    newCapteur.type=$("#typeCapteur")[0].options[indexSelected].text; // A retravailler ^^ 
-   newCapteur.id = $("#idCapteur").val();
+   newCapteur.id = $("#idCapteur").val().toUpperCase();
    newCapteur.nomCapteur = $("#nomCapteur").val();
    indexSelected = $("#selectPieces")[0].selectedIndex;
    newCapteur.piece = $("#selectPieces")[0].options[indexSelected].text;
