@@ -155,10 +155,11 @@ public class MainRoutes extends RouteBuilder{
                         .log ( "invalid request :)")
                         //.setBody().constant("invalid request")
                         .setHeader(Exchange.HTTP_RESPONSE_CODE).constant(400)
+                 .end()
                 //.enrich("jpa:Historique?persistenceUnit="+PERSISTANCE_UNIT_NAME+"&consumeDelete=false&maximumResults=5&consumer.query=select o from Historique o")
                 
                 
-                .to("log:obj retrieved?showAll=true")
+                .to("log:obj retrieved")
                 
         .log("lol");
         
