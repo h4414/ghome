@@ -21,9 +21,9 @@ public class Historique implements Serializable{
     @GeneratedValue
     private int id;
     private String idCapteur;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIME)
     private Calendar debutPresence;
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIME)
     private Calendar finPresence;
 
     public Historique(){}
