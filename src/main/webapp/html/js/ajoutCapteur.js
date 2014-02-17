@@ -52,39 +52,20 @@ function init()
 {
     $("#header").load("/ghome/html/header.html"); 
     // TO DO : requete sur getData pour chopper la liste des pieces dans la base
+       var xmlHttp = null;
 
-       
-   $('#selectPieces')
-    .find('option')
-    .remove()
-    .end();
-    
-    $.getJSON("http://localhost:8087/getdata?name=Piece",function(data){
-        processData(data);}
-    );
-    function processData( data ){
-        var select = $('#selectPieces');
-        var listePieces = data.data;
-        for ( var i = 0 ; i < listePieces.length ; i++ ){
-            if ( listePieces[i] !== null ){
-                select.append('<option value = '+listePieces[i].nom+'>'+listePieces[i].nom+'</option>');
-            }
-        }
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType="JSON";
+    xmlHttp.open( "GET", "http://localhost:8087/getdata?name=Piece", false );
+    xmlHttp.send();
+    var data = xmlHttp.responseText;
+    var listePiece=JSON.parse(data);
+  
+    for(var i=0;i< listePiece.data.length ;i++ )
+    {
+    var option = new Option(listePiece.data[i]["nom"]);
+    $("#selectPieces")[0].add(option) ;
     }
-    
-   /* $.when($.ajax({
-        url: '/echo/json/',
-        type: 'POST',
-        data: {json: '{"a":12}'}
-    })).done(function(a) {
-          
-    });*/
-    
-    
-    
-    
-    
-
     
 }
 

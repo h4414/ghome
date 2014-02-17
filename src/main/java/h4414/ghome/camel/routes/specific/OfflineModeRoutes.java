@@ -24,7 +24,7 @@ public class OfflineModeRoutes extends RouteBuilder{
         final String PERSISTANCE_UNIT_NAME = "4414_ghhome_war_1.0-SNAPSHOTPU";
         
         
-        int timer = 60; // nb de secondes d'intervalle entre chaque donnée envoyée
+        int timer = 10; // nb de secondes d'intervalle entre chaque donnée envoyée
                     // ( pratique pour changer tout d'un coup )
         
         

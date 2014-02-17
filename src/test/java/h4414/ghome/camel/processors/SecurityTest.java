@@ -7,8 +7,6 @@
 package h4414.ghome.camel.processors;
 
 import java.security.Key;
-import javax.crypto.SecretKey;
-import org.apache.camel.Message;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
