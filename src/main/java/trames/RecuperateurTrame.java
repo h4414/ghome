@@ -12,6 +12,7 @@ import h4414.ghome.entities.Capteur;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.Registry;
+import traitement.Actionneur;
 import traitement.Presence;
+import traitement.Temperature;
 /**
  *
  * @author Maud et Thomas
@@ -75,6 +78,12 @@ public class RecuperateurTrame implements Runnable {
             else if (this.IDS_TEMPERATURE.contains(trameRecue.getID()))
             {
                 System.out.println("TRAME TEMPERATURE DETECTEE");
+                double temperature = Temperature.getTemperature(trameRecue);
+                if (temperature<25){
+                    Trame envoi = Actionneur.sendTrame("FF9F1E06");
+                    PrintWriter out = new PrintWriter(socket.getOutputStream());
+                    out.println(envoi.getTrame());
+                }
                 return true;
                 //TO DO Traitement
             }

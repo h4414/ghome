@@ -5,6 +5,7 @@
 package h4414.ghome.camel.processors;
 
 import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import h4414.ghome.entities.Historique;
@@ -37,8 +38,17 @@ public class DataToJson implements Processor{
         
         ObjectWriter oWriter = mapper.writer();
         StringWriter sWriter = new StringWriter();
+        
+        
         try { 
-            oWriter.writeValue(sWriter, datas); 
+            JsonGenerator jg = factory.createGenerator(sWriter);
+            jg.writeStartObject();
+            jg.writeFieldName("data");
+            
+            oWriter.writeValue(jg, datas);
+            
+            jg.close();
+            //sWriter.write("}");
         } 
         catch (IOException e) {
             Logger.getLogger(PresenceRuleProcessor.class.getName()).log(Level.SEVERE, null, e);
@@ -46,6 +56,9 @@ public class DataToJson implements Processor{
         String resultat = sWriter.toString();
         //System.out.println("resultat : "+resultat);
         ex.getIn().setBody(resultat);
+        ex.getIn().setHeader("Access-Control-Allow-Origin","*");
+        ex.getIn().setHeader("Content-Type","application/json");
+        
     }
     
 }
