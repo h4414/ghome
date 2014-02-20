@@ -78,12 +78,15 @@ public class RecuperateurTrame implements Runnable {
             else if (this.IDS_TEMPERATURE.contains(trameRecue.getID()))
             {
                 System.out.println("TRAME TEMPERATURE DETECTEE");
-                double temperature = Temperature.getTemperature(trameRecue);
+                Temperature traitementTemperature = new Temperature(trameRecue, this.context);
+                /*double temperature = Temperature.getTemperature(trameRecue);
                 if (temperature<25){
                     Trame envoi = Actionneur.sendTrame("FF9F1E06");
                     PrintWriter out = new PrintWriter(socket.getOutputStream());
                     out.println(envoi.getTrame());
-                }
+                }*/
+                Thread temperature = new Thread(traitementTemperature);
+                temperature.start();
                 return true;
                 //TO DO Traitement
             }
