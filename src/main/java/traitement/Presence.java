@@ -6,16 +6,22 @@
 
 package traitement;
 
+import h4414.ghome.entities.Capteur;
 import h4414.ghome.entities.Historique;
+import h4414.ghome.entities.ReglePresence;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultProducerTemplate;
+import org.apache.camel.spi.Registry;
 import trames.Trame;
 
 /** Classe de traitement des trames du detecteur de présence
@@ -72,7 +78,7 @@ public class Presence implements Runnable {
      */
     @Override
     public void run() {
-        Calendar begin= new GregorianCalendar();
+        /*Calendar begin= new GregorianCalendar();
         
         Calendar end = new GregorianCalendar();
 
@@ -90,8 +96,58 @@ public class Presence implements Runnable {
                 Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
-        
+        //Version avec historiques corrects ?
+        /*/
+        Calendar now = new GregorianCalendar();
+        Registry reg = ctx.getRegistry();
+        Object emf = reg.lookupByName("entityManagerFactory");
+
+        if ( emf != null ){
+            if ( emf instanceof EntityManagerFactory ){
+                EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
+                EntityManager em = emFactory.createEntityManager();
+                Query qP = em.createQuery("SELECT o FROM Regle o WHERE o.idCapteur = :id");
+                qP.setParameter("id", trameTraitee.getID());
+                List<ReglePresence> plages = qP.getResultList();
+                boolean dansPlage = false;
+                for (ReglePresence p:plages){
+                    if (p.getDateBegin().before(now) && p.getDateEnd().after(now)){
+                        dansPlage = true;
+                        break;
+                    }
+                }
+                if (dansPlage){
+                    Query qH = em.createQuery("SELECT o FROM Historique o WHERE o.idCapteur = :id");
+                    qH.setParameter("id", trameTraitee.getID());
+                    List<Historique> datas = qH.getResultList();
+                    if (datas.isEmpty()){//si la liste est vide
+                        if (OccupancyDetected(trameTraitee)){
+                            Historique newhist = new Historique(trameTraitee.getID(),now,now);
+                            //TODO: Balancer l'histo dans la base
+                       }
+                    } else {//si la liste n'est pas vide
+                        if (OccupancyDetected(trameTraitee)){//si la trame a detecté une présence
+                            Historique lastHist = datas.get(datas.size()-1);
+                            if (lastHist.getDebutPresence()!=lastHist.getDebutPresence()){
+                                Historique newhist = new Historique(trameTraitee.getID(),now,now);
+                                //TODO: Balancer l'histo dans la base
+                            }                             
+                       } else {//si la trame n'a pas detecté une présence
+                            Historique lastHist = datas.get(datas.size()-1);
+                            if (lastHist.getDebutPresence()==lastHist.getDebutPresence()){
+                                //TODO: maj date de fin du dernier histo
+                            }
+                        }
+                    }
+                }
+
+            }
+            else{
+                System.out.println("failed to retrieve emfactory : is instance of "+emf.getClass()+"");
+            }
+        }
+        else{
+            System.out.println("failed to retrieve emfactory : is null ...");
+        }/**/
     }
 }
