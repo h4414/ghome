@@ -9,6 +9,10 @@ $(document).ready(init);
 function init()
 {
      $("#header").load("/ghome/html/header.html"); 
+     
+     //FONCTIONS DE MENU 
+     $('#leftMenu').load("/ghome/html/menu.html");
+
 }
 
 
