@@ -65,11 +65,8 @@ public class Temperature implements Runnable {
     @Override
     public void run() {
         Calendar begin= new GregorianCalendar();
-        begin .add(Calendar.HOUR, -4);
-        Calendar end = new GregorianCalendar();
-
-        end.add(Calendar.HOUR, 4);
-        Historique traitementTemperature = traitementTemperature(trameTraitee,begin, end);
+        
+        Historique traitementTemperature = traitementTemperature(trameTraitee,begin, null);
         listeTrame.add(traitementTemperature);
         System.out.println(traitementTemperature);
         ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
