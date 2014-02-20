@@ -9,15 +9,24 @@ $(document).ready(function()
      {
          $(location).attr('href',"/ghome/html/ajoutCapteurs.html");
      });
+       $("#addRegle").click(function()
+     {
+         $(location).attr('href',"/ghome/html/regles.html");
+     });
               $("#Statistiques").click(function()
      {
          $(location).attr('href',"/ghome/html/Statistiques.html");
      });
-                   $("#Statistiques").click(function()
+                   $("#settings").click(function()
      {
-         $(location).attr('href',"/ghome/html/Statistiques.html");
+         $(location).attr('href',"/ghome/html/settings.html");
      });
                        $("#objects").click(function()
+     {
+         $(location).attr('href',"/ghome/html/objects.html");
+     });
+     
+                            $("#objects2").click(function()
      {
          $(location).attr('href',"/ghome/html/objects.html");
      });
