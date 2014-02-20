@@ -122,19 +122,43 @@ public class Presence implements Runnable {
                     if (datas.isEmpty()){//si la liste est vide
                         if (OccupancyDetected(trameTraitee)){
                             Historique newhist = new Historique(trameTraitee.getID(),now,now);
-                            //TODO: Balancer l'histo dans la base
+                            //Balancer l'histo dans la base
+                            listeTrame.add(newhist);
+                            System.out.println(newhist);
+                            ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
+                            try {
+                                pdt.start();
+                                pdt.sendBody("direct:capteur",newhist);
+                                pdt.stop();
+                            } catch (Exception ex) {
+                                Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                        }
                     } else {//si la liste n'est pas vide
                         if (OccupancyDetected(trameTraitee)){//si la trame a detecté une présence
                             Historique lastHist = datas.get(datas.size()-1);
                             if (lastHist.getDebutPresence()!=lastHist.getDebutPresence()){
                                 Historique newhist = new Historique(trameTraitee.getID(),now,now);
-                                //TODO: Balancer l'histo dans la base
+                                //Balancer l'histo dans la base
+                                listeTrame.add(newhist);
+                                System.out.println(newhist);
+                                ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
+                                try {
+                                    pdt.start();
+                                    pdt.sendBody("direct:capteur",newhist);
+                                    pdt.stop();
+                                } catch (Exception ex) {
+                                    Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
+                                }
                             }                             
                        } else {//si la trame n'a pas detecté une présence
                             Historique lastHist = datas.get(datas.size()-1);
                             if (lastHist.getDebutPresence()==lastHist.getDebutPresence()){
                                 //TODO: maj date de fin du dernier histo
+                                Query qU = em.createQuery("UPDATE Historique h SET h.finPresence = :heurefin WHERE h.idCapteur = :id AND h.finPresence = h.debutPresence");
+                                qU.setParameter("heurefin", now);
+                                qU.setParameter("id", trameTraitee.getID());
+                                int updated = qU.executeUpdate();
                             }
                         }
                     }
