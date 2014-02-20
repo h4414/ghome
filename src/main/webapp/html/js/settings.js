@@ -7,7 +7,8 @@ function init()
 {
     $("#header").load("/ghome/html/header.html"); 
     // TO DO : requete sur getData pour chopper la liste des pieces dans la base
-    
+        $('#leftMenu').load("/ghome/html/menu.html");
+
 
 $("#btnAjouter").click((function()
 {

@@ -8,7 +8,9 @@ $(document).ready(init);
 function init()
 {
     
-    $("#header").load("/ghome/html/header.html"); 
+    $("#header").load("/ghome/html/header.html");
+        $('#leftMenu').load("/ghome/html/menu.html");
+
 //Get context with jQuery - using jQuery's .get() method.
 var ctx = $("#myChart").get(0).getContext("2d");
 //This will get the first returned node in the jQuery collection.
@@ -37,7 +39,7 @@ var data = {
 data.labels = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
 data.datasets[0].data = listHeure;
  var chart = new Chart(ctx).Bar(data);
- char
+
 }
 
 function recupHisto()

@@ -6,6 +6,8 @@
 function init()
 {
     $("#header").load('/ghome/html/header.html'); 
+        $('#leftMenu').load("/ghome/html/menu.html");
+
     var liste = retrieveCapteurs();
     affichage(liste);
     $(".glyphicon-remove").click(function(event)

@@ -51,6 +51,8 @@ $("#idCapteur").blur(function()
 function init()
 {
     $("#header").load("/ghome/html/header.html"); 
+        $('#leftMenu').load("/ghome/html/menu.html");
+
     // TO DO : requete sur getData pour chopper la liste des pieces dans la base
        var xmlHttp = null;
 

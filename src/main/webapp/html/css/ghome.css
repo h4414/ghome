@@ -13,10 +13,21 @@
     padding : 0 15px;
     /*margin: 0 -15px;*/
 }
-#ruleList{
-    
+#leftMenu{
+    margin-left: 0%;
+    vertical-align: top;
+    padding-left: 5%;
+    margin-right: auto;
+    width : 15%;
+    display : inline-block;
+}
+.glyphicon
+{
+    cursor:pointer;
 }
 
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {background-color: #ddd}
 a:link {text-decoration:none;}
 a:visited {text-decoration:none;}
 a:hover {text-decoration:none;}

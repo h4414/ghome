@@ -154,6 +154,9 @@ public class RecuperateurTrame implements Runnable {
         catch (IOException ex1) {
             Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex1);
         }
+        catch (NumberFormatException ex2){
+            System.out.println("Trame de merde");
+        }
         //System.out.println(trameRecue);
         return false;
         
