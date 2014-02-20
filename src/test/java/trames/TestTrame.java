@@ -48,7 +48,7 @@ public class TestTrame {
     /**
      *
      */
-        @Test
+    @Test
     public void testCasUsuel(){
         Trame test = new Trame("A55A0B07B729000D00053E7B00BD");
 
@@ -57,5 +57,16 @@ public class TestTrame {
         assertEquals("00053E7B",test.getID());
         assertEquals(0xB729000D,test.getData());
 
+    }
+    
+    @Test
+    public void testConstructeur(){
+        try{
+            Trame test = new Trame("   ngl,nskbksnvhijb ib");
+        }
+        catch (Exception e){
+            NumberFormatException b = new NumberFormatException();
+            assertEquals(e.getClass().getName(),b.getClass().getName());
+        }
     }
 }
