@@ -105,39 +105,20 @@ public class Presence implements Runnable {
             if ( emf instanceof EntityManagerFactory ){
                 EntityManagerFactory emFactory = (EntityManagerFactory )( emf);
                 EntityManager em = emFactory.createEntityManager();
-                Query qP = em.createQuery("SELECT o FROM Regle o WHERE o.idCapteur = :id");
+                Query qP = em.createQuery("SELECT o FROM ReglePresence o WHERE o.idCapteur = :id");
                 qP.setParameter("id", trameTraitee.getID());
                 List<ReglePresence> plages = qP.getResultList();
-                boolean dansPlage = false;
                 for (ReglePresence p:plages){
-                    if (p.getDateBegin().before(now) && p.getDateEnd().after(now)){
-                        dansPlage = true;
-                        break;
-                    }
-                }
-                if (dansPlage){
-                    Query qH = em.createQuery("SELECT o FROM Historique o WHERE o.idCapteur = :id");
-                    qH.setParameter("id", trameTraitee.getID());
-                    List<Historique> datas = qH.getResultList();
-                    if (datas.isEmpty()){//si la liste est vide
-                        if (OccupancyDetected(trameTraitee)){
-                            Historique newhist = new Historique(trameTraitee.getID(),now,now);
-                            //Balancer l'histo dans la base
-                            listeTrame.add(newhist);
-                            System.out.println(newhist);
-                            ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
-                            try {
-                                pdt.start();
-                                pdt.sendBody("direct:capteur",newhist);
-                                pdt.stop();
-                            } catch (Exception ex) {
-                                Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                       }
-                    } else {//si la liste n'est pas vide
-                        if (OccupancyDetected(trameTraitee)){//si la trame a detecté une présence
-                            Historique lastHist = datas.get(datas.size()-1);
-                            if (lastHist.getDebutPresence()!=lastHist.getDebutPresence()){
+                    boolean dansPlage = (!(p.getDateBegin().get(GregorianCalendar.HOUR_OF_DAY)>now.get(GregorianCalendar.HOUR_OF_DAY)))
+                            && (!(p.getDateEnd().get(GregorianCalendar.HOUR_OF_DAY)<now.get(GregorianCalendar.HOUR_OF_DAY)))
+                            && (!(p.getDateBegin().get(GregorianCalendar.HOUR_OF_DAY)==now.get(GregorianCalendar.HOUR_OF_DAY) && p.getDateBegin().get(GregorianCalendar.MINUTE)>now.get(GregorianCalendar.HOUR_OF_DAY)))
+                            && (!(p.getDateEnd().get(GregorianCalendar.HOUR_OF_DAY)==now.get(GregorianCalendar.HOUR_OF_DAY) && p.getDateEnd().get(GregorianCalendar.MINUTE)<now.get(GregorianCalendar.HOUR_OF_DAY)));
+                    if (dansPlage){
+                        Query qH = em.createQuery("SELECT o FROM Historique o WHERE o.idCapteur = :id");
+                        qH.setParameter("id", trameTraitee.getID());
+                        List<Historique> datas = qH.getResultList();
+                        if (datas.isEmpty()){//si la liste est vide
+                            if (OccupancyDetected(trameTraitee)){
                                 Historique newhist = new Historique(trameTraitee.getID(),now,now);
                                 //Balancer l'histo dans la base
                                 listeTrame.add(newhist);
@@ -150,22 +131,62 @@ public class Presence implements Runnable {
                                 } catch (Exception ex) {
                                     Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                            }                             
-                       } else {//si la trame n'a pas detecté une présence
+                           }
+                        } else {//si la liste n'est pas vide
+                            if (OccupancyDetected(trameTraitee)){//si la trame a detecté une présence
+                                Historique lastHist = datas.get(datas.size()-1);
+                                if (!lastHist.getDebutPresence().equals(lastHist.getFinPresence())){
+                                    Historique newhist = new Historique(trameTraitee.getID(),now,now);
+                                    //Balancer l'histo dans la base
+                                    listeTrame.add(newhist);
+                                    System.out.println(newhist);
+                                    ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
+                                    try {
+                                        pdt.start();
+                                        pdt.sendBody("direct:capteur",newhist);
+                                        pdt.stop();
+                                    } catch (Exception ex) {
+                                        Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }                             
+                           } else {//si la trame n'a pas detecté une présence
+                                Historique lastHist = datas.get(datas.size()-1);
+                                if (lastHist.getDebutPresence().equals(lastHist.getFinPresence())){
+                                    //maj date de fin du dernier histo
+                                    Query qU = em.createQuery("UPDATE Historique h SET h.finPresence = :heurefin WHERE h.idCapteur = :id AND h.finPresence = h.debutPresence");
+                                    qU.setParameter("heurefin", now);
+                                    qU.setParameter("id", trameTraitee.getID());
+                                    if (!em.getTransaction().isActive()){
+                                        em.getTransaction().begin();
+                                    }
+                                    int updated = qU.executeUpdate();
+                                    em.getTransaction().commit();
+                                }
+                            }
+                        }
+                        break;
+                    } else {//si on est en dehors de la plage
+                        Query qH = em.createQuery("SELECT o FROM Historique o WHERE o.idCapteur = :id");
+                        qH.setParameter("id", trameTraitee.getID());
+                        List<Historique> datas = qH.getResultList();
+                        if (!datas.isEmpty()){//si la liste n'est pas vide
                             Historique lastHist = datas.get(datas.size()-1);
-                            if (lastHist.getDebutPresence()==lastHist.getDebutPresence()){
-                                //TODO: maj date de fin du dernier histo
+                            if (lastHist.getDebutPresence().equals(lastHist.getFinPresence())){
+                                //maj date de fin du dernier histo
                                 Query qU = em.createQuery("UPDATE Historique h SET h.finPresence = :heurefin WHERE h.idCapteur = :id AND h.finPresence = h.debutPresence");
                                 qU.setParameter("heurefin", now);
                                 qU.setParameter("id", trameTraitee.getID());
+                                if (!em.getTransaction().isActive()){
+                                    em.getTransaction().begin();
+                                }
                                 int updated = qU.executeUpdate();
+                                em.getTransaction().commit();
                             }
+                            
                         }
-                    }
+                    } 
                 }
-
-            }
-            else{
+            }else{
                 System.out.println("failed to retrieve emfactory : is instance of "+emf.getClass()+"");
             }
         }
