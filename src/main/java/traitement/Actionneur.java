@@ -23,8 +23,9 @@ public class Actionneur {
     public static Trame sendTrame(String id){
         Integer checksum = Integer.parseInt(hseqLength,16) + Integer.parseInt(org,16) + Integer.parseInt(payload3,16)
                 + Integer.parseInt(payload2,16) + Integer.parseInt(payload1,16) + Integer.parseInt(payload0,16)
-                + Integer.parseInt(id.substring(0,2)) + Integer.parseInt(id.substring(2,4)) + Integer.parseInt(id.substring(4,6))
-                + Integer.parseInt(id.substring(6,8));
+                + Integer.parseInt(id.substring(0,2),16) + Integer.parseInt(id.substring(2,4),16) + Integer.parseInt(id.substring(4,6),16)
+                + Integer.parseInt(id.substring(6,8),16);
+        System.out.println(checksum);
         String chkSum = String.format("%02X",checksum);
         Trame trame = new Trame(sync+hseqLength+org+payload3+payload2+payload1+payload0+id+chkSum);
         return trame;
