@@ -17,7 +17,7 @@ public class Actionneur {
     private static final String hseqLength = "6B";
     private static final String org = "05";
     private static final String payload3on = "50";
-     private static final String payload3off = "50";
+     private static final String payload3off = "70";
     private static final String payload2 = "00";
     private static final String payload1 = "00";
     private static final String payload0 = "00";
