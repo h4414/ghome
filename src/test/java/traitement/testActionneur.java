@@ -58,7 +58,7 @@ public class testActionneur {
         String payload0 = "00";
         String id = "06";
         
-        String envoi = Actionneur.sendTrame(id);
-        System.out.println(envoi);
+       // String envoi = Actionneur.sendTrame(id);
+        //System.out.println(envoi);
     }
 }
