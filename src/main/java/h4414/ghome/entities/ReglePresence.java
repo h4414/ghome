@@ -4,7 +4,7 @@
  */
 package h4414.ghome.entities;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -21,20 +21,20 @@ public class ReglePresence extends Regle{
     private String idCapteur;
     
     @Temporal(javax.persistence.TemporalType.TIME)
-    private Date dateBegin;
+    private Calendar dateBegin;
 
     @Override
     public String toString() {
         return "ReglePresence{" /*+ "id=" + id */+ ", idCapteur=" + idCapteur + ", begin=" + dateBegin + ", end=" + dateEnd + '}';
     }
     @Temporal(javax.persistence.TemporalType.TIME)
-    private Date dateEnd;
+    private Calendar dateEnd;
     
     public  ReglePresence(){
         
     }
     
-    public  ReglePresence( String idCapteur, Date begin, Date end){
+    public  ReglePresence( String idCapteur, Calendar begin, Calendar end){
         this.idCapteur=idCapteur;
         this.dateBegin = begin;
         this.dateEnd = end;
@@ -88,19 +88,19 @@ public class ReglePresence extends Regle{
         this.idCapteur = idCapteur;
     }
 
-    public Date getDateBegin() {
+    public Calendar getDateBegin() {
         return dateBegin;
     }
 
-    public void setDateBegin(Date dateBegin) {
+    public void setDateBegin(Calendar dateBegin) {
         this.dateBegin = dateBegin;
     }
 
-    public Date getDateEnd() {
+    public Calendar getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(Calendar dateEnd) {
         this.dateEnd = dateEnd;
     }
     
