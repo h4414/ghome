@@ -52,14 +52,9 @@ public class Temperature implements Runnable {
     }
     
     public Historique traitementTemperature(Trame trame, Calendar debutplage, Calendar finplage){
-        Calendar now = new GregorianCalendar();
-        if (debutplage.before(now) && finplage.after(now) ){        
-            Historique newhist = new Historique(trame.getID(),now,now,Temperature.getTemperature(trame));
-            
-            return newhist;
-        }else{
-            return null;
-        }
+        Calendar now = new GregorianCalendar();     
+        Historique newhist = new Historique(trame.getID(),now,now,Temperature.getTemperature(trame));
+        return newhist;
     }
     
     @Override
