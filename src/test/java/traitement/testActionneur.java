@@ -6,12 +6,14 @@
 
 package traitement;
 
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import trames.Trame;
 
 /**
  *
@@ -44,4 +46,19 @@ public class testActionneur {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void testGenerationTrameEnvoi(){
+        String sync = "A55A";
+        String hseqLength = "6B";
+        String org = "06";
+        String payload3 = "09";
+        String payload2 = "00";
+        String payload1 = "00";
+        String payload0 = "00";
+        String id = "06";
+        
+        String envoi = Actionneur.sendTrame(id);
+        System.out.println(envoi);
+    }
 }

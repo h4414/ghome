@@ -20,7 +20,9 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.camel.Exchange;
@@ -40,7 +42,7 @@ public class PresenceRuleProcessor implements Processor{
         System.out.println("processing");
         try {
             String input = in.getBody(String.class);
-            System.out.println(input);
+            //System.out.println(input);
             //jp = jFactory.createParser(in.getBody(InputStream.class));
             jp = jFactory.createParser(input);
             ObjectMapper mapper = new ObjectMapper();
@@ -54,7 +56,11 @@ public class PresenceRuleProcessor implements Processor{
             SimpleDateFormat sd = new SimpleDateFormat("h:mma");
             Date b = sd.parse(begin.asText());
             Date e = sd.parse(end.asText());
-            ReglePresence regle = new ReglePresence("numcapteur",b,e);
+            Calendar beg = new GregorianCalendar();
+            beg.setTime(b);
+            Calendar ed = new GregorianCalendar();
+            ed.setTime(e);
+            ReglePresence regle = new ReglePresence("numcapteur",beg,ed);
             in.setBody(regle);
             System.out.println (regle);
         } catch (IOException ex) {

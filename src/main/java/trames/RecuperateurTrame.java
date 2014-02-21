@@ -10,10 +10,15 @@ package trames;
 
 import h4414.ghome.entities.Capteur;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -78,12 +83,16 @@ public class RecuperateurTrame implements Runnable {
             else if (this.IDS_TEMPERATURE.contains(trameRecue.getID()))
             {
                 System.out.println("TRAME TEMPERATURE DETECTEE");
-                double temperature = Temperature.getTemperature(trameRecue);
-                if (temperature<25){
-                    Trame envoi = Actionneur.sendTrame("FF9F1E06");
-                    PrintWriter out = new PrintWriter(socket.getOutputStream());
-                    out.println(envoi.getTrame());
+                Temperature traitementTemperature = new Temperature(trameRecue, this.context);
+                double dtemperature = Temperature.getTemperature(trameRecue);
+                if (dtemperature<25){
+                    String envoi = Actionneur.sendTrame("7");
+                    System.out.println(envoi);
+                    envoyerTrame(envoi);
                 }
+                Thread temperature = new Thread(traitementTemperature);
+                temperature.start();
+         
                 return true;
                 //TO DO Traitement
             }
@@ -150,6 +159,9 @@ public class RecuperateurTrame implements Runnable {
         }
         catch (IOException ex1) {
             Logger.getLogger(RecuperateurTrame.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+        catch (NumberFormatException ex2){
+            System.out.println("Trame de merde");
         }
         //System.out.println(trameRecue);
         return false;
@@ -228,7 +240,43 @@ public class RecuperateurTrame implements Runnable {
         this.context = context;
     }
     
-    
+    	public static void envoyerTrame(String trame)
+	{
+		final String laTrame = trame;
+		
+		new Thread(new Runnable()
+		{			
+			@Override
+			public void run() 
+			{	
+				Socket mSocket;
+				OutputStream os;
+				PrintWriter pw;
+				SocketAddress skAdd = new InetSocketAddress(IP, port);
+				mSocket = new Socket();
+				try 
+				{
+					mSocket.connect(skAdd, 0);
+					if (mSocket.isConnected())
+					{
+						os = mSocket.getOutputStream();
+						pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(os)), true);
+						pw.print(laTrame);
+						pw.flush();
+						pw.close();
+						mSocket.close();
+												
+					
+					}
+				} 
+				catch (IOException e) 
+				{
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
 }
+
 
 

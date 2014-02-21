@@ -33,7 +33,7 @@ public class Temperature implements Runnable {
     
     public static double getTemperature(Trame trame){
         
-        double temperature = (double)trame.getDATA1()*40/250;
+        double temperature = (double)(trame.getDATA1()*40)/250;
         return temperature;
         
     }
@@ -52,24 +52,16 @@ public class Temperature implements Runnable {
     }
     
     public Historique traitementTemperature(Trame trame, Calendar debutplage, Calendar finplage){
-        Calendar now = new GregorianCalendar();
-        if (debutplage.before(now) && finplage.after(now) && OccupancyDetected(trame)){        
-            Historique newhist = new Historique(trame.getID(),now,now);
-            
-            return newhist;
-        }else{
-            return null;
-        }
+        Calendar now = new GregorianCalendar();     
+        Historique newhist = new Historique(trame.getID(),now,now,Temperature.getTemperature(trame));
+        return newhist;
     }
     
     @Override
     public void run() {
         Calendar begin= new GregorianCalendar();
-        begin .add(Calendar.HOUR, -4);
-        Calendar end = new GregorianCalendar();
-
-        end.add(Calendar.HOUR, 4);
-        Historique traitementTemperature = traitementTemperature(trameTraitee,begin, end);
+        
+        Historique traitementTemperature = traitementTemperature(trameTraitee,begin, begin);
         listeTrame.add(traitementTemperature);
         System.out.println(traitementTemperature);
         ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );

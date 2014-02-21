@@ -56,9 +56,9 @@ public class Security {
             System.out.println("Message crypté : ");
             System.out.println(result);
             System.out.println("Fin cryptage");*/
-            return cipherText;           
+            return cipherText;            
         }catch(Exception e){
-            //System.out.println("Erreur cryptage");
+            System.out.println("Erreur cryptage");
             return null;
         }
     }
@@ -75,9 +75,9 @@ public class Security {
             /*System.out.println("Message décrypté : ");
             System.out.println(result);
             System.out.println("Fin décryptage");*/
-            return result;  
+            return result; 
         } catch (Exception e){
-            //System.out.println("Erreur décryptage");
+            System.out.println("Erreur décryptage");
             return null;
         }
     }

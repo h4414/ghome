@@ -7,7 +7,8 @@ function init(){
     $( "#ruleList" ).accordion();
     $('#heure1').timepicker();
     $('#heure2').timepicker();
-     
+         $('#leftMenu').load("/ghome/html/menu.html");
+
       $("#header").load("/ghome/html/header.html"); 
    
     

@@ -1,0 +1,43 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-color: #F3f3f3;
+}
+
+.navbar-custom {
+    background-color:#003366;
+    color:#003366;
+    text-decoration:none;
+}
+
+.btn-success{
+    background-color: #357AB7; 
+    vertical-align: middle;
+    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+    background: -moz-linear-gradient(top, #3e779d, #65a9d7); 
+    border-color: #357AB7; 
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    border-radius: 18px;
+    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+    box-shadow: rgba(0,0,0,1) 0 1px 0;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0; 
+    text-decoration: none;
+} 
+
+.btn-success:hover{
+    border-top-color: #28597a;
+    background: #28597a;
+    color: #ccc; 
+    text-decoration: none;
+} 
+
+.btn-success:active{
+    border-top-color: #1b435e;
+    background: #1b435e;  
+    text-decoration: none;
+} 
+
+

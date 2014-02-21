@@ -6,15 +6,65 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Ghome homepage</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-           
-            <!-- Bootstrap -->
-            <link href="/ghome/html/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Ghome - Ajout de capteurs</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="/ghome/html/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="/ghome/html/css/accueil.css" rel="stylesheet">
+        <link href="/ghome/html/css/ghome.css" rel="stylesheet">
+        <link href="/ghome/html/css/ajoutCapteurs.css" rel="stylesheet">
 
     </head>
     <body>
         <div id="header" class='header'></div>
+
+        
+                  <!-- Example row of columns -->
+          
+
+                      <div class="accordion" id="leftMenu">
+                      </div>
+
+                      <center>
+                          <form class="navbar-form pull-center">
+                                Type du capteur : 
+                                <select id="typeCapteur" class="form-control">
+                                     <option>TEMPERATURE</option>
+                                    <option>PRESENCE</option>
+                                    <option>PRISE</option>
+                                    <option>CONTACTEUR</option>
+                                    <option>BOUTON</option>
+                                </select>
+                          </form>
+                          <form class="navbar-form pull-center">
+                            ID du capteur : 
+                            <input id="idCapteur" type="text" class="span2"> 
+                          </form>
+                          <form class="navbar-form pull-center">
+                            Nom du capteur : 
+                            <input id="nomCapteur" type="text" class="span2"> 
+                          </form>
+                          <form class="navbar-form pull-center">
+                            Salle concernée :                              
+                            <select id="selectPieces" class="form-control">
+
+                            </select>
+                          </form>
+                      </center>  
+                      
+            
+                  <hr>
+         
+  
+        <!-- <div id="header" class='header'></div>
        <center>
             <div class="container">
                 <div class="row">
@@ -35,26 +85,18 @@ and open the template in the editor.
                                 <input id="nomCapteur" type="text" class="span2"> <br> <br>
                                 Salle concernée :                              
                                 <select id="selectPieces" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+
                                 </select>
                                  <br> <br>
                                 <button type="submit" id="btnValider" class="btn">Envoyer</button>
                             </form>
                     </div>
                 </div>
-            </div>
-            <!-- footer -->
-            <div class='footer'>
-            </div>
+            </div> -->
 
              <!-- scripts -->
              <script src="http://code.jquery.com/jquery.js"></script>
              <script src="/ghome/html/js/bootstrap.min.js"></script>
              <script src="/ghome/html/js/ajoutCapteur.js"></script>
-         </center>
     </body>
 </html>
