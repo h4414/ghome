@@ -1,0 +1,8 @@
+21/02/14 14:07:08 INFO  pop3server: POP3 Service uses default thread group.
+21/02/14 14:07:08 INFO  pop3server: POP3 Service is running on: Bernard
+21/02/14 14:07:08 INFO  pop3server: POP3 Service handler hello name is: Bernard
+21/02/14 14:07:08 INFO  pop3server: POP3 Service handler connection timeout is: 120000
+21/02/14 14:07:08 INFO  pop3server: POP3 Service connection backlog is: 5
+21/02/14 14:07:08 INFO  pop3server: POP3 Service will allow a maximum of 30 connections.
+21/02/14 14:07:08 INFO  pop3server: The idle timeout will be reset every 20480 bytes.
+21/02/14 14:07:08 INFO  pop3server: POP3 Service started plain:110

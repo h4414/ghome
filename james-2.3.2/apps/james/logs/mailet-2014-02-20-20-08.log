@@ -1,0 +1,9 @@
+20/02/14 20:08:08 INFO  James.Mailet: RemoteAddrNotInNetwork: Authorized addresses: [127.0.0.1/255.255.255.255]
+20/02/14 20:08:08 INFO  James.Mailet: RemoteDelivery: maxRetries is larger than total number of attempts specified. Increasing last delayTime with 19 attempts 
+20/02/14 20:08:08 INFO  James.Mailet: RemoteDelivery: Delay of 21600000 msecs is now attempted: 20 times
+20/02/14 20:16:04 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1392923728921-0-to-insa-lyon.fr to host smtp2.insa-lyon.fr. at 134.214.76.44 for addresses [mathis.paul@insa-lyon.fr]
+20/02/14 20:16:05 INFO  James.Mailet: RemoteDelivery: Permanent exception delivering mail (Mail1392923728921-0-to-insa-lyon.fr: 
+20/02/14 20:16:05 INFO  James.Mailet: ToRepository: Storing mail Mail1392923728921-0-to-insa-lyon.fr-!912543 in file://var/mail/relay-denied/
+20/02/14 20:32:11 INFO  James.Mailet: RemoteDelivery: Attempting delivery of Mail1392924681093-1-to-insa-lyon.fr to host smtp2.insa-lyon.fr. at 134.214.76.44 for addresses [mathis.paul@insa-lyon.fr]
+20/02/14 20:32:11 INFO  James.Mailet: RemoteDelivery: Permanent exception delivering mail (Mail1392924681093-1-to-insa-lyon.fr: 
+20/02/14 20:32:11 INFO  James.Mailet: ToRepository: Storing mail Mail1392924681093-1-to-insa-lyon.fr-!14484 in file://var/mail/relay-denied/

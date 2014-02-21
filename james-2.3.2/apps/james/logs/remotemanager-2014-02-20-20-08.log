@@ -1,0 +1,11 @@
+20/02/14 20:08:08 INFO  remotemanager: Remote Manager Service uses default thread group.
+20/02/14 20:08:08 INFO  remotemanager: Remote Manager Service is running on: Bernard
+20/02/14 20:08:08 INFO  remotemanager: Remote Manager Service handler hello name is: Bernard
+20/02/14 20:08:08 INFO  remotemanager: Remote Manager Service handler connection timeout is: 60000
+20/02/14 20:08:08 INFO  remotemanager: Remote Manager Service connection backlog is: 5
+20/02/14 20:08:08 INFO  remotemanager: Remote Manager Service will allow a maximum of 30 connections.
+20/02/14 20:08:08 INFO  remotemanager: Remote Manager Service started plain:4555
+20/02/14 20:08:28 INFO  remotemanager: Access from 127.0.0.1(127.0.0.1)
+20/02/14 20:08:38 INFO  remotemanager: Login for root successful
+20/02/14 20:09:54 INFO  remotemanager: User ghomeadmin added
+20/02/14 20:10:13 INFO  remotemanager: Logout for root.

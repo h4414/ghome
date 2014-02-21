@@ -1,0 +1,68 @@
+Date: Thu, 20 Feb 2014 20:32:11 +0100 (CET)
+From: postmaster@localhost
+To: ghomeadmin@localdomain.com
+Message-ID: <4974936.5.1392924731420.JavaMail.Mathis@Bernard>
+In-Reply-To: <18554375.3.1392924731379.JavaMail.Mathis@Bernard>
+Subject: =?Cp1252?Q?Re:test_message_with_james_apac=08=08=08=08=08=1B[C____=08?=
+ =?Cp1252?Q?__=08=08=08=08=08=08=08_=1B[C=08__=08=08_=08=08_?=
+ =?Cp1252?Q?=08=08_=08=08_=08apace=08_=08he_james?=
+MIME-Version: 1.0
+Content-Type: multipart/report; 
+	boundary="----=_Part_4_7147864.1392924731411"; 
+	report-type=delivery-status
+
+------=_Part_4_7147864.1392924731411
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Hi. This is the James mail server at Bernard.
+I'm afraid I wasn't able to deliver your message to the following addresses.
+This is a permanent error; I've given up. Sorry it didn't work out.  Below
+I include the list of recipients and the reason why I was unable to deliver
+your message.
+
+Failed recipient(s):
+mathis.paul@insa-lyon.fr
+
+Error message:
+554 5.7.1 Service unavailable; Client host [81.220.208.101] blocked using zen.dnsbl; http://www.spamhaus.org/query/bl?ip=81.220.208.101
+
+
+------=_Part_4_7147864.1392924731411
+Content-Type: message/delivery-status; name=status.dat
+Content-Transfer-Encoding: 7bit
+Content-Description: Delivery Status Notification
+Content-Disposition: attachment; filename=status.dat
+
+Reporting-MTA: dns; Bernard
+Received-From-MTA: dns; 127.0.0.1
+
+Final-Recipient: rfc822; mathis.paul@insa-lyon.fr
+Action: failed
+Status: 5.7.1
+Diagnostic-Code: smtp; 554 5.7.1 Service unavailable; Client host [81.220.208.101] blocked using zen.dnsbl; http://www.spamhaus.org/query/bl?ip=81.220.208.101
+Last-Attempt-Date: Thu, 20 Feb 2014 20:31:21 +0100 (CET)
+
+------=_Part_4_7147864.1392924731411
+Content-Type: message/rfc822; 
+	name="test message with james apac[C       [C   
+   apace he james"
+Content-Disposition: Attachment; 
+	filename="test message with james apac[C       [C
+      apace he james"
+
+Message-ID: <18554375.3.1392924731379.JavaMail.Mathis@Bernard>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Received: from 127.0.0.1 ([127.0.0.1])
+          by Bernard (JAMES SMTP Server 2.3.2) with SMTP ID 627
+          for <mathis.paul@insa-lyon.fr>;
+          Thu, 20 Feb 2014 20:31:21 +0100 (CET)
+Date: Thu, 20 Feb 2014 20:31:21 +0100 (CET)
+From: ghomeadmin@localdomain.com
+subject: test message with james apac[C       [C      apace he james
+
+c'eci est un message pour tester apache james
+
+------=_Part_4_7147864.1392924731411--

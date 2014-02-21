@@ -1,0 +1,5 @@
+21/02/14 14:07:07 INFO  dnsserver: Autodiscovery is enabled - trying to discover your system's DNS Servers
+21/02/14 14:07:07 INFO  dnsserver: Adding autodiscovered server 89.2.0.1
+21/02/14 14:07:07 INFO  dnsserver: Adding autodiscovered server 89.2.0.2
+21/02/14 14:07:07 INFO  dnsserver: DNS Server is: 89.2.0.1
+21/02/14 14:07:07 INFO  dnsserver: DNS Server is: 89.2.0.2
