@@ -16,6 +16,7 @@ import h4414.ghome.camel.processors.GetEntityType;
 import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
 import h4414.ghome.camel.processors.CapteurProcessor;
 import h4414.ghome.camel.processors.PieceProcessor;
+import h4414.ghome.camel.processors.UpdateRecuperateurTrame;
 import h4414.ghome.entities.Historique;
 import java.util.GregorianCalendar;
 import org.apache.camel.CamelContext;
@@ -47,7 +48,7 @@ public class MainRoutes extends RouteBuilder {
     private final String ID_TEMPERATURE = "0089337F";
 
     // offlineMode = ne pas charger de trames de la base de capteurs, simuler des trames à la place ( pour bosser à la maison )
-    private boolean offlineMode = false;
+    private boolean offlineMode = true;
 
     //@PersistenceUnit(unitName="ghome")
     //private EntityManagerFactory factory;
@@ -57,6 +58,7 @@ public class MainRoutes extends RouteBuilder {
         CamelContext context = this.getContext();
 
         RecuperateurTrame recuperateur = new RecuperateurTrame(context);
+        UpdateRecuperateurTrame updateRTrames = new UpdateRecuperateurTrame(recuperateur);
             //Thread listener = new Thread(recuperateur);
         //listener.start();
         //EntityManager eManager = factory.createEntityManager();
@@ -88,6 +90,7 @@ public class MainRoutes extends RouteBuilder {
 
         from("jetty:http://localhost:8087/addobject")
                 .process(capteurprocessor)
+                .process(updateRTrames)
                 .to("jpa:Capteur?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
                 .log("ajout d'un capteur");
 
@@ -121,7 +124,9 @@ public class MainRoutes extends RouteBuilder {
         
         from ( "direct:notifyUser")
             .setBody().constant("hello world")
-             
+             //TODO : parametrer cette requete pour spammer une autre adresse
+                //    faire passer la cause du message en parametres de l'echange pour choisir un message parmis des templates
+                //         (string template ? simple factory ?)
             .removeHeaders("*")
             .to("smtp://localhost?username=ghomeadmin&password=mouton&from=ghomeadmin@localdomain.com&subject=test&to=mathis.loriginal@gmail.com")
         .log("an email has been sent");
