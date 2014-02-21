@@ -25,6 +25,7 @@ public class Historique implements Serializable{
     private Calendar debutPresence;
     @Temporal(javax.persistence.TemporalType.TIME)
     private Calendar finPresence;
+    private double data;
 
     public Historique(){}
         
@@ -38,6 +39,25 @@ public class Historique implements Serializable{
         System.out.println(finPresence.toString());*/
     }
     
+    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence, double data ){
+        this.idCapteur = idCapteur;
+        this.debutPresence = debutPresence;
+        this.finPresence = finPresence;
+        this.data = data;
+        /*System.out.println("NOUVEL HISTO");
+        System.out.println(debutPresence.toString());
+        System.out.println(finPresence.toString());*/
+    }
+    
+    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence, int data ){
+        this.idCapteur = idCapteur;
+        this.debutPresence = debutPresence;
+        this.finPresence = finPresence;
+        this.data = data;
+        /*System.out.println("NOUVEL HISTO");
+        System.out.println(debutPresence.toString());
+        System.out.println(finPresence.toString());*/
+    }
     
     public int getId() {
         return id;
