@@ -37,6 +37,7 @@ public class Actionneur {
         String trame =sync+hseqLength+org+payload3on+payload2+payload1+payload0+id1+id0+last1+last0+numPrise+"30"+chkSum.substring(1);
         return trame;
     }
+    
         public static String eteindrePrise(String numPrise){
         Integer checksum = Integer.parseInt(hseqLength,16) + Integer.parseInt(org,16) + Integer.parseInt(payload3off,16)
                 + Integer.parseInt(payload2,16) + Integer.parseInt(payload1,16) + Integer.parseInt(payload0,16)

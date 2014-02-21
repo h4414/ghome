@@ -16,10 +16,19 @@
 #leftMenu{
     margin-left: 0%;
     vertical-align: top;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-right: auto;
+    width : 20%;
+    display : inline-block;
+}
+#Content{
+    margin-left: 0%;
+    vertical-align: top;
     padding-left: 5%;
     padding-right: 5%;
-    margin-right: auto;
-    width : 15%;
+  
+    width : 75%;
     display : inline-block;
 }
 .glyphicon
