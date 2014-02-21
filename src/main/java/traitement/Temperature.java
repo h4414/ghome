@@ -33,7 +33,7 @@ public class Temperature implements Runnable {
     
     public static double getTemperature(Trame trame){
         
-        double temperature = (double)(trame.getDATA0()*40)/250;
+        double temperature = (double)(trame.getDATA1()*40)/250;
         return temperature;
         
     }
