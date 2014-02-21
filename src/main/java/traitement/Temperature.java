@@ -54,7 +54,7 @@ public class Temperature implements Runnable {
     public Historique traitementTemperature(Trame trame, Calendar debutplage, Calendar finplage){
         Calendar now = new GregorianCalendar();
         if (debutplage.before(now) && finplage.after(now) ){        
-            Historique newhist = new Historique(trame.getID(),now,now);
+            Historique newhist = new Historique(trame.getID(),now,now,Temperature.getTemperature(trame));
             
             return newhist;
         }else{
@@ -66,7 +66,7 @@ public class Temperature implements Runnable {
     public void run() {
         Calendar begin= new GregorianCalendar();
         
-        Historique traitementTemperature = traitementTemperature(trameTraitee,begin, null);
+        Historique traitementTemperature = traitementTemperature(trameTraitee,begin, begin);
         listeTrame.add(traitementTemperature);
         System.out.println(traitementTemperature);
         ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
