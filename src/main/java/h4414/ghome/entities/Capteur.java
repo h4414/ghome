@@ -67,10 +67,10 @@ public class Capteur implements Serializable{
         return idCapteur;
     }
     public String getNomCapteur() {
-        return idCapteur;
+        return NomCapteur;
     }
     public String setNomCapteur() {
-        return idCapteur;
+        return NomCapteur;
     }
 
     public Piece getPiece() {
