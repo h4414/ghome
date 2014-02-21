@@ -15,6 +15,7 @@ import h4414.ghome.camel.processors.GetEntityType;
 
 import h4414.ghome.camel.routes.specific.OfflineModeRoutes;
 import h4414.ghome.camel.processors.CapteurProcessor;
+import h4414.ghome.camel.processors.DeleteCapteur;
 import h4414.ghome.camel.processors.PieceProcessor;
 import h4414.ghome.camel.processors.UpdateRecuperateurTrame;
 import h4414.ghome.entities.Historique;
@@ -38,6 +39,7 @@ public class MainRoutes extends RouteBuilder {
     private PieceProcessor pieceProcessor = new PieceProcessor();
     private DataBaseReader dbReader = new DataBaseReader();
     private DataToJson dataToJson = new DataToJson();
+    private DeleteCapteur deleteCapteur = new DeleteCapteur();
     private GetEntityType getQueryParams = new GetEntityType();
 
     private final String IP = "134.214.106.23";
@@ -121,6 +123,15 @@ public class MainRoutes extends RouteBuilder {
         //.delay(1000)
         //.to("controlbus:route?routeId=historiqueDbPull&action=suspend");
 
+        /*
+         * supprimer des capteurs : 
+         * 
+         * @ input : objet json {"id" : "<l'idCapteur du capteur a supprimer>"}
+         */
+        from ( "jetty:http://localhost:8087/deleteobject")
+                .process(deleteCapteur)
+                .log("capteur deleted");
+        
         
         from ( "direct:notifyUser")
             .setBody().constant("hello world")
