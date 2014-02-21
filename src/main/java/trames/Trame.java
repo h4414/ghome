@@ -125,4 +125,6 @@ public class Trame {
         }
         return data;
     }
+    
+    
 }
