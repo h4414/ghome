@@ -6,6 +6,7 @@ package h4414.ghome.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,7 +26,8 @@ public class Historique implements Serializable{
     private Calendar debutPresence;
     @Temporal(javax.persistence.TemporalType.TIME)
     private Calendar finPresence;
-    private double data;
+    @Column(nullable=true)
+    private double donnee;
 
     public Historique(){}
         
@@ -43,7 +45,7 @@ public class Historique implements Serializable{
         this.idCapteur = idCapteur;
         this.debutPresence = debutPresence;
         this.finPresence = finPresence;
-        this.data = data;
+        this.donnee = data;
         /*System.out.println("NOUVEL HISTO");
         System.out.println(debutPresence.toString());
         System.out.println(finPresence.toString());*/
@@ -53,7 +55,7 @@ public class Historique implements Serializable{
         this.idCapteur = idCapteur;
         this.debutPresence = debutPresence;
         this.finPresence = finPresence;
-        this.data = data;
+        this.donnee = data;
         /*System.out.println("NOUVEL HISTO");
         System.out.println(debutPresence.toString());
         System.out.println(finPresence.toString());*/
