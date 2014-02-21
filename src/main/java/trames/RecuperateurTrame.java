@@ -86,7 +86,13 @@ public class RecuperateurTrame implements Runnable {
                 Temperature traitementTemperature = new Temperature(trameRecue, this.context);
                 double dtemperature = Temperature.getTemperature(trameRecue);
                 if (dtemperature<25){
-                    String envoi = Actionneur.sendTrame("7");
+                    String envoi = Actionneur.allumerPrise("7");
+                    System.out.println("Temp" + dtemperature);
+                    envoyerTrame(envoi);
+                }
+                else 
+                {
+                      String envoi = Actionneur.eteindrePrise("7");
                     System.out.println(envoi);
                     envoyerTrame(envoi);
                 }
