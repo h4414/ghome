@@ -1,0 +1,44 @@
+20/02/14 20:37:39 INFO  smtpserver: SMTP Service uses default thread group.
+20/02/14 20:37:39 INFO  smtpserver: SMTP Service is running on: Bernard
+20/02/14 20:37:39 INFO  smtpserver: SMTP Service handler hello name is: Bernard
+20/02/14 20:37:39 INFO  smtpserver: SMTP Service handler connection timeout is: 360000
+20/02/14 20:37:39 INFO  smtpserver: SMTP Service connection backlog is: 5
+20/02/14 20:37:39 INFO  smtpserver: SMTP Service will allow a maximum of 30 connections.
+20/02/14 20:37:39 INFO  smtpserver: This SMTP server does not require authentication.
+20/02/14 20:37:39 INFO  smtpserver: Authorized addresses: [127.0.0.0/255.0.0.0]
+20/02/14 20:37:39 INFO  smtpserver: No maximum message size is enforced for this server.
+20/02/14 20:37:39 INFO  smtpserver: The idle timeout will be reset every 20480 bytes.
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.VrfyCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.AuthCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.QuitCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.HelpCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.HeloCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.MailCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.DataCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.RcptCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.EhloCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added MessageHandler: org.apache.james.smtpserver.SendMailHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.NoopCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.ExpnCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: Added Commandhandler: org.apache.james.smtpserver.RsetCmdHandler
+20/02/14 20:37:39 INFO  smtpserver: SMTP Service started plain:25
+20/02/14 20:37:44 INFO  smtpserver: Connection from 127.0.0.1 (127.0.0.1)
+20/02/14 20:39:41 ERROR smtpserver: Error parsing recipient address:  [to:bxccgtwx@guerillamail.comuerrillamail.com] [from:ghomeadmin@localdomain.com]Invalid character at 25
+20/02/14 20:41:19 INFO  smtpserver: Successfully spooled mail Mail1392925274725-0 from ghomeadmin@localdomain.com on 127.0.0.1 for [bxccgtwx@guerrillamail.com]
+20/02/14 20:46:38 INFO  smtpserver: Successfully spooled mail Mail1392925583991-1 from ghomeadmin@localdomain.com on 127.0.0.1 for [mathis.loriginal@gmail.com]
+20/02/14 20:51:38 ERROR smtpserver: Socket to 127.0.0.1 (127.0.0.1) timeout.
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.io.BufferedInputStream.fill(Unknown Source)
+	at java.io.BufferedInputStream.read(Unknown Source)
+	at org.apache.james.util.CRLFTerminatedReader.read(CRLFTerminatedReader.java:153)
+	at org.apache.james.util.CRLFTerminatedReader.readLine(CRLFTerminatedReader.java:113)
+	at org.apache.james.smtpserver.SMTPHandler.readCommandLine(SMTPHandler.java:751)
+	at org.apache.james.smtpserver.SMTPHandler.handleConnection(SMTPHandler.java:372)
+	at org.apache.james.util.connection.ServerConnection$ClientConnectionRunner.run(ServerConnection.java:432)
+	at org.apache.excalibur.thread.impl.ExecutableRunnable.execute(ExecutableRunnable.java:55)
+	at org.apache.excalibur.thread.impl.WorkerThread.run(WorkerThread.java:116)
+20/02/14 21:05:02 INFO  smtpserver: Connection from 127.0.0.1 (127.0.0.1)
+20/02/14 21:05:02 INFO  smtpserver: Successfully spooled mail Mail1392926702241-2 from ghomeadmin@localdomain.com on 127.0.0.1 for [mathis.loriginal@gmail.com]

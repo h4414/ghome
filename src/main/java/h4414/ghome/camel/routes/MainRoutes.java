@@ -19,11 +19,24 @@ import h4414.ghome.camel.processors.CapteurProcessor;
 import h4414.ghome.camel.processors.PieceProcessor;
 import h4414.ghome.entities.Historique;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import trames.RecuperateurTrame;
+import javax.mail.internet.InternetAddress;
+import org.apache.camel.component.gae.mail.GMailBinding;
 
 /**
  *
@@ -69,7 +82,9 @@ public class MainRoutes extends RouteBuilder{
             .to("direct:historiqueToDb");
           
             from("jetty:http://localhost:8087/test")
-                .process(new Processor(){
+               
+                    .to("direct:notifyUser");
+        /*            .process(new Processor(){
                     @Override
                     public void process ( Exchange exchange ){
                         Historique hist = new Historique("test",new GregorianCalendar(),new GregorianCalendar());
@@ -77,7 +92,7 @@ public class MainRoutes extends RouteBuilder{
                     }
                 })
                 
-            .to("direct:historiqueToDb");
+            .to("direct:historiqueToDb");*/
                 
            
         //.to("http://localhost:8084/ghome/mainView.jsp?bridgeEndpoint=true"/*+&disableStreamCache=true"+*/);
@@ -135,6 +150,14 @@ public class MainRoutes extends RouteBuilder{
                 .to("log:obj retrieved?showAll=true");
           */      
         
+        from ( "direct:notifyUser")
+            .setBody().constant("hello world")
+             
+            .removeHeaders("*")
+            .to("smtp://localhost?username=ghomeadmin&password=mouton&from=ghomeadmin@localdomain.com&subject=test&to=mathis.loriginal@gmail.com")
+        .log("an email has been sent");
+        
+        
         from ( "jetty:http://localhost:8087/getdata")
                 /*
                  *  ça lit les données :)
@@ -169,4 +192,3 @@ public class MainRoutes extends RouteBuilder{
     
     
 }
-
