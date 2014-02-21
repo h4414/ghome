@@ -14,10 +14,30 @@ function init()
 {
     confirm("Le capteur va être supprimé, êtes vous sur ? ");
     //TODO ENVOYER UNE REQUETE AU BACK END POUR VIRER LE CAPTEUR CHOISI 
+    
+     Capteur = new Object();
+     Capteur.id = event.target.parentNode.parentNode.FirstElementChild;
+ 
+    var jText = JSON.stringify(Capteur);
+    
+    if(Capteur.id)
+    {
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", "http://localhost:8087/deleteobject", false );
+    xmlHttp.send( jText );
+   }
+   else 
+   {
+       $("#MessageErreur")[0].textContent="Erreur : Le capteur n'a pas été trouvé.";
+       $("#MessageErreur")[0].style.display="block"; 
+       event.preventDefault();
+   }
+});
     }
     
-);
-}
+
 $(document).ready( init);
 
 
