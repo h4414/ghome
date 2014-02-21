@@ -90,6 +90,8 @@ public class RecuperateurTrame implements Runnable {
                     System.out.println(envoi);
                     envoyerTrame(envoi);
                 }
+                Thread temperature = new Thread(traitementTemperature);
+                temperature.start();
          
                 return true;
                 //TO DO Traitement
