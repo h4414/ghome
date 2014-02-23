@@ -12,8 +12,10 @@ function init()
     var liste = retrievePieces();
     affichage(liste);
     
-$("#btnAjouter").click((function()
+$("#btnAjouter").click((function(event)
 {
+
+
     newPiece = new Object();
    newPiece.nom = $("#nomPiece").val() ;
    if( newPiece.nom !== ""  )//RAJOUTER CONDITION SUR UNICITE
@@ -38,9 +40,10 @@ $("#btnAjouter").click((function()
        $("#MessageErreur")[0].textContent="Erreur : L'un des champs est vide";
        $("#MessageErreur")[0].style.display="block";    
    }
-   
-}));}
-$(document).ready( init);
+    }
+));
+
+}
 
 function retrievePieces()
 {
@@ -65,6 +68,5 @@ function affichage(listePieces)
      //   var objectToAdd = new Node(strToAdd);
         $("#listePiecesContenu")[0].innerHTML+=strToAdd;
     }
-  
-
-}
+    }
+$(document).ready( init);
