@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -23,7 +24,7 @@ public class Historique implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    @ManyToMany
+    @ManyToOne(optional = false)
     private Capteur capteur;
     //private String idCapteur;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
