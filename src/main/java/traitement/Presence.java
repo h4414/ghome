@@ -7,7 +7,7 @@ package traitement;
 
 import h4414.ghome.entities.Capteur;
 import h4414.ghome.entities.Historique;
-import h4414.ghome.entities.ReglePresence;
+//import h4414.ghome.entities.ReglePresence;
 import h4414.ghome.vues.PersistanceUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,7 +72,27 @@ public class Presence implements Runnable {
                 EntityManager em = emFactory.createEntityManager();
                 Query getCapteurs = em.createQuery("SELECT o FROM Capteur o WHERE o.idCapteur = "+trameTraitee.getID(), Capteur.class);
                 Capteur capteur = (Capteur) getCapteurs.getSingleResult();
-                Query qP = em.createQuery("SELECT o FROM ReglePresence o WHERE o.idCapteur = :id");
+                int pscdtct =0;
+                if ( OccupancyDetected(this.trameTraitee)){
+                    pscdtct = 1;
+                }
+                
+                
+                 Historique newhist = new Historique(capteur, now, now, pscdtct);
+                //Balancer l'histo dans la base
+                listeTrame.add(newhist);
+                System.out.println(newhist);
+                ProducerTemplate pdt = new DefaultProducerTemplate(this.ctx);
+                try {
+                    pdt.start();
+                    pdt.sendBody("direct:capteur", newhist);
+                    pdt.stop();
+                } catch (Exception ex) {
+                    Logger.getLogger(Presence.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+               /* Query qP = em.createQuery("SELECT o FROM ReglePresence o WHERE o.idCapteur = :id");
                 qP.setParameter("id", trameTraitee.getID());
                 List<ReglePresence> plages = qP.getResultList();
                 for (ReglePresence p : plages) {
@@ -149,9 +169,9 @@ public class Presence implements Runnable {
                                 int updated = qU.executeUpdate();
                                 em.getTransaction().commit();
                             }
-                        }
+                        } 
                     }
-                }
+                }*/
             } else {
                 System.out.println("failed to retrieve emfactory : is instance of " + emf.getClass() + "");
             }
