@@ -48,6 +48,7 @@ public class DeleteCapteur implements Processor{
                         String idCapteur = idNode.asText();
                         
                         Query q= em.createQuery("DELETE o FROM Capteur WHERE o.idCapteur = '"+idCapteur+"'");
+                         ex.getIn().setHeader("Access-Control-Allow-Origin", "*");
                         q.executeUpdate();
                     }
                 } catch (IOException ex1) {

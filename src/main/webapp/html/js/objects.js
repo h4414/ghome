@@ -16,7 +16,7 @@ function init()
     //TODO ENVOYER UNE REQUETE AU BACK END POUR VIRER LE CAPTEUR CHOISI 
     
      Capteur = new Object();
-     Capteur.id = event.target.parentNode.parentNode.FirstElementChild;
+     Capteur.id = event.target.parentNode.parentNode.cells[0].textContent;
  
     var jText = JSON.stringify(Capteur);
     
