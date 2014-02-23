@@ -16,20 +16,34 @@ and open the template in the editor.
         <script src="/ghome/html/js/settings.js"></script>
         <link href="/ghome/html/css/ghome.css" rel="stylesheet" media="screen">
         <link href="/ghome/html/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="/ghome/html/css/settings.css" rel="stylesheet">
         <div class="header" id="header"></div>
          <div class="accordion" id="leftMenu">
                             
         </div>
        <div id="Content">
-            <div style ="display:inline-block;width:60%" class="input-group">
+            <div style ="display:inline-block;width:132%" class="input-group">
                 <input style = "width:70% " id="nomPiece" type="text" placeholder="Nom de la pièce" class="form-control">
                 <span  class="input-group-btn">
                     <button class="btn btn-default" id="btnAjouter" type="button">Ajouter</button>
                 </span>
             </div>
+           
+            <table  id="listePieces" class="table table-hover">
+                           <thead>
+                               <tr>  
+                <th style="width:97%" >Nom de la salle</th>
+                <th style="width:3%"></th></tr>
+                </thead>
+                <tbody id="listePiecesContenu"></tbody>
+            </table>
        </div>
+               
         
         <!-- TODO : AJUTER ICI LA LISTE DES PIECES / MODIFIER NOM /SUPPRIMER -> seulement si pièce sans capteur -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="/ghome/html/js/bootstrap.min.js"></script>
+        <script src="/ghome/html/js/settings.js"></script>
     </body>
     
     
