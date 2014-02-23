@@ -21,6 +21,7 @@ public class UpdateRecuperateurTrame implements Processor{
        this.recupTrames = rec; 
     }
     
+    @Override
     public void process (Exchange ex ){
         Capteur capteur = ex.getIn().getBody(Capteur.class);
         this.recupTrames.update(capteur);
