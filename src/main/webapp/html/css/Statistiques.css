@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23 févr. 2014, 18:08:53
+    Author     : UTILISATEUR
+*/
+
+.police1{
+    font-family: "Trebuchet MS";
+    font-size: large; 
+    color:#003366;
+}
+
+.police2{
+    font-family: "Trebuchet MS";
+    font-size: medium; 
+    color:#2C75FF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+table {
+ border-collapse:collapse;
+ width:90%;
+ text-align:center;
+ }
+th  {
+ border:1px solid black;
+ width:20%;
+ text-align:center;
+ background-color: #99BBFF;
+ }
+td {
+ text-align:center;
+ }
