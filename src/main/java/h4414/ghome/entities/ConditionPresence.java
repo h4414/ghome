@@ -39,7 +39,9 @@ public class ConditionPresence extends Condition implements Serializable{
     }
 
   
-
+    /*
+     * implementation fausse : l'info sur la presence n'est pas stockée dans les calendriers de l'objet historique ...
+     */
     @Override
     public boolean isMet(Historique historique ) {
         if ( historique.getDebutPresence().getTime().after( this.beginDetect.getTime()) 
