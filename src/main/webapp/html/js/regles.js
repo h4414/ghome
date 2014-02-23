@@ -2,36 +2,66 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-function init(){
-   
-    $( "#ruleList" ).accordion();
-    $('#heure1').timepicker();
-    $('#heure2').timepicker();
-         $('#leftMenu').load("/ghome/html/menu.html");
+function init() {
 
-      $("#header").load("/ghome/html/header.html"); 
-   
+
+    $('#leftMenu').load("/ghome/html/menu.html");
+
+    $("#header").load("/ghome/html/header.html");
+    var list = retrievePieces();
+    affichage(list);
+    $("input[type=checkbox]").on("click", function(event) {
+        event.stopPropagation();
+    });
     
+
 }
 
-$(".presenceRuleSubmit").click(function(){
-   ruleSettings = new Object();
-   ruleSettings.type="intrusion";
-   ruleSettings.time = new Object();
-   ruleSettings.time.begin = ($("#heure1").val());
-   ruleSettings.time.end = ($("#heure2").val()); 
-   var jText = JSON.stringify(ruleSettings);
-    
-   var xmlHttp = null;
+function retrievePieces()
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType = "JSON";
+    xmlHttp.open("GET", "http://localhost:8087/getdata?name=Piece", false);
+    xmlHttp.send();
+    var data = xmlHttp.responseText;
+    var listePieces = JSON.parse(data);
+    return listePieces;
+}
 
-    xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "POST", "http://localhost:8087/addrule", false );
-    xmlHttp.send( jText );
-  
-  
-   
-});
+function affichage(listePieces)
+{
+    $("#pieceGauche")[0].innerHTML = "";
+    $("#pieceDroite")[0].innerHTML = "";
+
+    for (var i = 0; i < listePieces.data.length; i++)
+    {
+        if (i % 2 == 0)
+        {
+            var strToAdd = "<label class=\"checkbox\">";
+            strToAdd += " <input type=\"checkbox\">"+ listePieces.data[i].nom +"</label>" ;
+            //   var objectToAdd = new Node(strToAdd);
+            $("#pieceGauche")[0].innerHTML += strToAdd;
+        }
+        else
+        {
+            var strToAdd = "<label class=\"checkbox\">";
+            strToAdd += " <input type=\"checkbox\">"+ listePieces.data[i].nom +"</label>" ;;
+            //   var objectToAdd = new Node(strToAdd);
+            $("#pieceDroite")[0].innerHTML += strToAdd;
+        }
+    }
+}
+$(document).ready(init);
 
 
-$(document).ready( init);
+$(document).ready(init);
 
+/*    <label class="checkbox">
+ <input type="checkbox"> Coche moi
+ </label>
+ <label class="checkbox">
+ <input type="checkbox"> Moi aussi
+ </label>
+ <label class="checkbox">
+ <input type="checkbox"> Et moi lol
+ </label>/*/

@@ -5,6 +5,19 @@
     Description:
         Purpose of the stylesheet follows.
 */
+
+#pieceDroite
+{
+ width:50%;
+     display: inline-block;
+     vertical-align: top;
+}
+#pieceGauche
+{
+    width: 49%;
+        display: inline-block;
+}
+
 .accordion-toggle
 {
       cursor:pointer;
@@ -37,6 +50,10 @@
 .glyphicon
 {
     cursor:pointer;
+}
+div
+{
+
 }
 
 
