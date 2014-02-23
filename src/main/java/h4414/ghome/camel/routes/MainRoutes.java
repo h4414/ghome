@@ -52,7 +52,7 @@ public class MainRoutes extends RouteBuilder {
     private final String ID_TEMPERATURE = "0089337F";
 
     // offlineMode = ne pas charger de trames de la base de capteurs, simuler des trames à la place ( pour bosser à la maison )
-    private boolean offlineMode = true;
+    private boolean offlineMode = false;
 
     //@PersistenceUnit(unitName="ghome")
     //private EntityManagerFactory factory;
@@ -113,7 +113,7 @@ public class MainRoutes extends RouteBuilder {
                 .process(new AddRoute(new OfflineModeRoutes()))
                 .log("\n***************************\nOffline mode engaged :@\n changez le boolean dans mainroutes pour changer de mode\nYAAAAARRRHHH\n***************************")
                 .end()
-                .log("");
+                .log("fghf");
         /*
          * route qui envoie un objet historique dans la db
          * @ input : un objet historique dans le body
