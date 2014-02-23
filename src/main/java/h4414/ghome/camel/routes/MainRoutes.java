@@ -111,7 +111,9 @@ public class MainRoutes extends RouteBuilder {
                 .log("code de thomas op")
                 .otherwise()
                 .process(new AddRoute(new OfflineModeRoutes()))
-                .log("\n***************************\nOffline mode engaged :@\n changez le boolean dans mainroutes pour changer de mode\nYAAAAARRRHHH\n***************************");
+                .log("\n***************************\nOffline mode engaged :@\n changez le boolean dans mainroutes pour changer de mode\nYAAAAARRRHHH\n***************************")
+                .end()
+                .log("");
         /*
          * route qui envoie un objet historique dans la db
          * @ input : un objet historique dans le body
@@ -126,7 +128,7 @@ public class MainRoutes extends RouteBuilder {
         //.to("controlbus:route?routeId=historiqueDbPull&action=suspend");
 
         /*
-         * supprimer des capteurs : 
+         * supprimer un capteur : 
          * 
          * @ input : objet json {"id" : "<l'idCapteur du capteur a supprimer>"}
          */
@@ -134,6 +136,11 @@ public class MainRoutes extends RouteBuilder {
                 .process(deleteCapteur)
                 .log("capteur deleted");
         
+        /*
+         * supprimer une piece :
+         * 
+         * @input : objet json {"nom" : "<le nom de la piece a supprimer>" }
+         */
         from ("jetty:http://localhost:8087/deletepiece")
                 .process(deletePiece);
                 
