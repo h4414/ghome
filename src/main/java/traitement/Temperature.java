@@ -62,18 +62,20 @@ public class Temperature implements Runnable {
     @Override
     public void run() {
         Calendar begin= new GregorianCalendar();
-          double dtemperature = Temperature.getTemperature(trameTraitee);
-                if (dtemperature<25){
-                    String envoi = Actionneur.allumerPrise("6");
-                    System.out.println("Temp" + dtemperature);
-                    RecuperateurTrame.envoyerTrame(envoi);
-                }
-                else 
-                {
-                      String envoi = Actionneur.eteindrePrise("6");
-                    System.out.println(envoi+"pour eteindre");
-                    RecuperateurTrame.envoyerTrame(envoi);
-                }
+        double dtemperature = Temperature.getTemperature(trameTraitee);
+        //TODO : A remplacer par la gestion de règle.
+        if (dtemperature<25){
+            String envoi = Actionneur.allumerPrise("6");
+            System.out.println("Temp" + dtemperature);
+            RecuperateurTrame.envoyerTrame(envoi);
+        }
+        else 
+        {
+            String envoi = Actionneur.eteindrePrise("6");
+            System.out.println(envoi+"pour eteindre");
+            RecuperateurTrame.envoyerTrame(envoi);
+        }
+        
         Historique traitementTemperature = traitementTemperature(trameTraitee,begin, begin);
         listeTrame.add(traitementTemperature);
         System.out.println(traitementTemperature);
