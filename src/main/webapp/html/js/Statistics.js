@@ -136,15 +136,15 @@ function affichageListePresence(listHisto)
     var listLastHist = listHisto.data.slice(-10);
     var options = {hour: "numeric", minute: "numeric", second: "numeric",
            hour12: false};
-    for (var i=0;i<listLastHist.length;i++)
+    for (var i=listLastHist.length-1;i>0;i--)
     {
         var str ="<tr>";
         var beginTime = new Date(listLastHist[i].debutPresence);
         var endTime = new Date(listLastHist[i].finPresence);
         str += "<td>"+ listLastHist[i].idCapteur + "</td>";
-        str += "<td>"+"</td>";
+        str += "<td>"+beginTime.toLocaleDateString("fr-FR") +"</td>";
         str += "<td>"+ beginTime.toLocaleString("fr-FR",options)+ "</td>";
-        str += "<td>"+"</td>";
+        str += "<td>"+endTime.toLocaleDateString("fr-FR")+"</td>";
         str += "<td>"+ endTime.toLocaleString("fr-FR",options) + "</td>";
         str += "</tr>";
         $("#listePresenceContenu")[0].innerHTML+=str;

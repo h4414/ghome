@@ -6,13 +6,17 @@
 
 package traitement;
 
+import h4414.ghome.entities.Capteur;
 import h4414.ghome.entities.Historique;
+import h4414.ghome.vues.PersistanceUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultProducerTemplate;
@@ -54,8 +58,11 @@ public class Temperature implements Runnable {
     }
     
     public Historique traitementTemperature(Trame trame){
-        Calendar now = new GregorianCalendar();     
-        Historique newhist = new Historique(trame.getID(),now,now,Temperature.getTemperature(trame));
+        Calendar now = new GregorianCalendar();
+        EntityManager em = PersistanceUtils.getEmf().createEntityManager();
+        Query getCapteurs = em.createQuery("SELECT o FROM Capteur o WHERE o.idCapteur = "+trame.getID(), Capteur.class);
+        Capteur capteur = (Capteur) getCapteurs.getSingleResult();
+        Historique newhist = new Historique(capteur,now,now,Temperature.getTemperature(trame));
         return newhist;
     }
     

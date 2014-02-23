@@ -1,3 +1,4 @@
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -113,6 +114,10 @@ public class Historique implements Serializable{
 
     public void setFinPresence(Calendar finPresence) {
         this.finPresence = finPresence;
+    }
+    
+    public double getDonnee(){
+        return this.donnee;
     }
     
     @Override

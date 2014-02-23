@@ -5,8 +5,10 @@
  */
 package traitement;
 
+import h4414.ghome.entities.Capteur;
 import h4414.ghome.entities.Historique;
 import h4414.ghome.entities.ReglePresence;
+import h4414.ghome.vues.PersistanceUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -68,6 +70,8 @@ public class Presence implements Runnable {
             if (emf instanceof EntityManagerFactory) {
                 EntityManagerFactory emFactory = (EntityManagerFactory) (emf);
                 EntityManager em = emFactory.createEntityManager();
+                Query getCapteurs = em.createQuery("SELECT o FROM Capteur o WHERE o.idCapteur = "+trameTraitee.getID(), Capteur.class);
+                Capteur capteur = (Capteur) getCapteurs.getSingleResult();
                 Query qP = em.createQuery("SELECT o FROM ReglePresence o WHERE o.idCapteur = :id");
                 qP.setParameter("id", trameTraitee.getID());
                 List<ReglePresence> plages = qP.getResultList();
@@ -82,7 +86,7 @@ public class Presence implements Runnable {
                         List<Historique> datas = qH.getResultList();
                         if (datas.isEmpty()) {//si la liste est vide
                             if (OccupancyDetected(trameTraitee)) {
-                                Historique newhist = new Historique(trameTraitee.getID(), now, now);
+                                Historique newhist = new Historique(capteur, now, now);
                                 //Balancer l'histo dans la base
                                 listeTrame.add(newhist);
                                 System.out.println(newhist);
@@ -99,7 +103,7 @@ public class Presence implements Runnable {
                             if (OccupancyDetected(trameTraitee)) {//si la trame a detecté une présence
                                 Historique lastHist = datas.get(datas.size() - 1);
                                 if (!lastHist.getDebutPresence().equals(lastHist.getFinPresence())) {
-                                    Historique newhist = new Historique(trameTraitee.getID(), now, now);
+                                    Historique newhist = new Historique(capteur, now, now);
                                     //Balancer l'histo dans la base
                                     listeTrame.add(newhist);
                                     System.out.println(newhist);
