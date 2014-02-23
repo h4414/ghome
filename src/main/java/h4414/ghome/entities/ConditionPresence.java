@@ -26,7 +26,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @DiscriminatorValue("CONDITION_PRESENCE")
-public class ConditionPresence extends Condition implements Serializable{
+public class ConditionPresence extends RegleCondition implements Serializable{
 
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -81,7 +81,10 @@ public class ConditionPresence extends Condition implements Serializable{
         if ( whereClause.equals("")){
             return false;
         }
-        
+        /*
+         * mettre une condition sur la date dans la requete pour ne pas prendre toutes les presences en cours ?
+         * ( faire correspondre cette condition a l'intervalle de verification des regles ???)
+         */
         Query getAllrelatedHistoriques = em.createQuery("SELECT x FROM Historique x WHERE " + whereClause, Historique.class);
         List<Historique> relatedHistoriques =  getAllrelatedHistoriques.getResultList();
         if ( relatedHistoriques.isEmpty()){
