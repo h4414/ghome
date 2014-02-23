@@ -33,8 +33,8 @@ public class ConditionTemperature extends RegleCondition implements Serializable
     /*
      * La condition est remplie quand la temperature est comprise entre tempMin et tempMax
      */
-    public ConditionTemperature( Piece piece, double tempMin, double tempMax){
-        this.piece = piece;
+    public ConditionTemperature( List<Piece> pieces, double tempMin, double tempMax){
+        this.pieces = pieces;
         this.tempMin = tempMin;
         this.tempMax = tempMax;
         
@@ -89,7 +89,17 @@ public class ConditionTemperature extends RegleCondition implements Serializable
          EntityManager em = PersistanceUtils.getEmf().createEntityManager();
         //recuperer la liste des capteurs de type presence de la piece (shameless copy paste )
         
-        Query getCapteurs = em.createQuery("SELECT o FROM Capteur o WHERE o.piece.nom = "+this.piece.getNom(), Capteur.class);
+         String whereClause ="";
+        Iterator<Piece> itPieces= this.pieces.iterator();
+        while( itPieces.hasNext()){
+            whereClause += "o.piece.nom = ";
+            whereClause += itPieces.next().getNom();
+            if ( itPieces.hasNext()){
+                whereClause += " OR ";
+            }
+        }
+         
+        Query getCapteurs = em.createQuery("SELECT o FROM Capteur o WHERE o.piece.nom = "+whereClause, Capteur.class);
         List<Capteur> capteurs = getCapteurs.getResultList();
         
         

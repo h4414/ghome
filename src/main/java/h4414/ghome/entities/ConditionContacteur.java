@@ -4,53 +4,38 @@
  */
 package h4414.ghome.entities;
 
-import h4414.ghome.entities.Capteur.TypeCapteur;
 import h4414.ghome.vues.PersistanceUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Id;
 import javax.persistence.Query;
-import javax.persistence.Temporal;
 
 /**
  *
  * @author Mathis
  */
 @Entity
-@DiscriminatorValue("CONDITION_PRESENCE")
-public class ConditionPresence extends RegleCondition implements Serializable{
+@DiscriminatorValue("CONDITION_CONTACTEUR")
+public class ConditionContacteur extends RegleCondition implements Serializable {
 
-    
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Calendar beginDetect;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Calendar endDetect;
-    
-    public ConditionPresence() {
+    public ConditionContacteur(){
+        
     }
-    
-    
-    public ConditionPresence( List<Piece> pieces, Calendar begin, Calendar end ){
+    public ConditionContacteur ( List<Piece> pieces){
         this.pieces = pieces;
-        this.beginDetect = begin;
-        this.endDetect = end;
     }
-
-  
+    
+    
     /*
-     * implementation fausse : l'info sur la presence n'est pas stockée dans les calendriers de l'objet historique ...
+     * condition declenchee si l'un des contacteurs des pieces concernées est en position ouverte
      */
     @Override
     public boolean isMet() {
-        EntityManager em = PersistanceUtils.getEmf().createEntityManager();
+     EntityManager em = PersistanceUtils.getEmf().createEntityManager();
         //recuperer la liste des capteurs de type presence de la piece
         
         
@@ -70,7 +55,7 @@ public class ConditionPresence extends RegleCondition implements Serializable{
         
         Iterator<Capteur> itTousCapteurs = capteurs.iterator();
         while(itTousCapteurs.hasNext()){
-            if (  ! itTousCapteurs.next().getType().equals(TypeCapteur.PRESENCE)){
+            if (  ! itTousCapteurs.next().getType().equals(Capteur.TypeCapteur.CONTACTEUR)){
                 itTousCapteurs.remove();
             }
         }
@@ -95,25 +80,31 @@ public class ConditionPresence extends RegleCondition implements Serializable{
          * mettre une condition sur la date dans la requete pour ne pas prendre toutes les presences en cours ?
          * ( faire correspondre cette condition a l'intervalle de verification des regles ???)
          */
-        Query getAllrelatedHistoriques = em.createQuery("SELECT x FROM Historique x WHERE " + whereClause, Historique.class);
-        List<Historique> relatedHistoriques =  getAllrelatedHistoriques.getResultList();
+        List<Historique> relatedHistoriques = new ArrayList();
+        Iterator<Capteur> itCapteurs = capteurs.iterator();
+        while ( it.hasNext()){
+            Query q = em.createQuery("SELECT x FROM HISTORIQUE x WHERE x.idCapteur = "+itCapteurs.next().getIdCapteur()+" order by x.debutPresence desc", Historique.class);
+            Object res = q.getSingleResult();
+            if ( res instanceof Historique ){
+                relatedHistoriques.add((Historique)res);
+            }
+        }
         if ( relatedHistoriques.isEmpty()){
             return false;
         }
         Iterator<Historique> itHistoriques = relatedHistoriques.iterator();
-        while ( itHistoriques.hasNext()){
-            Historique historique = itHistoriques.next();
-            if ( historique.getDebutPresence().getTime().after( this.beginDetect.getTime()) 
-                    && historique.getDebutPresence().getTime().before( this.endDetect.getTime()) && 
-                    historique.getDonnee() == 1){
+        while (itHistoriques.hasNext()){
+            // condition a modifier eventuellement ?
+            if ( itHistoriques.next().getDonnee()==0){
                 return true;
             }
         }
-        return false;
         
-        
-        
+    
+    return false;
     }
+    
+    
     
     
 }

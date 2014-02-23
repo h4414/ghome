@@ -5,7 +5,9 @@
 package h4414.ghome.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -55,8 +57,9 @@ public class ConditionTemps extends RegleCondition implements Serializable{
     public ConditionTemps ( ){
         
     }
-    public ConditionTemps( EmploiTemps emploitemps ){
+    public ConditionTemps(  EmploiTemps emploitemps ){
         this.emploitemps = emploitemps;
+        this.pieces = new ArrayList();
     }
     
     
