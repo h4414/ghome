@@ -28,7 +28,12 @@ public class Contacteur implements Runnable{
     Trame trameTraitee;
     CamelContext ctx;
     
-    /**Permet de savoir si une porte est fermé ou non.
+    public Contacteur(Trame trameTraitee, CamelContext ctx){
+        this.trameTraitee = trameTraitee;
+        this.ctx = ctx;
+    }
+    
+    /*Permet de savoir si une porte est fermé ou non.
      * 
      * @param trame
      * @return True si la porte est fermé.
