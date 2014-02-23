@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 @Entity
 @DiscriminatorValue("CONDITION_TEMPERATURE")
-public class ConditionTemperature extends Condition implements Serializable {
+public class ConditionTemperature extends RegleCondition implements Serializable {
 
     
     private double tempMin;
