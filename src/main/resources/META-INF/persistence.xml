@@ -7,6 +7,14 @@
     <class>h4414.ghome.entities.ReglePresence</class>
     <class>h4414.ghome.entities.Regle</class>
     <class>h4414.ghome.entities.Piece</class>
+    <class>h4414.ghome.entities.AllumerPrise</class>
+    <class>h4414.ghome.entities.ConditionPresence</class>
+    <class>h4414.ghome.entities.ConditionTemperature</class>
+    <class>h4414.ghome.entities.ConditionTemps</class>
+    <class>h4414.ghome.entities.EmploiTemps</class>
+    <class>h4414.ghome.entities.EnvoyerMail</class>
+    <class>h4414.ghome.entities.PlageHoraire</class>
+    <class>h4414.ghome.entities.RegleCondition</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/ghome"/>
