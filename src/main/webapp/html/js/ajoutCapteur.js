@@ -22,6 +22,12 @@ $(document).on("submit","form",(function(event)
     xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "POST", "http://localhost:8087/addobject", false );
     xmlHttp.send( jText );
+    $("#MessageSucces")[0].textContent="Le capteur a bien été ajouté";
+    $("#MessageSucces")[0].style.display="block"; 
+    $("#typeCapteur")[0].selectedIndex = 0;
+    $("#idCapteur").val("");
+    $("#nomCapteur").val("");
+    $("#selectPieces")[0].selectedIndex=0;
    }
    else 
    {

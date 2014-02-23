@@ -5,7 +5,10 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+.accordion-toggle
+{
+      cursor:pointer;
+}
 #options{
     float : right;
 }
