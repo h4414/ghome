@@ -59,7 +59,7 @@ function affichage(listeCapteurs)
         var strToAdd = "<tr>";
         strToAdd += "<td>" + listeCapteurs.data[i].idCapteur + "</td>";
         strToAdd += "<td>" + listeCapteurs.data[i].nomCapteur + "</td>";
-              strToAdd += "<td>" + "<span class=\"glyphicon glyphicon-edit\"></span>" + "</td>";
+              strToAdd += "<td>" +  "</td>";
                     strToAdd += "<td>" +"<span class=\"glyphicon glyphicon-remove\"></span>"+ "</td>";
      //   var objectToAdd = new Node(strToAdd);
         $("#listeCapteursContenu")[0].innerHTML+=strToAdd;
@@ -68,3 +68,4 @@ function affichage(listeCapteurs)
 
 }
 
+//Ligne enlevé : "<span class=\"glyphicon glyphicon-edit\"></span>" +

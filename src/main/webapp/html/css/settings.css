@@ -4,17 +4,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 17 févr. 2014, 11:39:22
+    Created on : 23 févr. 2014, 17:24:15
     Author     : UTILISATEUR
 */
 
-body {
-  padding-top: 50px;
-  padding-bottom: 20px;
-  background-color: #8EA2C6;
-}
-
-.formulaire{
-  padding-top: 10px;
-  padding-bottom: 10px;
+.input-group{
+      padding-bottom: 20px;
 }
