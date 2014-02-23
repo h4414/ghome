@@ -6,7 +6,7 @@
 $(document).on("submit","form",(function(event)
 {
    newCapteur = new Object();
-   var indexSelected = $("#selectPieces")[0].selectedIndex;
+   var indexSelected = $("#typeCapteur")[0].selectedIndex;
    newCapteur.type=$("#typeCapteur")[0].options[indexSelected].text; // A retravailler ^^ 
    newCapteur.id = $("#idCapteur").val().toUpperCase();
    newCapteur.nomCapteur = $("#nomCapteur").val();
@@ -27,8 +27,9 @@ $(document).on("submit","form",(function(event)
    {
        $("#MessageErreur")[0].textContent="Erreur : L'un des champs est vide";
        $("#MessageErreur")[0].style.display="block"; 
-       event.preventDefault();
+       
    }
+   event.preventDefault();
 }));
 
 $("#idCapteur").blur(function()
