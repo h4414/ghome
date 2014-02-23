@@ -167,6 +167,7 @@ public class RecuperateurTrame implements Runnable {
     
     public void update(Capteur c)
     {
+        System.out.println("en direct du recuperateur de trames");
                             switch ( c.getType().toString())
                     {
                         case "CONTACTEUR":
