@@ -28,6 +28,7 @@ import javax.persistence.EntityManagerFactory;
 import org.apache.camel.CamelContext;
 import org.apache.camel.spi.Registry;
 import traitement.Actionneur;
+import traitement.Contacteur;
 import traitement.Presence;
 import traitement.Temperature;
 /**
@@ -78,13 +79,13 @@ public class RecuperateurTrame implements Runnable {
             if (this.IDS_BOUTON.contains(trameRecue.getID()))
             {
                 System.out.println("TRAME BOUTON DETECTEE");
+                
                 return true;
             }
             else if (this.IDS_TEMPERATURE.contains(trameRecue.getID()))
             {
                 System.out.println("TRAME TEMPERATURE DETECTEE");
                 Temperature traitementTemperature = new Temperature(trameRecue, this.context);
-              
                 Thread temperature = new Thread(traitementTemperature);
                 temperature.start();
          
@@ -94,8 +95,11 @@ public class RecuperateurTrame implements Runnable {
             else if (this.IDS_CONTACTEUR.contains(trameRecue.getID()))
             {
                 System.out.println("TRAME CONTACTEUR DETECTEE");
+                Contacteur traitementContacteur = new Contacteur(trameRecue, this.context);
+                Thread contacteur = new Thread(traitementContacteur);
+                contacteur.start();
                 return true;
-                //TO DO Traitement
+                
             }
             else if (this.IDS_PRESENCE.contains(trameRecue.getID()))
             {
