@@ -22,9 +22,9 @@ public class Historique implements Serializable{
     @GeneratedValue
     private int id;
     private String idCapteur;
-    @Temporal(javax.persistence.TemporalType.TIME)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar debutPresence;
-    @Temporal(javax.persistence.TemporalType.TIME)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar finPresence;
     @Column(nullable=true)
     private double donnee;
@@ -61,6 +61,21 @@ public class Historique implements Serializable{
         System.out.println(finPresence.toString());*/
     }
     
+    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence, boolean data ){
+        this.idCapteur = idCapteur;
+        this.debutPresence = debutPresence;
+        this.finPresence = finPresence;
+        if (data){
+            this.donnee =  1;
+        }
+        else {
+            this.donnee = 0;
+        }
+        /*System.out.println("NOUVEL HISTO");
+        System.out.println(debutPresence.toString());
+        System.out.println(finPresence.toString());*/
+    }
+        
     public int getId() {
         return id;
     }

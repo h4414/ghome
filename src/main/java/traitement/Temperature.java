@@ -21,13 +21,13 @@ import trames.RecuperateurTrame;
 import static trames.RecuperateurTrame.envoyerTrame;
 import trames.Trame;
 
-/**
+/*
  *
  * @author qdunoyer
  */
 public class Temperature implements Runnable {
-    private static List<Historique> listeTrame = new ArrayList<Historique>();
-    /**
+    private static List<Historique> listeTrame = new ArrayList<>();
+    /*
      * Champ contenant la trame traitée ( pour execution dans un thread a part 
      */
     Trame trameTraitee;
@@ -45,7 +45,7 @@ public class Temperature implements Runnable {
     }
     
     public static void viderHistorique(){
-        listeTrame = new ArrayList<Historique>();
+        listeTrame = new ArrayList<>();
     }
 
     public Temperature(Trame trameTraitee, CamelContext ctx){
@@ -53,7 +53,7 @@ public class Temperature implements Runnable {
         this.ctx = ctx;
     }
     
-    public Historique traitementTemperature(Trame trame, Calendar debutplage, Calendar finplage){
+    public Historique traitementTemperature(Trame trame){
         Calendar now = new GregorianCalendar();     
         Historique newhist = new Historique(trame.getID(),now,now,Temperature.getTemperature(trame));
         return newhist;
@@ -61,20 +61,21 @@ public class Temperature implements Runnable {
     
     @Override
     public void run() {
-        Calendar begin= new GregorianCalendar();
-          double dtemperature = Temperature.getTemperature(trameTraitee);
-                if (dtemperature<25){
-                    String envoi = Actionneur.allumerPrise("6");
-                    System.out.println("Temp" + dtemperature);
-                    RecuperateurTrame.envoyerTrame(envoi);
-                }
-                else 
-                {
-                      String envoi = Actionneur.eteindrePrise("6");
-                    System.out.println(envoi+"pour eteindre");
-                    RecuperateurTrame.envoyerTrame(envoi);
-                }
-        Historique traitementTemperature = traitementTemperature(trameTraitee,begin, begin);
+        double dtemperature = Temperature.getTemperature(trameTraitee);
+        //TODO : A remplacer par la gestion de règle.
+        if (dtemperature<25){
+            String envoi = Actionneur.allumerPrise("6");
+            System.out.println("Temp" + dtemperature);
+            RecuperateurTrame.envoyerTrame(envoi);
+        }
+        else 
+        {
+            String envoi = Actionneur.eteindrePrise("6");
+            System.out.println(envoi+"pour eteindre");
+            RecuperateurTrame.envoyerTrame(envoi);
+        }
+        
+        Historique traitementTemperature = traitementTemperature(trameTraitee);
         listeTrame.add(traitementTemperature);
         System.out.println(traitementTemperature);
         ProducerTemplate pdt = new DefaultProducerTemplate( this.ctx );
