@@ -12,19 +12,34 @@ and open the template in the editor.
     </head>
     <body>
         <div id="header"></div>
-         <div class="accordion" id="leftMenu">
-                            
+        <div class="accordion" id="leftMenu"></div>
+        <div id="Content">
+            <h4>Presences détectées dans la journée</h4>
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <hr>
+            <h4>Dernières présences détectées</h4>
+            <table id="listePresence">
+                <thead>
+                    <tr>
+                        <th style="width:12%" >Capteur</th>
+                        <th style="width:22%" >Date de début</th>
+                        <th style="width:22%" >Heure de début</th>
+                        <th style="width:22%" >Date de fin</th>
+                        <th style="width:22%" >Heure de fin</th>
+                    </tr>
+                </thead>
+                <tbody id="listePresenceContenu"></tbody>
+            </table>
+            <hr>
+            <h4>Températures mesurées dans la journée</h4>
+            <canvas id="myChart2" width="400" height="400"></canvas>
         </div>
-           <div id="Content">
-                            
-        
-        <canvas id="myChart" width="400" height="400"></canvas></div>
-               <script src="http://code.jquery.com/jquery.js"></script>
-            <script src="js/jquery-ui.js"></script>  
-         <script src="/ghome/html/js/Chart.min.js"></script>
-         <script src="/ghome/html/js/Statistics.js"></script>
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/jquery-ui.js"></script>  
+        <script src="/ghome/html/js/Chart.min.js"></script>
+        <script src="/ghome/html/js/Statistics.js"></script>
 
     </body>
-    
-   
+
+
 </html>
