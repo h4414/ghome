@@ -4,7 +4,11 @@
  */
 package h4414.ghome.camel.routes.specific;
 
+import h4414.ghome.entities.Capteur;
+import h4414.ghome.entities.Capteur.TypeCapteur;
+import static h4414.ghome.entities.Capteur.TypeCapteur.TEST;
 import h4414.ghome.entities.Historique;
+import h4414.ghome.entities.Piece;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import org.apache.camel.builder.RouteBuilder;
@@ -31,8 +35,10 @@ public class OfflineModeRoutes extends RouteBuilder{
         /*
          * Route pour générer des objets historiques et les persister
          */
+        Piece fakePiece = new Piece ("FakePiece");
+        Capteur fakeCapteur = new Capteur("FakeCapteur","FakeCapteur",fakePiece,TEST);
         from("timer://foo?fixedRate=true&period="+timer+"s")
-                .setBody().constant(new Historique("FakeCapteur",new GregorianCalendar(), new GregorianCalendar()))
+                .setBody().constant(new Historique(fakeCapteur,new GregorianCalendar(), new GregorianCalendar()))
                 .to("direct:historiqueToDb"); 
         
         // TODO : ajouter d'autre routes comme celle des historiques pour générer 

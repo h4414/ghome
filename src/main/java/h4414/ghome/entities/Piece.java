@@ -35,6 +35,12 @@ public class Piece implements Serializable{
     public Piece(){
         this.capteurs = new ArrayList<Capteur>();
     }
+    
+    public Piece(String nom){
+        this.capteurs = new ArrayList<Capteur>();
+        this.nom = nom;
+    }
+    
     public Piece(String nom,Capteur capteur){
         this.capteurs = new ArrayList<Capteur>();
         this.capteurs.add(capteur);
@@ -52,5 +58,8 @@ public class Piece implements Serializable{
         return capteurs;
     }
     
+    public int getId(){
+        return this.id;
+    }
     
 }

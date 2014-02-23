@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -21,7 +22,9 @@ public class Historique implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    private String idCapteur;
+    @ManyToMany
+    private Capteur capteur;
+    //private String idCapteur;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar debutPresence;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -32,8 +35,9 @@ public class Historique implements Serializable{
     public Historique(){}
         
     
-    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence ){
-        this.idCapteur = idCapteur;
+    public Historique ( Capteur capteur, Calendar debutPresence, Calendar finPresence ){
+        this.capteur = capteur;
+        //this.idCapteur = idCapteur;
         this.debutPresence = debutPresence;
         this.finPresence = finPresence;
         /*System.out.println("NOUVEL HISTO");
@@ -41,18 +45,9 @@ public class Historique implements Serializable{
         System.out.println(finPresence.toString());*/
     }
     
-    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence, double data ){
-        this.idCapteur = idCapteur;
-        this.debutPresence = debutPresence;
-        this.finPresence = finPresence;
-        this.donnee = data;
-        /*System.out.println("NOUVEL HISTO");
-        System.out.println(debutPresence.toString());
-        System.out.println(finPresence.toString());*/
-    }
-    
-    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence, int data ){
-        this.idCapteur = idCapteur;
+    public Historique ( Capteur capteur, Calendar debutPresence, Calendar finPresence, double data ){
+        this.capteur = capteur;
+        //this.Capteur = idCapteur;
         this.debutPresence = debutPresence;
         this.finPresence = finPresence;
         this.donnee = data;
@@ -61,8 +56,20 @@ public class Historique implements Serializable{
         System.out.println(finPresence.toString());*/
     }
     
-    public Historique ( String idCapteur, Calendar debutPresence, Calendar finPresence, boolean data ){
-        this.idCapteur = idCapteur;
+    public Historique ( Capteur capteur, Calendar debutPresence, Calendar finPresence, int data ){
+        this.capteur = capteur;
+        //this.idCapteur = idCapteur;
+        this.debutPresence = debutPresence;
+        this.finPresence = finPresence;
+        this.donnee = data;
+        /*System.out.println("NOUVEL HISTO");
+        System.out.println(debutPresence.toString());
+        System.out.println(finPresence.toString());*/
+    }
+    
+    public Historique ( Capteur capteur, Calendar debutPresence, Calendar finPresence, boolean data ){
+        this.capteur = capteur;
+        //this.idCapteur = idCapteur;
         this.debutPresence = debutPresence;
         this.finPresence = finPresence;
         if (data){
@@ -85,11 +92,11 @@ public class Historique implements Serializable{
     }
 
     public String getIdCapteur() {
-        return idCapteur;
+        return capteur.getIdCapteur();
     }
 
     public void setIdCapteur(String idCapteur) {
-        this.idCapteur = idCapteur;
+        this.capteur.setIdCapteur(idCapteur);
     }
 
     public Calendar getDebutPresence() {

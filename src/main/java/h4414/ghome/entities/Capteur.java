@@ -31,7 +31,7 @@ public class Capteur implements Serializable{
       CONTACTEUR,
       BOUTON,
       PRISE,
-    
+      TEST
     };
     @Enumerated(EnumType.STRING)
     TypeCapteur type;
@@ -60,17 +60,19 @@ public class Capteur implements Serializable{
         this.id = id;
     }
     
+    
     public String getIdCapteur() {
         return idCapteur;
     }
-    public String setIdCapteur() {
-        return idCapteur;
+    public void setIdCapteur(String idCapteur) {
+        this.idCapteur = idCapteur;
     }
+    
     public String getNomCapteur() {
         return NomCapteur;
     }
-    public String setNomCapteur() {
-        return NomCapteur;
+    public void setNomCapteur(String nomCapteur) {
+        this.NomCapteur = nomCapteur;
     }
 
     public Piece getPiece() {
