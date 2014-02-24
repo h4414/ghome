@@ -128,7 +128,7 @@ function quelquonque()
         newRegle.conditions.push(condition);
     }
     
-    newRegle.actions = new Array();
+    actions = new Array();
     var envoiMail = $("#envoiMail").attr('checked');
     var activerPrise = $("#activerPrise").attr('checked');
     var desactiverPrise = $("#desactiverPrise").attr('checked');
@@ -137,7 +137,7 @@ function quelquonque()
     {
         action = new Object();
         action.type = "envoyerMail";
-        newRegle.actions.push(action);
+        actions.push(action);
         
     }
     if (activerPrise)
@@ -147,7 +147,7 @@ function quelquonque()
         var index= $("#prise")[0].selectedIndex;
         var optionSelected = $("#prise")[0].options[index];
         action.id = optionSelected.value;
-        newRegle.actions.push(action);
+        actions.push(action);
         
     }
     else if (desactiverPrise)
@@ -157,7 +157,11 @@ function quelquonque()
         var index= $("#prise")[0].selectedIndex;
         var optionSelected = $("#prise")[0].options[index];
         action.id = optionSelected.value;
-        newRegle.actions.push(action);
+        actions.push(action);
+    }
+    if (envoiMail || activerPrise || desactiverPrise)
+    {
+        newRegle.actions = actions;
     }
     
     
