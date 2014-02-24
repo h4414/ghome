@@ -4,9 +4,9 @@
  */
 function init() {
 
-
+    $("#validation").click(quelquonque);
     $('#leftMenu').load("/ghome/html/menu.html");
-
+    
     $("#header").load("/ghome/html/header.html");
     var list = retrievePieces();
     affichage(list);
@@ -55,8 +55,84 @@ $("#btnAddCondition").click(function(event)
 function quelquonque()
 {
     newRegle = new Object();
-    var tableauCheckbox = $("input[type='checkbox']") ;
+    var tableauCheckbox = new Array($("input[type='checkbox']")) ;
+    var tableauPiece = new Array();
+    for (var i = 0 ; i < tableauCheckbox.length ; i++ )
+    {
+        if (tableauCheckbox[i].parentnode.id == "pieceGauche" || tableauCheckbox[i].parentnode.id == "pieceDroite")
+        {
+            tableauPiece.append(tableauCheckbox[i]);
+        }
+    }
+    newRegle.pieces = tableauPiece;
+    newRegle.conditions = new Array();
+    condition = new Object();
+    var heureDebut = $("heureDebut");
+    if (heureDebut.value != "")
+    {
+        condition.type = "presence";
+        condition.dateDebut = $("heureDebut");
+        condition.dateFin = $("heureFin");
+        newRegle.conditions.append(condition);
+    }
+    condition = new Object();
+    var contacteur = $("porteOuverte").value;
+    if(contacteur != "")
+    {
+        condition.type = "contacteur";
+        if ($("porteFermee").value != "")
+        {
+            condition.fermee = "1";
+        }
+        else
+        {
+            condition.fermee = "0";
+        }
+        newRegle.conditions.append(condition);
+    }
+    //TODO temps.
+    condition = new Object();
+    var tempMin = $("tempMin");
+    if(tempMin.value != "")
+    {
+        conditon.type = "temperature";
+        condition.tempMin = $("tempMin").value;
+        condition.tempMax = $("tempMax").value;
+        newRegle.conditions.append(condition);
+    }
+    condition = new Object();
+    var idBouton0 = $("btA0").value;
+    var idBouton1 = $("btA1").value;
+    var idBouton2 = $("btB0").value;
+    var idBouton3 = $("btB1").value;
+    condition.type = "bouton";
+    if (idBouton0 != "")
+    {
+        condition.bouton = "0";
+        newRegle.conditions.append(condition);
+    }
+    if (idBouton1 != "")
+    {
+        condition.bouton = "1";
+        newRegle.conditions.append(condition);
+    }
+    if (idBouton2 != "")
+    {
+        condition.bouton = "2";
+        newRegle.conditions.append(condition);
+    }
+    if (idBouton3 != "")
+    {
+        condition.bouton = "3";
+        newRegle.conditions.append(condition);
+    }
+    var jText = JSON.stringify(newRegle);
     
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", "http://localhost:8087/addrule", false );
+    xmlHttp.send( jText );
 }
 
 function retrievePieces()
@@ -74,6 +150,7 @@ function affichage(listePieces)
 {
     $("#pieceGauche")[0].innerHTML = "";
     $("#pieceDroite")[0].innerHTML = "";
+    
 
     for (var i = 0; i < listePieces.data.length; i++)
     {
