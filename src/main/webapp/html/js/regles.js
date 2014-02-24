@@ -17,6 +17,13 @@ function init() {
 
 }
 
+function quelquonque()
+{
+    newRegle = new Object();
+    var tableauCheckbox = $("input[type='checkbox']") ;
+    
+}
+
 function retrievePieces()
 {
     var xmlHttp = new XMLHttpRequest();
@@ -45,7 +52,7 @@ function affichage(listePieces)
         else
         {
             var strToAdd = "<label class=\"checkbox\">";
-            strToAdd += " <input type=\"checkbox\">"+ listePieces.data[i].nom +"</label>" ;;
+            strToAdd += " <input type=\"checkbox\" value=\""+ listePieces.data[i].nom + "\">"+ listePieces.data[i].nom +"</label>" ;;
             //   var objectToAdd = new Node(strToAdd);
             $("#pieceDroite")[0].innerHTML += strToAdd;
         }
