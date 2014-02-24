@@ -110,9 +110,15 @@ public class MainRoutes extends RouteBuilder {
                     }
                 })
                 .process(rJsonToJava)
+                .choice()
+                .when().simple("${property.erreur}")
+                .log("erreur de parsing de la regle")
+                .otherwise()
+                .to("jpa:Regle?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
+                .log("ajout d'une règle")
+                .end();
                // .to("log:regle ajoutee?showAll=true")
-               .to("jpa:Regle?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
-                .log("ajout d'une règle");
+               
 
         from("timer://runOnce?repeatCount=1&delay=5000")
                 .choice()

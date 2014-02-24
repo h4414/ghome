@@ -30,9 +30,11 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.camel.spi.Registry;
 
 /**
  *
@@ -49,7 +51,7 @@ public class RuleJsonToJava implements Processor{
         System.out.println("rootnode : "+rootNode);
         // créer un objet regle a partir de ca
         
-        JsonNode piecesNode = rootNode.path("salles");
+        JsonNode piecesNode = rootNode.path("pieces");
         JsonNode conditionsNodes = rootNode.path("conditions");
         JsonNode actionNodes = rootNode.path("actions");
         
@@ -69,9 +71,15 @@ public class RuleJsonToJava implements Processor{
                     whereClause += " OR ";
                 }
             }
-            EntityManager em = PersistanceUtils.getEmf().createEntityManager();
+            //EntityManager em = PersistanceUtils.getEmf().createEntityManager();
+            Registry reg = exchng.getContext().getRegistry();
+        
+            Object emf = reg.lookupByName("entityManagerFactory");
+            EntityManagerFactory emg = (EntityManagerFactory)emf;
+            EntityManager em = emg.createEntityManager();
             Query getPieces = em.createQuery("SELECT o FROM Piece o WHERE "+whereClause,Piece.class);
             pieces = getPieces.getResultList();
+            System.out.println ( "retrieved pieces " + pieces);
             
             // recuperer toutes les conditions :o
             Iterator<JsonNode> itConditions = conditionsNodes.iterator();
@@ -97,6 +105,7 @@ public class RuleJsonToJava implements Processor{
                        Date fin = new Date ( dateFin );
                        GregorianCalendar gcDebut = new GregorianCalendar();
                        gcDebut.setTime(debut);
+                       
                        GregorianCalendar gcFin = new GregorianCalendar ( );
                        gcFin.setTime ( fin );
                        rc = new ConditionPresence(pieces, gcDebut, gcFin);
@@ -105,7 +114,7 @@ public class RuleJsonToJava implements Processor{
                     }
                     case "contacteur" : {
                         
-                        rc = new ConditionContacteur ( pieces, condNode.path("ferme").asBoolean() );
+                        rc = new ConditionContacteur ( pieces, condNode.path("fermee").asBoolean() );
                         conditions.add(rc);
                         break;
                     }
@@ -157,8 +166,9 @@ public class RuleJsonToJava implements Processor{
             while ( itActions.hasNext()){
                 Action action;
                 JsonNode nNode = itActions.next();
-                if ( nNode.path("type").asText().equals("envoiMail")){
-                    String email = nNode.path("mail").asText();
+                if ( nNode.path("type").asText().equals("envoyerMail")){
+                    //String email = nNode.path("mail").asText();
+                    String email = "test@email.com";
                     action = new EnvoyerMail(email);
                     actions.add(action);
                 }
@@ -178,6 +188,7 @@ public class RuleJsonToJava implements Processor{
         }
         else{ //erreur :( impossible de créer une regle : setter un header ?
             exchng.setProperty("erreur",true);
+            System.out.println("erreur de parsing");
         }
         
         
