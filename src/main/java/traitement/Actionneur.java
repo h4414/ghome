@@ -17,14 +17,14 @@ public class Actionneur {
     private static final String hseqLength = "6B";
     private static final String org = "05";
     private static final String payload3on = "50";
-     private static final String payload3off = "70";
+    private static final String payload3off = "70";
     private static final String payload2 = "00";
     private static final String payload1 = "00";
     private static final String payload0 = "00";
     private static final String id1 = "FF";
     private static final String id0 = "9F";
     private static final String last1 = "1E";
-   private static final String last0 = "0";
+    private static final String last0 = "0";
     
     
     public static String allumerPrise(String numPrise){
@@ -38,7 +38,7 @@ public class Actionneur {
         return trame;
     }
     
-        public static String eteindrePrise(String numPrise){
+    public static String eteindrePrise(String numPrise){
         Integer checksum = Integer.parseInt(hseqLength,16) + Integer.parseInt(org,16) + Integer.parseInt(payload3off,16)
                 + Integer.parseInt(payload2,16) + Integer.parseInt(payload1,16) + Integer.parseInt(payload0,16)
                 + Integer.parseInt(id1,16) + Integer.parseInt(id0,16) + Integer.parseInt(last1,16)
