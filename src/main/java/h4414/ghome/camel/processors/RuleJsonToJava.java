@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import h4414.ghome.entities.Action;
+import h4414.ghome.entities.AllumerPrise;
 import h4414.ghome.entities.ConditionBouton;
 import h4414.ghome.entities.ConditionContacteur;
 import h4414.ghome.entities.ConditionPresence;
@@ -90,10 +91,12 @@ public class RuleJsonToJava implements Processor{
                        GregorianCalendar gcFin = new GregorianCalendar ( );
                        gcFin.setTime ( fin );
                        rc = new ConditionPresence(pieces, gcDebut, gcFin);
+                       conditions.add(rc);
                        break; 
                     }
                     case "contacteur" : {
                         rc = new ConditionContacteur ( pieces );
+                        conditions.add(rc);
                         break;
                     }
                     case "temps" : {
@@ -111,6 +114,7 @@ public class RuleJsonToJava implements Processor{
                             emploiTemps.ajouterPlage(ph);
                         }
                         rc = new ConditionTemps(emploiTemps);
+                        conditions.add(rc);
                         
                         break;
                     }
@@ -118,16 +122,18 @@ public class RuleJsonToJava implements Processor{
                         double tMin = condNode.path("tempMin").asDouble();
                         double tMax= condNode.path("tempMax").asDouble();
                         rc = new ConditionTemperature ( pieces , tMin, tMax);
+                        conditions.add(rc);
                         break;
                     }
                     case "bouton" : {
                         String id = condNode.path("id").asText();
                         rc = new ConditionBouton(id);
+                        conditions.add(rc);
                         break;
                     }
                 }
                 
-                conditions.add(rc);
+                
                 
             }
             regle.setConditions(conditions);
@@ -141,18 +147,23 @@ public class RuleJsonToJava implements Processor{
                 if ( nNode.path("type").asText().equals("envoiMail")){
                     String email = nNode.path("mail").asText();
                     action = new EnvoyerMail(email);
+                    actions.add(action);
                 }
                 else if ( nNode.path("type").asText().equals("allumerPrise")){
                     String idCapteur = nNode.path("id").asText();
-                    action = new AllumerPrise( id );
+                    action = new AllumerPrise( idCapteur );
+                    actions.add(action);
                 }
                 
                 
             }
+            regle.setActions(actions);
+            exchng.getIn().setBody(regle);
+            exchng.setProperty("erreur",false);
             
         }
         else{ //erreur :( impossible de créer une regle : setter un header ?
-            
+            exchng.setProperty("erreur",true);
         }
         
         
