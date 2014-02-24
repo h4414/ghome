@@ -7,6 +7,7 @@
 package h4414.ghome.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.DiscriminatorColumn;
@@ -96,7 +97,10 @@ public class Regle implements Serializable{
         return true;
     }
     
-    public Regle(){}
+    public Regle(){
+        this.actions = new ArrayList<Action>();
+        this.conditions = new ArrayList<RegleCondition>();
+    }
     
     public Regle ( List<RegleCondition> conditions, List<Action> actions){
        this.actions = actions;

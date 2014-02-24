@@ -23,8 +23,8 @@ public class EnvoyerMail extends Action implements  Serializable{
     
     
     private String adresse;
-    
-    public void EnvoyerMail( String adresse ){
+    public  EnvoyerMail(){}
+    public  EnvoyerMail( String adresse ){
         this.adresse = adresse;
     }
 

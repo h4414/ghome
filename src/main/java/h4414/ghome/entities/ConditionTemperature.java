@@ -93,8 +93,9 @@ public class ConditionTemperature extends RegleCondition implements Serializable
         String whereClause ="";
         Iterator<Piece> itPieces= this.pieces.iterator();
         while( itPieces.hasNext()){
-            whereClause += "o.piece.nom = ";
+            whereClause += "o.piece.nom = '";
             whereClause += itPieces.next().getNom();
+            whereClause += "'";
             if ( itPieces.hasNext()){
                 whereClause += " OR ";
             }
@@ -122,7 +123,7 @@ public class ConditionTemperature extends RegleCondition implements Serializable
         
         Iterator<Capteur> it = capteurs.iterator();
         while ( it.hasNext()){
-            Query q = em.createQuery("SELECT x FROM HISTORIQUE x WHERE x.idCapteur = "+it.next().getIdCapteur()+" order by x.debutPresence desc", Historique.class);
+            Query q = em.createQuery("SELECT x FROM HISTORIQUE x WHERE x.idCapteur = '"+it.next().getIdCapteur()+"' order by x.debutPresence desc", Historique.class);
             Object res = q.getSingleResult();
             if ( res instanceof Historique ){
                 relatedHistoriques.add((Historique)res);
