@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -36,6 +37,48 @@ public class ConditionPresence extends RegleCondition implements Serializable{
     private Calendar endDetect;
     
     public ConditionPresence() {
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.beginDetect);
+        hash = 47 * hash + Objects.hashCode(this.endDetect);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ConditionPresence other = (ConditionPresence) obj;
+        if (!Objects.equals(this.beginDetect, other.beginDetect)) {
+            return false;
+        }
+        if (!Objects.equals(this.endDetect, other.endDetect)) {
+            return false;
+        }
+        return true;
+    }
+
+    public Calendar getBeginDetect() {
+        return beginDetect;
+    }
+
+    public void setBeginDetect(Calendar beginDetect) {
+        this.beginDetect = beginDetect;
+    }
+
+    public Calendar getEndDetect() {
+        return endDetect;
+    }
+
+    public void setEndDetect(Calendar endDetect) {
+        this.endDetect = endDetect;
     }
     
     
