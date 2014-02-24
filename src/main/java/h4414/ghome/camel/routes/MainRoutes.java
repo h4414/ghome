@@ -18,6 +18,7 @@ import h4414.ghome.camel.processors.CapteurProcessor;
 import h4414.ghome.camel.processors.DeleteCapteur;
 import h4414.ghome.camel.processors.DeletePiece;
 import h4414.ghome.camel.processors.PieceProcessor;
+import h4414.ghome.camel.processors.RuleJsonToJava;
 import h4414.ghome.camel.processors.UpdateRecuperateurTrame;
 import h4414.ghome.entities.Historique;
 import java.util.GregorianCalendar;
@@ -43,6 +44,7 @@ public class MainRoutes extends RouteBuilder {
     private DeleteCapteur deleteCapteur = new DeleteCapteur();
     private GetEntityType getQueryParams = new GetEntityType();
     private DeletePiece deletePiece = new DeletePiece();
+    private RuleJsonToJava rJsonToJava = new RuleJsonToJava();
 
     private final String IP = "134.214.106.23";
     private final String ID_CONTACTEUR = "0001B25E";
@@ -100,8 +102,9 @@ public class MainRoutes extends RouteBuilder {
 
         from("jetty:http://localhost:8087/addrule")
                // .process(presenceRuleProcessor)
+                .process(rJsonToJava)
                // .to("log:regle ajoutee?showAll=true")
-               // .to("jpa:ReglePresence?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
+               .to("jpa:Regle?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
                 .log("ajout d'une règle");
 
         from("timer://runOnce?repeatCount=1&delay=5000")
