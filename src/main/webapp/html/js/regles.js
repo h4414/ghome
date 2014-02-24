@@ -132,9 +132,9 @@ function quelquonque()
     }
     
     newRegle.actions = new Array();
-    var envoiMail = $("#envoiMail").is(':checked');
-    var activerPrise = $("#activerPrise").is(':checked');
-    var desactiverPrise = $("#desactiverPrise").is(':checked');
+    var envoiMail = $("#envoiMail").attr('checked');
+    var activerPrise = $("#activerPrise").attr('checked');
+    var desactiverPrise = $("#desactiverPrise").attr('checked');
     
     if (envoiMail)
     {
