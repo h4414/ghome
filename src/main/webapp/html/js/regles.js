@@ -136,7 +136,7 @@ function quelquonque()
     {
         action = new Object();
         action.type = "envoyerMail";
-        newRegle.actions.append(action);
+        newRegle.actions.push(action);
         
     }
     if (activerPrise)
@@ -146,7 +146,7 @@ function quelquonque()
         var index= $("#prise")[0].selectedIndex;
         var optionSelected = $("#prise")[0].options[index];
         action.id = optionSelected.value;
-        newRegle.actions.append(action);
+        newRegle.actions.push(action);
         
     }
     else if (desactiverPrise)
@@ -156,7 +156,7 @@ function quelquonque()
         var index= $("#prise")[0].selectedIndex;
         var optionSelected = $("#prise")[0].options[index];
         action.id = optionSelected.value;
-        newRegle.actions.append(action);
+        newRegle.actions.push(action);
     }
     
     
