@@ -14,6 +14,7 @@ function init() {
         event.stopPropagation();
     });
     $("#ComboboxType").load("/ghome/html/reglesCombobox.html");
+    $("#action").load("/ghome/html/reglesActions.html");
 $("#btnAddCondition").click(function(event)
 {
    var index= $("#typeRegle")[0].selectedIndex;
