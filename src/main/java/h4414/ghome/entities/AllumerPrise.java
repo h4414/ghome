@@ -22,13 +22,16 @@ import trames.RecuperateurTrame;
 @DiscriminatorValue("ALLUMER_PRISE")
 public class AllumerPrise extends Action implements Serializable{ 
     
-    private String id;
+    private String idPrise;
     
     protected AllumerPrise(){
+        super();
     }
     
     public AllumerPrise (String id ){
-        this.id = id;
+        super();
+        this.idPrise = id;
+        
     }
     
     public void allumer(String id){
