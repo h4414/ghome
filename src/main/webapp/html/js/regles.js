@@ -70,7 +70,7 @@ function quelquonque()
     newRegle.conditions = new Array();
     condition = new Object();
     var heureDebut = $("#dateDebut");
-    if (heureDebut.val() != "")
+    if (heureDebut.val() != "" && $("#dateFin").val()!="" )
     {
         condition.type = "presence";
         condition.dateDebut = $("#dateDebut").val();
@@ -99,7 +99,10 @@ function quelquonque()
     {
         condition.type = "temperature";
         condition.tempMin = $("#tempMin").val();
+        if($("#tempMax").val()!= "")
+        {
         condition.tempMax = $("#tempMax").val();
+    }
         newRegle.conditions.push(condition);
     }
     condition = new Object();
@@ -128,37 +131,40 @@ function quelquonque()
         condition.bouton = "3";
         newRegle.conditions.push(condition);
     }
-    
-    newRegle.actions = new Array();
-    var envoiMail = $("#envoiMail").is(':checked');
-    var activerPrise = $("#activerPrise").is(':checked');
-    var desactiverPrise = $("#desactiverPrise").is(':checked');
-    
-    if (envoiMail)
+    if (envoiMail || activerPrise || desactiverPrise)
     {
-        action = new Object();
-        action.type = "envoyerMail";
-        newRegle.actions.push(action);
-        
-    }
-    if (activerPrise)
-    {
-        action = new Object();
-        action.type = "activerPrise";
-        var index= $("#prise")[0].selectedIndex;
-        var optionSelected = $("#prise")[0].options[index];
-        action.id = optionSelected.value;
-        newRegle.actions.push(action);
-        
-    }
-    else if (desactiverPrise)
-    {
-        action = new Object();
-        action.type = "desactiverPrise";
-        var index= $("#prise")[0].selectedIndex;
-        var optionSelected = $("#prise")[0].options[index];
-        action.id = optionSelected.value;
-        newRegle.actions.push(action);
+        newRegle.actions = new Array();
+        var envoiMail = $("#envoiMail").attr('checked');
+        var activerPrise = $("#activerPrise").attr('checked');
+        var desactiverPrise = $("#desactiverPrise").attr('checked');
+
+        if (envoiMail)
+        {
+            action = new Object();
+            action.type = "envoyerMail";
+            newRegle.actions.push(action);
+
+        }
+        if (activerPrise)
+        {
+            action = new Object();
+            action.type = "activerPrise";
+            var index = $("#prise")[0].selectedIndex;
+            var optionSelected = $("#prise")[0].options[index];
+            action.id = optionSelected.value;
+            newRegle.actions.push(action);
+
+        }
+        else if (desactiverPrise)
+        {
+            action = new Object();
+            action.type = "desactiverPrise";
+            var index = $("#prise")[0].selectedIndex;
+            var optionSelected = $("#prise")[0].options[index];
+            action.id = optionSelected.value;
+            newRegle.actions.push(action);
+        }
+
     }
     
     
