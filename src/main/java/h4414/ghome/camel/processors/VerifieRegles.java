@@ -61,7 +61,7 @@ public class VerifieRegles implements Processor {
                     ex.setProperty("prise",true);
                     List l = ex.getProperty("listePrises",ArrayList.class);
                     l.add(ac);
-                     ex.setProperty("listePrises",l);
+                    ex.setProperty("listePrises",l);
                 }
             }
         }

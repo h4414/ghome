@@ -27,6 +27,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import h4414.ghome.camel.processors.Executer;
 import trames.RecuperateurTrame;
 
 /**
@@ -47,6 +48,7 @@ public class MainRoutes extends RouteBuilder {
     private DeletePiece deletePiece = new DeletePiece();
     private RuleJsonToJava rJsonToJava = new RuleJsonToJava();
     private VerifieRegles checkRules = new VerifieRegles();
+    private Executer executer = new Executer();
 
     private final String IP = "134.214.106.23";
     private final String ID_CONTACTEUR = "0001B25E";
@@ -162,12 +164,13 @@ public class MainRoutes extends RouteBuilder {
                 
         
         from ( "direct:notifyUser")
-            .setBody().constant("hello world")
+            /*.setBody().constant("hello world")
              //TODO : parametrer cette requete pour spammer une autre adresse
                 //    faire passer la cause du message en parametres de l'echange pour choisir un message parmis des templates
                 //         (string template ? simple factory ?)
             .removeHeaders("*")
-            .to("smtp://localhost?username=ghomeadmin&password=mouton&from=ghomeadmin@localdomain.com&subject=test&to=mathis.loriginal@gmail.com")
+            .to("smtp://localhost?username=ghomeadmin&password=mouton&from=ghomeadmin@localdomain.com&subject=test&to=mathis.loriginal@gmail.com")*/
+                .process(executer)
         .log("an email has been sent");
         
         

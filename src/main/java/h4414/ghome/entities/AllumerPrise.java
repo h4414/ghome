@@ -45,6 +45,6 @@ public class AllumerPrise extends Action implements Serializable{
     }
 
     public String getIdPrise() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.idPrise;
     }
 }
