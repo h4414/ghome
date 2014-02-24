@@ -128,11 +128,16 @@ public class RegleJavaToJson implements Processor {
                if ( action instanceof AllumerPrise ){
                    AllumerPrise ap= (AllumerPrise)action;
                    jg.writeStartObject();
-                   jg.writeStringField("envoiMail", ap.)
+                   jg.writeStringField("type","allumerPrise");
+                   jg.writeStringField("envoiMail", ap.getIdPrise());
                    jg.writeEndObject();
                }
                else if ( action instanceof EnvoyerMail){
-                   
+                   EnvoyerMail evm = (EnvoyerMail) action;
+                   jg.writeStartObject();
+                   jg.writeStringField("type","envoiMail");
+                   jg.writeStringField("mail", evm.getAdresse());
+                   jg.writeEndObject();
                }
            }
            jg.writeEndArray();

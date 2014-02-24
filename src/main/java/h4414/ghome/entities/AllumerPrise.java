@@ -43,4 +43,8 @@ public class AllumerPrise extends Action implements Serializable{
         String envoi = Actionneur.eteindrePrise(id);
         RecuperateurTrame.envoyerTrame(envoi);
     }
+
+    public String getIdPrise() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
