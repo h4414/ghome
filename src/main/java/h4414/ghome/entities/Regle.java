@@ -8,6 +8,7 @@ package h4414.ghome.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.DiscriminatorColumn;
@@ -110,5 +111,48 @@ public class Regle implements Serializable{
     public String getNom() {
         return nom;
     }     
+    
+    
+    public boolean conditionsRemplies ( ){
+        boolean res = true;
+        Iterator<RegleCondition> itConditions = this.conditions.iterator();
+        while (itConditions.hasNext() ){
+             RegleCondition rc = itConditions.next();
+
+            if ( ! (rc instanceof ConditionBouton) ){
+                if ( ! rc.isMet()){
+                    return false;
+                }
+            }
+            else{
+                return false;
+            }
+            
+            
+        }
+        return res;
+    }
+    public boolean ConditionsRemplies ( String idBouton ){
+        
+        boolean res = true;
+        Iterator<RegleCondition> itConditions = this.conditions.iterator();
+        while (itConditions.hasNext() ){
+            RegleCondition rc = itConditions.next();
+            if ( ! (rc instanceof ConditionBouton) ){
+                if (!rc.isMet()){
+                    return false;
+                }
+            }
+            else{
+                ConditionBouton rb = (ConditionBouton)rc;
+                if( !rb.getCapteurId().equals(idBouton)){
+                    return false;
+                }
+            }
+        }
+        return res;
+        
+    }
+    
     
 }

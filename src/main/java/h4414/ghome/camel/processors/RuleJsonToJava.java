@@ -95,7 +95,8 @@ public class RuleJsonToJava implements Processor{
                        break; 
                     }
                     case "contacteur" : {
-                        rc = new ConditionContacteur ( pieces );
+                        
+                        rc = new ConditionContacteur ( pieces, condNode.path("ferme").asBoolean() );
                         conditions.add(rc);
                         break;
                     }
@@ -127,7 +128,10 @@ public class RuleJsonToJava implements Processor{
                     }
                     case "bouton" : {
                         String id = condNode.path("id").asText();
-                        rc = new ConditionBouton(id);
+                        int boutonConcerne = condNode.path("bouton").asInt();
+                        
+                        
+                        rc = new ConditionBouton(id,boutonConcerne );
                         conditions.add(rc);
                         break;
                     }
