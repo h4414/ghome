@@ -168,7 +168,19 @@ public class MainRoutes extends RouteBuilder {
         
         from("direct:checkRules")
                 .process(checkRules)
-                .log("b");
+                .choice()
+                .when().simple("${property.email}")
+                .to("direct:notifyUser")
+                .when().simple("$property.prise")
+                .to("direct:allumerPrise")
+                .otherwise()
+                .log("aucune regle n'est activee")
+                .end()
+                .log("regles verifiees");
+        
+        from( "direct:allumerPrise")
+                
+                .log("prise allumee");
         
         /*
          * Route activee des que l'on ajoute un historique dans la Db
