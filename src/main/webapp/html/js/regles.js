@@ -14,6 +14,7 @@ function init() {
         event.stopPropagation();
     });
     $("#ComboboxType").load("/ghome/html/reglesCombobox.html");
+    $("#action").load("/ghome/html/reglesActions.html");
 $("#btnAddCondition").click(function(event)
 {
    var index= $("#typeRegle")[0].selectedIndex;
@@ -127,7 +128,7 @@ function quelquonque()
         newRegle.conditions.push(condition);
     }
     
-    NewRegle.actions = new Array();
+    newRegle.actions = new Array();
     var envoiMail = $("#envoiMail").is(':checked');
     var activerPrise = $("#activerPrise").is(':checked');
     var desactiverPrise = $("#desactiverPrise").is(':checked');
@@ -136,7 +137,7 @@ function quelquonque()
     {
         action = new Object();
         action.type = "envoyerMail";
-        newRegle.actions.append(action);
+        newRegle.actions.push(action);
         
     }
     if (activerPrise)
@@ -146,7 +147,7 @@ function quelquonque()
         var index= $("#prise")[0].selectedIndex;
         var optionSelected = $("#prise")[0].options[index];
         action.id = optionSelected.value;
-        newRegle.actions.append(action);
+        newRegle.actions.push(action);
         
     }
     else if (desactiverPrise)
@@ -156,7 +157,7 @@ function quelquonque()
         var index= $("#prise")[0].selectedIndex;
         var optionSelected = $("#prise")[0].options[index];
         action.id = optionSelected.value;
-        newRegle.actions.append(action);
+        newRegle.actions.push(action);
     }
     
     
