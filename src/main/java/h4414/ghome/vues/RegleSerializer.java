@@ -2,10 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package h4414.ghome.camel.processors;
+package h4414.ghome.vues;
 
-import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import h4414.ghome.entities.Action;
 import h4414.ghome.entities.AllumerPrise;
 import h4414.ghome.entities.ConditionBouton;
@@ -20,28 +22,23 @@ import h4414.ghome.entities.PlageHoraire;
 import h4414.ghome.entities.Regle;
 import h4414.ghome.entities.RegleCondition;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 
 /**
  *
  * @author Mathis
  */
-public class RegleJavaToJson implements Processor {
+public class RegleSerializer extends StdSerializer<Regle>{
     
-    public void process ( Exchange ex ){
-        
-        Regle regle = ex.getIn().getBody(Regle.class);
-        JsonFactory factory = new JsonFactory();
-        StringWriter sWriter = new StringWriter();
-        try {
-            JsonGenerator jg = factory.createGenerator(sWriter);
+    public RegleSerializer( ){
+        super ( Regle.class);
+    }
+    
+    
+    @Override
+        public void serialize(Regle regle, JsonGenerator jg, SerializerProvider sp) throws IOException, JsonProcessingException {
             jg.writeStartObject();
             // recuperer la liste des pieces
             List <RegleCondition> conditions = regle.getConditions();
@@ -87,8 +84,6 @@ public class RegleJavaToJson implements Processor {
            }else if ( rc instanceof ConditionContacteur ){
                jg.writeStartObject();
                jg.writeStringField("type","contacteur");
-               ConditionContacteur cc = (ConditionContacteur)rc;
-               jg.writeBooleanField("ferme",cc.isFerme());
                jg.writeEndObject();
            }else if ( rc instanceof ConditionTemps ){
                jg.writeStartObject();
@@ -115,7 +110,6 @@ public class RegleJavaToJson implements Processor {
                jg.writeStringField("type","bouton");
                ConditionBouton cb = (ConditionBouton) rc;
                jg.writeStringField("id", cb.getCapteurId());
-               jg.writeNumberField("bouton",cb.getBoutonConcerne());
                jg.writeEndObject();
            }
 
@@ -146,14 +140,7 @@ public class RegleJavaToJson implements Processor {
            jg.writeEndArray();
             
             jg.writeEndObject();
-            
-            
-            
-            
-        } catch (IOException ex1) {
-            Logger.getLogger(RegleJavaToJson.class.getName()).log(Level.SEVERE, null, ex1);
         }
-        
-    }
+
     
 }
