@@ -19,8 +19,10 @@ public class JsonUtils {
         ObjectMapper mapper = new ObjectMapper();
         
         // ajout du serializer pour pieces : evite d'avoir une recursion infinie ( piece contient des capteurs et capteur contient une piece)
+        // ajout d'un serializer pour regle
         SimpleModule pieces = new SimpleModule ( "piecesModule" );
         pieces.addSerializer( new PieceSerializer());
+        pieces.addSerializer(new RegleSerializer());
         mapper.registerModule(pieces);
         
         

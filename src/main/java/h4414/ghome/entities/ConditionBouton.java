@@ -4,6 +4,7 @@
  */
 package h4414.ghome.entities;
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -18,13 +19,22 @@ public class ConditionBouton extends RegleCondition{
 
     
     private String capteurId;
-    
+    private int boutonConcerne;
     public ConditionBouton ( ){
         
     }
     
-    public ConditionBouton ( String id){
+    public ConditionBouton ( String id, int boutonsConcernes){
         this.capteurId = id;
+        this.boutonConcerne=boutonsConcernes;
+    }
+
+    public int  getBoutonConcerne() {
+        return boutonConcerne;
+    }
+
+    public void setBoutonConcerne(int boutonConcerne) {
+        this.boutonConcerne = boutonConcerne;
     }
 
     @Override

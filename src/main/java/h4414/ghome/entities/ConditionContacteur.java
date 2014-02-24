@@ -22,11 +22,22 @@ import javax.persistence.Query;
 @DiscriminatorValue("CONDITION_CONTACTEUR")
 public class ConditionContacteur extends RegleCondition implements Serializable {
 
+    private boolean ferme;
+
+    public boolean isFerme() {
+        return ferme;
+    }
+
+    public void setFerme(boolean ferme) {
+        this.ferme = ferme;
+    }
+    
     public ConditionContacteur(){
         
     }
-    public ConditionContacteur ( List<Piece> pieces){
+    public ConditionContacteur ( List<Piece> pieces, boolean ferme){
         this.pieces = pieces;
+        this.ferme = ferme;
     }
     
     
@@ -87,7 +98,8 @@ public class ConditionContacteur extends RegleCondition implements Serializable 
         Iterator<Historique> itHistoriques = relatedHistoriques.iterator();
         while (itHistoriques.hasNext()){
             // condition a modifier eventuellement ?
-            if ( itHistoriques.next().getDonnee()==0){
+            if ( itHistoriques.next().getDonnee()==0 && this.ferme==false
+                    || itHistoriques.next().getDonnee()==1 && this.ferme==true){
                 return true;
             }
         }
