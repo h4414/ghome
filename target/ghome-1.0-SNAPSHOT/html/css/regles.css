@@ -8,6 +8,49 @@ and open the template in the editor.
     Author     : UTILISATEUR
 */
 
+.police{
+    font-family: "Trebuchet MS";
+    padding-top: 20px;
+    padding-bottom: 10px; 
+}
+
 .design{
     color:#5959AB;
+}
+
+.accordion-body collapse{
+    padding-top: 20px;
+    padding-bottom: 20px; 
+}
+
+.accordion-inner{
+    padding-top: 20px;
+    padding-bottom: 20px; 
+}
+
+.espace{
+        padding-top: 40px;
+    padding-bottom: 40px; 
+}
+
+.time ui-timepicker-input{
+    border:1px solid #DF3F3F;
+}
+
+.btn-group{
+    padding-top: 10px;
+    padding-bottom: 10px; 
+}
+
+.titre{
+    font-family: "Trebuchet MS";
+    font-size: medium; 
+    color:#2C75FF;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.checkbox{
+    padding-top: 10px;
+    padding-bottom: 10px; 
 }

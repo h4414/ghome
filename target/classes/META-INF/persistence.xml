@@ -17,9 +17,9 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/ghome"/>
-      <property name="javax.persistence.jdbc.password" value="admin"/>
+      <property name="javax.persistence.jdbc.password" value="4414"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
-      <property name="javax.persistence.jdbc.user" value="ghomeAdmin"/>
+      <property name="javax.persistence.jdbc.user" value="coucou"/>
     </properties>
   </persistence-unit>
 </persistence>
