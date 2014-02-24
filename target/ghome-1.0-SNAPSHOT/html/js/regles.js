@@ -1,3 +1,4 @@
+
 /* 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -14,6 +15,7 @@ function init() {
         event.stopPropagation();
     });
     $("#ComboboxType").load("/ghome/html/reglesCombobox.html");
+    $("#action").load("/ghome/html/reglesActions.html");
 $("#btnAddCondition").click(function(event)
 {
    var index= $("#typeRegle")[0].selectedIndex;
@@ -55,20 +57,20 @@ $("#btnAddCondition").click(function(event)
 function quelquonque()
 {
     newRegle = new Object();
-    var tableauCheckbox = new Array($("input[type='checkbox']")[0]) ;
+    var tableauCheckbox = $("input[type='checkbox']") ;
     var tableauPiece = new Array();
     for (var i = 0 ; i < tableauCheckbox.length ; i++ )
     {
-        if (tableauCheckbox[i].parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.id == "pieceDroite")
+        if (tableauCheckbox[i].parentNode.parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.parentNode.id == "pieceDroite")
         {
-            tableauPiece.push(tableauCheckbox[i]);
+            tableauPiece.push(tableauCheckbox[i].value);
         }
     }
     newRegle.pieces = tableauPiece;
     newRegle.conditions = new Array();
     condition = new Object();
     var heureDebut = $("#dateDebut");
-    if (heureDebut.val() != "")
+    if (heureDebut.val() != "" && $("#dateFin").val()!="" )
     {
         condition.type = "presence";
         condition.dateDebut = $("#dateDebut").val();
@@ -97,7 +99,10 @@ function quelquonque()
     {
         condition.type = "temperature";
         condition.tempMin = $("#tempMin").val();
+        if($("#tempMax").val()!= "")
+        {
         condition.tempMax = $("#tempMax").val();
+    }
         newRegle.conditions.push(condition);
     }
     condition = new Object();
@@ -126,7 +131,43 @@ function quelquonque()
         condition.bouton = "3";
         newRegle.conditions.push(condition);
     }
-    alert ( newRegle);
+    if (envoiMail || activerPrise || desactiverPrise)
+    {
+        newRegle.actions = new Array();
+        var envoiMail = $("#envoiMail").attr('checked');
+        var activerPrise = $("#activerPrise").attr('checked');
+        var desactiverPrise = $("#desactiverPrise").attr('checked');
+
+        if (envoiMail)
+        {
+            action = new Object();
+            action.type = "envoyerMail";
+            newRegle.actions.push(action);
+
+        }
+        if (activerPrise)
+        {
+            action = new Object();
+            action.type = "activerPrise";
+            var index = $("#prise")[0].selectedIndex;
+            var optionSelected = $("#prise")[0].options[index];
+            action.id = optionSelected.value;
+            newRegle.actions.push(action);
+
+        }
+        else if (desactiverPrise)
+        {
+            action = new Object();
+            action.type = "desactiverPrise";
+            var index = $("#prise")[0].selectedIndex;
+            var optionSelected = $("#prise")[0].options[index];
+            action.id = optionSelected.value;
+            newRegle.actions.push(action);
+        }
+
+    }
+    
+    
     var jText = JSON.stringify(newRegle);
     
     var xmlHttp = null;
@@ -158,7 +199,7 @@ function affichage(listePieces)
         if (i % 2 == 0)
         {
             var strToAdd = "<label class=\"checkbox\">";
-            strToAdd += " <input type=\"checkbox\">"+ listePieces.data[i].nom +"</label>" ;
+        strToAdd += " <input type=\"checkbox\" value=\""+ listePieces.data[i].nom + "\">"+ listePieces.data[i].nom +"</label>" ;;
             //   var objectToAdd = new Node(strToAdd);
             $("#pieceGauche")[0].innerHTML += strToAdd;
         }
