@@ -62,7 +62,7 @@ function quelquonque()
     {
         if (tableauCheckbox[i].parentNode.parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.parentNode.id == "pieceDroite")
         {
-            tableauPiece.push(tableauCheckbox[i]);
+            tableauPiece.push(tableauCheckbox[i].value);
         }
     }
     newRegle.pieces = tableauPiece;

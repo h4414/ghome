@@ -23,6 +23,7 @@ import h4414.ghome.entities.Regle;
 import h4414.ghome.entities.RegleCondition;
 import h4414.ghome.vues.PersistanceUtils;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -82,8 +83,16 @@ public class RuleJsonToJava implements Processor{
                 switch ( type ){
                     case "presence" :
                     {
-                       long dateBegin = condNode.path("dateDebut").asLong();
-                       long dateFin = condNode.path("dateFin").asLong();
+                        SimpleDateFormat sd = new SimpleDateFormat("h:mma");
+                        String d1 = condNode.path("dateDebut").asText();
+                        String d2 = condNode.path("dateFin").asText();
+                        
+                        Date d11 = sd.parse(d1);
+                        Date d12 = sd.parse(d2);
+                        long dateBegin = d11.getTime();
+                        long dateFin = d12.getTime();
+                       //long dateBegin = condNode.path("dateDebut").asLong();
+                       //long dateFin = condNode.path("dateFin").asLong();
                        Date debut = new Date ( dateBegin );
                        Date fin = new Date ( dateFin );
                        GregorianCalendar gcDebut = new GregorianCalendar();
