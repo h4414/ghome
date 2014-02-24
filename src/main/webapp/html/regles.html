@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Regles</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta charset='UTF-8'>
-            <!-- Bootstrap -->
-            <link href="/ghome/html/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<html>
+    <head>
+        <title>Regles</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset='UTF-8'>
+        <!-- Bootstrap -->
+        <link href="/ghome/html/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="/ghome/html/css/ghome.css" rel ="stylesheet" media="screen">
+        <link href="/ghome/html/css/timepicker.css" rel="stylesheet" media="screen">
+        <link href="/ghome/html/css/regles.css" rel="stylesheet">
+    </head>
+    <body>
 
-            <link href="/ghome/html/css/timepicker.css" rel="stylesheet" media="screen">
-            <link href="/ghome/html/css/regles.css" rel="stylesheet">
-        </head>
-        <body>
-                 
-            <div id="header" class='header'> 
-            </div>
-            
-            <div class="accordion" id="leftMenu">
-            </div>
-            
-            <div id="Content">
-                <div id='ruleList' class='container'>  
-                       
+        <div id="header" class='header'> 
+        </div>
+
+        <div class="accordion" id="leftMenu">
+        </div>
+
+        <div id="Content">
+            <div id='ruleList' class='container'>  
+
                 <div class="accordion-group">
                     <div class="accordion-heading">
                         <a class="accordion-toggle" data-toggle="collapse"  href="#collapse1">
@@ -30,43 +30,69 @@
                     </div>
                     <div id="collapse1" class="accordion-body collapse" style="height: 0px; ">
                         <div class="accordion-inner">
-                                <form>
-                                  <fieldset>
-                                      <div id="pieceGauche"> </div> <div id="pieceDroite"></div>
-                                  </fieldset>
-                                </form>
-                           
+                            <form>
+                                <fieldset>
+                                    <div id="pieceGauche"> </div> <div id="pieceDroite"></div>
+                                </fieldset>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse"  href="#collapse2">
+                            <i class="icon-th"></i>
+                            <div class= "design"> Choisir la (ou les) condition(s) </div>
+                        </a>
+                    </div>
+                    <div id="collapse2" class="accordion-body collapse" style="height: 0px; ">
+                        <div class="accordion-inner">
+                            <form>
+                                <div id="ComboboxType"> </div>
+                            </form>
+
+                            <button type="button" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+
                         </div>
                     </div>
                     <div class="accordion-heading">
                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu">
                             <i class="icon-th"></i> 
-                            <div class= "design"> Choisir la (ou les) condition(s) </div>
+                            <div class= "design"> </div>
                         </a>
+                        <div id="collapse1" class="accordion-body collapse" style="height: 0px; ">
+                            <div class="accordion-inner">
+
+                                <div style="width:5%" id="ComboboxType">
+
+
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu">
+                                <i class="icon-th"></i> 
+                                <div class= "design"> Choisir la (ou les) action(s) </div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="accordion-heading">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu">
-                            <i class="icon-th"></i> 
-                            <div class= "design"> Choisir la (ou les) action(s) </div>
-                        </a>
-                    </div>
-                </div>
 
                 </div>
-                
-                
+
+
             </div>
-            
-            <!-- footer -->
-            <div class='footer'>
-                
-            </div>
-            
-            <!-- scripts -->
-            <script src="http://code.jquery.com/jquery.js"></script>
-            <script src="js/jquery-ui.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/timepicker.js"></script>
-            <script src="js/regles.js"></script>
-        </body>
-    </html>
+        </div>
+        <!-- footer -->
+        <div class='footer'>
+
+        </div>
+
+        <!-- scripts -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/jquery-ui.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/timepicker.js"></script>
+        <script src="js/regles.js"></script>
+    </body>
+</html>
