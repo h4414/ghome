@@ -55,32 +55,32 @@ $("#btnAddCondition").click(function(event)
 function quelquonque()
 {
     newRegle = new Object();
-    var tableauCheckbox = new Array($("input[type='checkbox']")) ;
+    var tableauCheckbox = new Array($("input[type='checkbox']")[0]) ;
     var tableauPiece = new Array();
     for (var i = 0 ; i < tableauCheckbox.length ; i++ )
     {
-        if (tableauCheckbox[i].parentnode.id == "pieceGauche" || tableauCheckbox[i].parentnode.id == "pieceDroite")
+        if (tableauCheckbox[i].parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.id == "pieceDroite")
         {
-            tableauPiece.append(tableauCheckbox[i]);
+            tableauPiece.push(tableauCheckbox[i]);
         }
     }
     newRegle.pieces = tableauPiece;
     newRegle.conditions = new Array();
     condition = new Object();
-    var heureDebut = $("heureDebut");
-    if (heureDebut.value != "")
+    var heureDebut = $("#dateDebut");
+    if (heureDebut.val() != "")
     {
         condition.type = "presence";
-        condition.dateDebut = $("heureDebut");
-        condition.dateFin = $("heureFin");
-        newRegle.conditions.append(condition);
+        condition.dateDebut = $("#dateDebut").val();
+        condition.dateFin = $("#dateFin").val();
+        newRegle.conditions.push(condition);
     }
     condition = new Object();
-    var contacteur = $("porteOuverte").value;
+    var contacteur = $("#porteOuverte").val();
     if(contacteur != "")
     {
         condition.type = "contacteur";
-        if ($("porteFermee").value != "")
+        if ($("#porteFermee").val() != "")
         {
             condition.fermee = "1";
         }
@@ -88,44 +88,45 @@ function quelquonque()
         {
             condition.fermee = "0";
         }
-        newRegle.conditions.append(condition);
+        newRegle.conditions.push(condition);
     }
     //TODO temps.
     condition = new Object();
-    var tempMin = $("tempMin");
-    if(tempMin.value != "")
+    var tempMin = $("#tempMin");
+    if(tempMin.val() != "")
     {
-        conditon.type = "temperature";
-        condition.tempMin = $("tempMin").value;
-        condition.tempMax = $("tempMax").value;
-        newRegle.conditions.append(condition);
+        condition.type = "temperature";
+        condition.tempMin = $("#tempMin").val();
+        condition.tempMax = $("#tempMax").val();
+        newRegle.conditions.push(condition);
     }
     condition = new Object();
-    var idBouton0 = $("btA0").value;
-    var idBouton1 = $("btA1").value;
-    var idBouton2 = $("btB0").value;
-    var idBouton3 = $("btB1").value;
+    var idBouton0 = $("#btA0").val();
+    var idBouton1 = $("#btA1").val();
+    var idBouton2 = $("#btB0").val();
+    var idBouton3 = $("#btB1").val();
     condition.type = "bouton";
     if (idBouton0 != "")
     {
         condition.bouton = "0";
-        newRegle.conditions.append(condition);
+        newRegle.conditions.push(condition);
     }
     if (idBouton1 != "")
     {
         condition.bouton = "1";
-        newRegle.conditions.append(condition);
+        newRegle.conditions.push(condition);
     }
     if (idBouton2 != "")
     {
         condition.bouton = "2";
-        newRegle.conditions.append(condition);
+        newRegle.conditions.push(condition);
     }
     if (idBouton3 != "")
     {
         condition.bouton = "3";
-        newRegle.conditions.append(condition);
+        newRegle.conditions.push(condition);
     }
+    alert ( newRegle);
     var jText = JSON.stringify(newRegle);
     
     var xmlHttp = null;
