@@ -130,41 +130,40 @@ function quelquonque()
         condition.bouton = "3";
         newRegle.conditions.push(condition);
     }
-    
-    actions = new Array();
-    var envoiMail = $("#envoiMail").attr('checked');
-    var activerPrise = $("#activerPrise").attr('checked');
-    var desactiverPrise = $("#desactiverPrise").attr('checked');
-    
-    if (envoiMail)
-    {
-        action = new Object();
-        action.type = "envoyerMail";
-        actions.push(action);
-        
-    }
-    if (activerPrise)
-    {
-        action = new Object();
-        action.type = "activerPrise";
-        var index= $("#prise")[0].selectedIndex;
-        var optionSelected = $("#prise")[0].options[index];
-        action.id = optionSelected.value;
-        actions.push(action);
-        
-    }
-    else if (desactiverPrise)
-    {
-        action = new Object();
-        action.type = "desactiverPrise";
-        var index= $("#prise")[0].selectedIndex;
-        var optionSelected = $("#prise")[0].options[index];
-        action.id = optionSelected.value;
-        actions.push(action);
-    }
     if (envoiMail || activerPrise || desactiverPrise)
     {
-        newRegle.actions = actions;
+        newRegle.actions = new Array();
+        var envoiMail = $("#envoiMail").attr('checked');
+        var activerPrise = $("#activerPrise").attr('checked');
+        var desactiverPrise = $("#desactiverPrise").attr('checked');
+
+        if (envoiMail)
+        {
+            action = new Object();
+            action.type = "envoyerMail";
+            newRegle.actions.push(action);
+
+        }
+        if (activerPrise)
+        {
+            action = new Object();
+            action.type = "activerPrise";
+            var index = $("#prise")[0].selectedIndex;
+            var optionSelected = $("#prise")[0].options[index];
+            action.id = optionSelected.value;
+            newRegle.actions.push(action);
+
+        }
+        else if (desactiverPrise)
+        {
+            action = new Object();
+            action.type = "desactiverPrise";
+            var index = $("#prise")[0].selectedIndex;
+            var optionSelected = $("#prise")[0].options[index];
+            action.id = optionSelected.value;
+            newRegle.actions.push(action);
+        }
+
     }
     
     
