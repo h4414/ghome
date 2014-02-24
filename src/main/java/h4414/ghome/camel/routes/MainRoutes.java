@@ -20,6 +20,7 @@ import h4414.ghome.camel.processors.DeletePiece;
 import h4414.ghome.camel.processors.PieceProcessor;
 import h4414.ghome.camel.processors.RuleJsonToJava;
 import h4414.ghome.camel.processors.UpdateRecuperateurTrame;
+import h4414.ghome.camel.processors.VerifieRegles;
 import h4414.ghome.entities.Historique;
 import java.util.GregorianCalendar;
 import org.apache.camel.CamelContext;
@@ -45,6 +46,7 @@ public class MainRoutes extends RouteBuilder {
     private GetEntityType getQueryParams = new GetEntityType();
     private DeletePiece deletePiece = new DeletePiece();
     private RuleJsonToJava rJsonToJava = new RuleJsonToJava();
+    private VerifieRegles checkRules = new VerifieRegles();
 
     private final String IP = "134.214.106.23";
     private final String ID_CONTACTEUR = "0001B25E";
@@ -161,6 +163,12 @@ public class MainRoutes extends RouteBuilder {
             .removeHeaders("*")
             .to("smtp://localhost?username=ghomeadmin&password=mouton&from=ghomeadmin@localdomain.com&subject=test&to=mathis.loriginal@gmail.com")
         .log("an email has been sent");
+        
+        
+        
+        from("direct:checkRules")
+                .process(checkRules)
+                .log("b");
         
         /*
          * Route activee des que l'on ajoute un historique dans la Db

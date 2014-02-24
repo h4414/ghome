@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Ghome-Statistics</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="/ghome/html/css/Statistiques.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="header"></div>
+        <div class="accordion" id="leftMenu"></div>
+        <div id="Content">
+            <div class="police1">
+                Présences détectées selon l'heure de la journée
+            </div>
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <hr>
+            <div class="police2">
+                Dernières présences détectées
+            </div>
+            <table id="listePresence" BORDER="1">
+                <thead>
+                    <tr> 
+                        <th style="text-align: center" >Capteur</th>
+                        <th style="text-align: center" >Date de début</th>
+                        <th style="text-align: center" >Heure de début</th>
+                        <th style="text-align: center" >Date de fin</th>
+                        <th style="text-align: center" >Heure de fin</th>
+                      
+                    </tr>
+                </thead>
+                <tbody id="listePresenceContenu"></tbody>
+            </table>
+            <hr>
+            <div class="police1">
+                Températures mesurées dans la journée
+            </div>
+            <canvas id="myChart2" width="400" height="400"></canvas>
+        </div>
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="/ghome/html/js/jquery-ui.js"></script>  
+        <script src="/ghome/html/js/Chart.min.js"></script>
+        <script src="/ghome/html/js/Statistics.js"></script>
+
+    </body>
+
+
+</html>

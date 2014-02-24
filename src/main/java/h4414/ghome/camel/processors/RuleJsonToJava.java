@@ -45,7 +45,7 @@ public class RuleJsonToJava implements Processor{
         JsonFactory factory = new JsonFactory();
         JsonParser jparser = factory.createParser(exchng.getIn().getBody ( InputStream.class));
         JsonNode rootNode = mapper.readValue(jparser, JsonNode.class);
-        
+        System.out.println("rootnode : "+rootNode);
         // créer un objet regle a partir de ca
         
         JsonNode piecesNode = rootNode.path("salles");
@@ -163,6 +163,7 @@ public class RuleJsonToJava implements Processor{
             }
             regle.setActions(actions);
             exchng.getIn().setBody(regle);
+            System.out.println("c boooooooooooooon");
             exchng.setProperty("erreur",false);
             
         }

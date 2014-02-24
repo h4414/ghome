@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd">
+    <display-name>Camel Routes</display-name>
+    <!-- location of spring xml files -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+    <!--<servlet>
+        <servlet-name>main</servlet-name>
+        <jsp-file>/mainView.jsp</jsp-file>
+   </servlet>
+   -->
+    <!--
+  <servlet id="jsp">
+     <servlet-name>jsp</servlet-name>
+     <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+     <init-param>
+         <param-name>logVerbosityLevel</param-name>
+         <param-value>DEBUG</param-value>
+     </init-param>
+     <init-param>
+         <param-name>fork</param-name>
+         <param-value>false</param-value>
+     </init-param>
+     <init-param>
+         <param-name>keepgenerated</param-name>
+         <param-value>true</param-value>
+     </init-param>
+   
+ 
+     <load-on-startup>0</load-on-startup>
+   </servlet>
+ 
+   <servlet-mapping>
+     <servlet-name>jsp</servlet-name>
+     <url-pattern>*.jsp</url-pattern>
+     <url-pattern>*.jspf</url-pattern>
+     <url-pattern>*.jspx</url-pattern>
+     <url-pattern>*.xsp</url-pattern>
+     <url-pattern>*.JSP</url-pattern>
+     <url-pattern>*.JSPF</url-pattern>
+     <url-pattern>*.JSPX</url-pattern>
+     <url-pattern>*.XSP</url-pattern>
+   </servlet-mapping>-->
+    <!-- <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/view/</url-pattern>
+    </servlet-mapping>-->
+    <!-- the listener that kick-starts Spring -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>Vues</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Vues</servlet-name>
+        <url-pattern>/Vues</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/html/accueil.html</welcome-file>
+    </welcome-file-list>
+</web-app>

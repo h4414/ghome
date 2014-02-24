@@ -1,0 +1,64 @@
+/* 
+    Document   : ghome
+    Created on : 22 janv. 2014, 15:45:35
+    Author     : Mathis
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#pieceDroite
+{
+ width:50%;
+     display: inline-block;
+     vertical-align: top;
+}
+#pieceGauche
+{
+    width: 49%;
+        display: inline-block;
+}
+
+.accordion-toggle
+{
+      cursor:pointer;
+}
+#options{
+    float : right;
+}
+#boutons-accueil .row{
+    padding : 0 15px;
+    /*margin: 0 -15px;*/
+}
+#leftMenu{
+    margin-left: 0%;
+    vertical-align: top;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-right: auto;
+    width : 20%;
+    display : inline-block;
+}
+#Content{
+    margin-left: 0%;
+    vertical-align: top;
+    padding-left: 5%;
+    padding-right: 5%;
+  
+    width : 75%;
+    display : inline-block;
+}
+.glyphicon
+{
+    cursor:pointer;
+}
+div
+{
+
+}
+
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {background-color: #ddd}
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:hover {text-decoration:none;}
+a:active {text-decoration:none;}
