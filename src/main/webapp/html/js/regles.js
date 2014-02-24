@@ -55,11 +55,11 @@ $("#btnAddCondition").click(function(event)
 function quelquonque()
 {
     newRegle = new Object();
-    var tableauCheckbox = new Array($("input[type='checkbox']")[0]) ;
+    var tableauCheckbox = $("input[type='checkbox']") ;
     var tableauPiece = new Array();
     for (var i = 0 ; i < tableauCheckbox.length ; i++ )
     {
-        if (tableauCheckbox[i].parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.id == "pieceDroite")
+        if (tableauCheckbox[i].parentNode.parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.parentNode.id == "pieceDroite")
         {
             tableauPiece.push(tableauCheckbox[i]);
         }
