@@ -5,6 +5,9 @@
  */
 function init()
 {
+        $("input[type=checkbox]").on("click", function(event) {
+        event.stopPropagation();
+    });
 }
     
 $(document).ready( init);
