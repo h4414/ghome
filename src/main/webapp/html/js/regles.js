@@ -69,7 +69,7 @@ function quelquonque()
     newRegle.conditions = new Array();
     condition = new Object();
     var heureDebut = $("#dateDebut");
-    if (heureDebut.val() != "")
+    if (heureDebut.val() != "" && $("#dateFin").val()!="" )
     {
         condition.type = "presence";
         condition.dateDebut = $("#dateDebut").val();
@@ -98,7 +98,10 @@ function quelquonque()
     {
         condition.type = "temperature";
         condition.tempMin = $("#tempMin").val();
+        if($("#tempMax").val()!= "")
+        {
         condition.tempMax = $("#tempMax").val();
+    }
         newRegle.conditions.push(condition);
     }
     condition = new Object();
