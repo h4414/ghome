@@ -44,6 +44,11 @@ $("#btnAddCondition").click(function(event)
       $("#presence").load("reglesPresence.html");
       $("#presence")[0].style.display = "block";
   }   
+        if(optionSelected.value == "TEMPS")
+  {
+      $("#temps").load("reglesTemps.html");
+      $("#temps")[0].style.display = "block";
+  }   
 });
 
 }
