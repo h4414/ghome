@@ -35,11 +35,13 @@ function init()
         {
             captBouton = true;
         }
-        
     }
+    
+   
+    
     if (captTemp)
     {
-        var opt = document.createElement('option');
+      var opt = document.createElement('option');
         opt.value = "TEMPERATURE";
         opt.innerHTML = "TEMPERATURE";
         select = document.getElementById('typeRegle');
@@ -47,7 +49,7 @@ function init()
     }
         if (captPres)
     {
-        var opt = document.createElement('option');
+         var opt = document.createElement('option');
         opt.value = "PRESENCE";
         opt.innerHTML = "PRESENCE";
         select = document.getElementById('typeRegle');
@@ -55,7 +57,7 @@ function init()
     }
         if (captContact)
     {
-        var opt = document.createElement('option');
+         var opt = document.createElement('option');
         opt.value = "CONTACTEUR";
         opt.innerHTML = "CONTACTEUR";
         select = document.getElementById('typeRegle');
@@ -63,13 +65,13 @@ function init()
     }
         if (captBouton)
     {
-        var opt = document.createElement('option');
-        opt.value = "TEMPERATURE";
-        opt.innerHTML = "TEMPERATURE";
+         var opt = document.createElement('option');
+        opt.value = "BOUTON";
+        opt.innerHTML = "BOUTON";
         select = document.getElementById('typeRegle');
         select.appendChild(opt);
     }
-                   
-}
+    }          
+
 
 $(document).ready( init);
