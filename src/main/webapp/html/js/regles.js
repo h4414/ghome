@@ -45,7 +45,6 @@ $("#btnAddCondition").click(function(event)
       $("#presence")[0].style.display = "block";
   }   
 });
-
 }
 
 function quelquonque()
@@ -83,6 +82,7 @@ function affichage(listePieces)
         else
         {
             var strToAdd = "<label class=\"checkbox\">";
+
 
             strToAdd += " <input type=\"checkbox\" value=\""+ listePieces.data[i].nom + "\">"+ listePieces.data[i].nom +"</label>" ;;
 
