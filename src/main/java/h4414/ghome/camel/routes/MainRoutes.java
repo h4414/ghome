@@ -102,6 +102,11 @@ public class MainRoutes extends RouteBuilder {
 
         from("jetty:http://localhost:8087/addrule")
                // .process(presenceRuleProcessor)
+                .process(new Processor ( ){
+                    public void process ( Exchange e ){
+                        e.getIn().setHeader("Access-Control-Allow-Origin", "*");
+                    }
+                })
                 .process(rJsonToJava)
                // .to("log:regle ajoutee?showAll=true")
                .to("jpa:Regle?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
