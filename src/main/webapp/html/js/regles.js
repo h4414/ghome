@@ -14,6 +14,37 @@ function init() {
         event.stopPropagation();
     });
     $("#ComboboxType").load("/ghome/html/reglesCombobox.html");
+$("#btnAddCondition").click(function(event)
+{
+   var index= $("#typeRegle")[0].selectedIndex;
+  var optionSelected = $("#typeRegle")[0].options[index];
+  if(optionSelected.value == "TEMPERATURE")
+  {
+      $("#temperature").load("reglesTemp.html");
+      $("#temperature")[0].style.display = "block";
+      
+  }
+  if(optionSelected.value == "CONTACTEUR")
+  {
+      $("#Contacteur").load("reglesContacteur.html");
+      $("#Contacteur")[0].style.display = "block";
+  }
+  if(optionSelected.value == "BOUTON")
+  {
+       $("#bouton").load("reglesBouton.html");
+      $("#bouton")[0].style.display = "block";
+  }
+    if(optionSelected.value == "PRESENCE")
+  {
+      $("#presence").load("reglesPresence.html");
+      $("#presence")[0].style.display = "block";
+  }
+      if(optionSelected.value == "PRESENCE")
+  {
+      $("#presence").load("reglesPresence.html");
+      $("#presence")[0].style.display = "block";
+  }   
+});
 
 }
 
@@ -45,16 +76,17 @@ function affichage(listePieces)
         else
         {
             var strToAdd = "<label class=\"checkbox\">";
-            strToAdd += " <input type=\"checkbox\">"+ listePieces.data[i].nom +"</label>" ;;
+            strToAdd += " <input type=\"checkbox\" value=\""+listePieces.data[i].nom  +"\">"+ listePieces.data[i].nom +"</label>" ;;
             //   var objectToAdd = new Node(strToAdd);
             $("#pieceDroite")[0].innerHTML += strToAdd;
         }
     }
 }
-$(document).ready(init);
 
 
 $(document).ready(init);
+
+
 
 /*    <label class="checkbox">
  <input type="checkbox"> Coche moi
