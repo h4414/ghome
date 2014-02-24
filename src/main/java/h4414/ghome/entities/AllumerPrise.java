@@ -5,6 +5,7 @@
 package h4414.ghome.entities;
 
 import java.io.Serializable;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,10 +17,9 @@ import javax.persistence.Id;
  * pour le moment on n'a qu'une seule prise, id codé en dur ...
  */
 @Entity
-public class AllumerPrise implements Action, Serializable{
-    @Id
-    @GeneratedValue
-    private int id;
+@DiscriminatorValue("ALLUMER_PRISE")
+public class AllumerPrise extends Action implements Serializable{
+    
 
     
     
@@ -29,13 +29,7 @@ public class AllumerPrise implements Action, Serializable{
     
    
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
     
     
     

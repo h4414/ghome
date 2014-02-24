@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import h4414.ghome.entities.ReglePresence;
+//import h4414.ghome.entities.ReglePresence;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -60,9 +60,9 @@ public class PresenceRuleProcessor implements Processor{
             beg.setTime(b);
             Calendar ed = new GregorianCalendar();
             ed.setTime(e);
-            ReglePresence regle = new ReglePresence("numcapteur",beg,ed);
-            in.setBody(regle);
-            System.out.println (regle);
+           // ReglePresence regle = new ReglePresence("numcapteur",beg,ed);
+           // in.setBody(regle);
+           // System.out.println (regle);
         } catch (IOException ex) {
             Logger.getLogger(PresenceRuleProcessor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

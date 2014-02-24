@@ -99,9 +99,9 @@ public class MainRoutes extends RouteBuilder {
                 .log("ajout d'un capteur");
 
         from("jetty:http://localhost:8087/addrule")
-                .process(presenceRuleProcessor)
-                .to("log:regle ajoutee?showAll=true")
-                .to("jpa:ReglePresence?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
+               // .process(presenceRuleProcessor)
+               // .to("log:regle ajoutee?showAll=true")
+               // .to("jpa:ReglePresence?persistenceUnit=" + PERSISTANCE_UNIT_NAME)
                 .log("ajout d'une règle");
 
         from("timer://runOnce?repeatCount=1&delay=5000")

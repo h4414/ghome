@@ -6,6 +6,7 @@ package h4414.ghome.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,10 +18,9 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class EnvoyerMail implements Action, Serializable{
-    @Id
-    @GeneratedValue
-    private int id;
+@DiscriminatorValue("ENVOI_MAIL")
+public class EnvoyerMail extends Action implements  Serializable{
+    
     
     private String adresse;
     
@@ -34,13 +34,7 @@ public class EnvoyerMail implements Action, Serializable{
 
     
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
 
     @Override
     public int hashCode() {
