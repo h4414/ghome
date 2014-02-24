@@ -22,13 +22,16 @@ import trames.RecuperateurTrame;
 @DiscriminatorValue("ALLUMER_PRISE")
 public class AllumerPrise extends Action implements Serializable{ 
     
-    private String id;
+    private String idPrise;
     
     protected AllumerPrise(){
+        super();
     }
     
     public AllumerPrise (String id ){
-        this.id = id;
+        super();
+        this.idPrise = id;
+        
     }
     
     public void allumer(String id){
@@ -39,5 +42,9 @@ public class AllumerPrise extends Action implements Serializable{
     public void eteindreString(String id){
         String envoi = Actionneur.eteindrePrise(id);
         RecuperateurTrame.envoyerTrame(envoi);
+    }
+
+    public String getIdPrise() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
