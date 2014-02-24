@@ -128,7 +128,7 @@ function quelquonque()
         newRegle.conditions.push(condition);
     }
     
-    NewRegle.actions = new Array();
+    newRegle.actions = new Array();
     var envoiMail = $("#envoiMail").is(':checked');
     var activerPrise = $("#activerPrise").is(':checked');
     var desactiverPrise = $("#desactiverPrise").is(':checked');
