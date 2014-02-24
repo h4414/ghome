@@ -9,6 +9,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import traitement.Actionneur;
+import trames.RecuperateurTrame;
 
 /**
  *
@@ -18,19 +20,24 @@ import javax.persistence.Id;
  */
 @Entity
 @DiscriminatorValue("ALLUMER_PRISE")
-public class AllumerPrise extends Action implements Serializable{
+public class AllumerPrise extends Action implements Serializable{ 
     
-
+    private String id;
     
-    
-    public AllumerPrise ( ){
-        
+    protected AllumerPrise(){
     }
     
-   
-
-
+    public AllumerPrise (String id ){
+        this.id = id;
+    }
     
+    public void allumer(String id){
+        String envoi = Actionneur.allumerPrise(id);
+        RecuperateurTrame.envoyerTrame(envoi);
+    }
     
-    
+    public void eteindreString(String id){
+        String envoi = Actionneur.eteindrePrise(id);
+        RecuperateurTrame.envoyerTrame(envoi);
+    }
 }
