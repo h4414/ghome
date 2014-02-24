@@ -60,8 +60,9 @@ public class ConditionPresence extends RegleCondition implements Serializable{
         String whereClause ="";
         Iterator<Piece> itPieces= this.pieces.iterator();
         while( itPieces.hasNext()){
-            whereClause += "o.piece.nom = ";
+            whereClause += "o.piece.nom = '";
             whereClause += itPieces.next().getNom();
+            whereClause +="'";
             if ( itPieces.hasNext()){
                 whereClause += " OR ";
             }
@@ -85,8 +86,9 @@ public class ConditionPresence extends RegleCondition implements Serializable{
         whereClause = "";
         Iterator<Capteur> it = capteurs.iterator();
         while ( it.hasNext()){
-            whereClause += "x.idCapteur = ";
+            whereClause += "x.idCapteur = '";
             whereClause += it.next().getIdCapteur();
+            whereClause += "'";
             if ( it.hasNext()){
                 whereClause += " OR ";
             }

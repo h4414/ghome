@@ -70,7 +70,7 @@ public class Presence implements Runnable {
             if (emf instanceof EntityManagerFactory) {
                 EntityManagerFactory emFactory = (EntityManagerFactory) (emf);
                 EntityManager em = emFactory.createEntityManager();
-                Query getCapteurs = em.createQuery("SELECT o FROM Capteur o WHERE o.idCapteur = "+trameTraitee.getID(), Capteur.class);
+                Query getCapteurs = em.createQuery("SELECT o FROM Capteur o WHERE o.idCapteur = '"+trameTraitee.getID()+"'", Capteur.class);
                 Capteur capteur = (Capteur) getCapteurs.getSingleResult();
                 int pscdtct =0;
                 if ( OccupancyDetected(this.trameTraitee)){

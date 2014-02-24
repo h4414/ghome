@@ -42,8 +42,9 @@ public class ConditionContacteur extends RegleCondition implements Serializable 
         String whereClause ="";
         Iterator<Piece> itPieces= this.pieces.iterator();
         while( itPieces.hasNext()){
-            whereClause += "o.piece.nom = ";
+            whereClause += "o.piece.nom = '";
             whereClause += itPieces.next().getNom();
+            whereClause += "'";
             if ( itPieces.hasNext()){
                 whereClause += " OR ";
             }
@@ -65,25 +66,16 @@ public class ConditionContacteur extends RegleCondition implements Serializable 
         
         // recuperer les ids des capteurs concernes et generer la clause where
         whereClause = "";
-        Iterator<Capteur> it = capteurs.iterator();
-        while ( it.hasNext()){
-            whereClause += "x.idCapteur = ";
-            whereClause += it.next().getIdCapteur();
-            if ( it.hasNext()){
-                whereClause += " OR ";
-            }
-        }
-        if ( whereClause.equals("")){
-            return false;
-        }
+        //Iterator<Capteur> it = capteurs.iterator();
+        
         /*
          * mettre une condition sur la date dans la requete pour ne pas prendre toutes les presences en cours ?
          * ( faire correspondre cette condition a l'intervalle de verification des regles ???)
          */
         List<Historique> relatedHistoriques = new ArrayList();
         Iterator<Capteur> itCapteurs = capteurs.iterator();
-        while ( it.hasNext()){
-            Query q = em.createQuery("SELECT x FROM HISTORIQUE x WHERE x.idCapteur = "+itCapteurs.next().getIdCapteur()+" order by x.debutPresence desc", Historique.class);
+        while ( itCapteurs.hasNext()){
+            Query q = em.createQuery("SELECT x FROM HISTORIQUE x WHERE x.idCapteur = '"+itCapteurs.next().getIdCapteur()+"' order by x.debutPresence desc", Historique.class);
             Object res = q.getSingleResult();
             if ( res instanceof Historique ){
                 relatedHistoriques.add((Historique)res);
