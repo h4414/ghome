@@ -55,11 +55,11 @@ $("#btnAddCondition").click(function(event)
 function quelquonque()
 {
     newRegle = new Object();
-    var tableauCheckbox = new Array($("input[type='checkbox']")[0]) ;
+    var tableauCheckbox = $("input[type='checkbox']") ;
     var tableauPiece = new Array();
     for (var i = 0 ; i < tableauCheckbox.length ; i++ )
     {
-        if (tableauCheckbox[i].parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.id == "pieceDroite")
+        if (tableauCheckbox[i].parentNode.parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.parentNode.id == "pieceDroite")
         {
             tableauPiece.push(tableauCheckbox[i]);
         }
@@ -126,7 +126,40 @@ function quelquonque()
         condition.bouton = "3";
         newRegle.conditions.push(condition);
     }
-    alert ( newRegle);
+    
+    NewRegle.actions = new Array();
+    var envoiMail = $("#envoiMail").is(':checked');
+    var activerPrise = $("#activerPrise").is(':checked');
+    var desactiverPrise = $("#desactiverPrise").is(':checked');
+    
+    if (envoiMail)
+    {
+        action = new Object();
+        action.type = "envoyerMail";
+        newRegle.actions.append(action);
+        
+    }
+    if (activerPrise)
+    {
+        action = new Object();
+        action.type = "activerPrise";
+        var index= $("#prise")[0].selectedIndex;
+        var optionSelected = $("#prise")[0].options[index];
+        action.id = optionSelected.value;
+        newRegle.actions.append(action);
+        
+    }
+    else if (desactiverPrise)
+    {
+        action = new Object();
+        action.type = "desactiverPrise";
+        var index= $("#prise")[0].selectedIndex;
+        var optionSelected = $("#prise")[0].options[index];
+        action.id = optionSelected.value;
+        newRegle.actions.append(action);
+    }
+    
+    
     var jText = JSON.stringify(newRegle);
     
     var xmlHttp = null;
