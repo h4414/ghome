@@ -62,7 +62,7 @@ function quelquonque()
     {
         if (tableauCheckbox[i].parentNode.parentNode.id == "pieceGauche" || tableauCheckbox[i].parentNode.parentNode.id == "pieceDroite")
         {
-            tableauPiece.push(tableauCheckbox[i]);
+            tableauPiece.push(tableauCheckbox[i].value);
         }
     }
     newRegle.pieces = tableauPiece;
@@ -192,7 +192,7 @@ function affichage(listePieces)
         if (i % 2 == 0)
         {
             var strToAdd = "<label class=\"checkbox\">";
-            strToAdd += " <input type=\"checkbox\">"+ listePieces.data[i].nom +"</label>" ;
+        strToAdd += " <input type=\"checkbox\" value=\""+ listePieces.data[i].nom + "\">"+ listePieces.data[i].nom +"</label>" ;;
             //   var objectToAdd = new Node(strToAdd);
             $("#pieceGauche")[0].innerHTML += strToAdd;
         }
