@@ -39,7 +39,11 @@ $("#btnAddCondition").click(function(event)
       $("#presence").load("reglesPresence.html");
       $("#presence")[0].style.display = "block";
   }
-      
+      if(optionSelected.value == "PRESENCE")
+  {
+      $("#presence").load("reglesPresence.html");
+      $("#presence")[0].style.display = "block";
+  }   
 });
 
 }
@@ -72,7 +76,7 @@ function affichage(listePieces)
         else
         {
             var strToAdd = "<label class=\"checkbox\">";
-            strToAdd += " <input type=\"checkbox\">"+ listePieces.data[i].nom +"</label>" ;;
+            strToAdd += " <input type=\"checkbox\" value=\""+listePieces.data[i].nom  +"\">"+ listePieces.data[i].nom +"</label>" ;;
             //   var objectToAdd = new Node(strToAdd);
             $("#pieceDroite")[0].innerHTML += strToAdd;
         }
