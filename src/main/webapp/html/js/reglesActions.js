@@ -33,7 +33,7 @@ function init()
         select.appendChild(opt);
     }
     
-    
-}
 
+}
 $(document).ready( init);
+
